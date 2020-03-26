@@ -3,11 +3,14 @@ import { Injectable, OnInit } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { IItem, Item } from "../models/item.interface";
+import { QueryStringUtils, Query } from '../utils/query-string.utils';
+import crypto from 'crypto-js';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class ItemService implements OnInit {
+export class ItemService {
   private _itemsSubject = new BehaviorSubject<IItem[]>([] as IItem[]);
 
   constructor(
@@ -25,18 +28,24 @@ export class ItemService implements OnInit {
     this._itemsSubject.next(items);
   }
 
-  ngOnInit() {
-    // this.load();
-    // this.getAll();
-    this.get('asofa');
-  }
-
   // Static data for one item
   // Should I allow internal access to items?
-  public get(id?: string): any { // return T
-    return this.http.get('/items/1').subscribe(val => console.log(val))
+  public query(query: Query): any {
+    const queryString = Object.entries(query).map(([key, value]) => `${key}=${value}`).join('&');
+    console.log(queryString.split('&').reduce((sql, pair) => {
+      const [key, value] = pair.split('=');
+      sql[key] = {
+        and: value
+      };
+      return sql;
+    }, {}))
+    return this.http.get(`/items/query/${queryString}`).subscribe(val => console.log(val));
   }
 
+  public getById(id: any): any {
+    return this.http.get(`/items/id/${id}`);
+
+  }
   // Static data for all
   // Should I allow internal access to items?
   // public getAll(): any {

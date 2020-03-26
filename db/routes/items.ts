@@ -32,7 +32,7 @@ router.get('/query:query', function (req, res, next) {
   });
 });
 
-module.exports = router;
+export default router;
 
 
 // router.get('/', function(req, res) {

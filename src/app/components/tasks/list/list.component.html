@@ -1,0 +1,8 @@
+<mat-card>
+  <mat-list cdkDropList #doneList="cdkDropList" [cdkDropListData]="done" [cdkDropListConnectedTo]="[todoList]" class="example-list"
+    (cdkDropListDropped)="drop($event)">
+    <mat-list-item *ngFor="let task of tasks | keyvalue" cdkDrag>
+      {{task.value.name}}
+    </mat-list-item>
+  </mat-list>
+</mat-card>

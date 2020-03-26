@@ -32,13 +32,6 @@ export class ItemService {
   // Should I allow internal access to items?
   public query(query: Query): any {
     const queryString = Object.entries(query).map(([key, value]) => `${key}=${value}`).join('&');
-    console.log(queryString.split('&').reduce((sql, pair) => {
-      const [key, value] = pair.split('=');
-      sql[key] = {
-        and: value
-      };
-      return sql;
-    }, {}))
     return this.http.get(`/items/query/${queryString}`).subscribe(val => console.log(val));
   }
 

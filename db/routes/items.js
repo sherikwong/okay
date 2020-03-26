@@ -2,7 +2,6 @@ const Router = require('express');
 const router = Router();
 const models = require('../models');
 const Sequelize = require('sequelize')
-const crypto = require('crypto-js/sha256');
 
 
 const Op = Sequelize.Op;
@@ -34,7 +33,7 @@ router.get('/query/:query', function (req, res, next) {
   }).then(items => res.send(items));
 });
 
-export default router;
+module.exports = router;
 
 
 // router.get('/', function(req, res) {

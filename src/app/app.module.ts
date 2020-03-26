@@ -14,6 +14,7 @@ import { TasksListComponent } from './components/tasks/list/list.component';
 import { ItemService } from './services/item.service';
 import { TasksService } from './services/tasks.service';
 import { HttpInterceptorService } from './services/http-interceptor.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -26,6 +27,8 @@ import { HttpInterceptorService } from './services/http-interceptor.service';
     MatListModule,
     MatCardModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   declarations: [
     AppComponent,

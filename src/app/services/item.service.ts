@@ -1,12 +1,8 @@
-import { Injectable, InjectionToken } from "@angular/core";
-import { IBaseItem, ICompositeItem, Item } from "../models/item.interface";
-import { inventory } from "../../dummy";
-import { BehaviorSubject, pipe, Subscription, Observable } from "rxjs";
-import { map } from "rxjs/operators";
-import { IItem } from '../models/item.interface';
-import { OnInit } from '@angular/core';
-import * as _ from 'lodash';
 import { HttpClient } from '@angular/common/http';
+import { Injectable, OnInit } from "@angular/core";
+import { BehaviorSubject, Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { IItem, Item } from "../models/item.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -31,27 +27,22 @@ export class ItemService implements OnInit {
 
   ngOnInit() {
     // this.load();
-    this.getAll();
-  }
-
-
-  // Load all items
-  // Paginate
-  private load(): void {
+    // this.getAll();
+    this.get('asofa');
   }
 
   // Static data for one item
   // Should I allow internal access to items?
-  public get(id: string): Item { // return T
-    return this._items.find(item => item.id === id);
+  public get(id?: string): any { // return T
+    return this.http.get('/items/1').subscribe(val => console.log(val))
   }
 
   // Static data for all
   // Should I allow internal access to items?
-  public getAll(): any {
-    // console.log('Hello', this.http.get('/items'));
-    return this.http.get('/items').subscribe(val => console.log(val));
-  }
+  // public getAll(): any {
+  //   // console.log('Hello', this.http.get('/items'));
+  //   return this.http.get('/items').subscribe(val => console.log(val));
+  // }
 
   public update<T>(updated: T): void {
 

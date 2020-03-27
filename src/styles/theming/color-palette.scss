@@ -4,4 +4,6 @@ $primary-color: #01BAEF;
 $accent-color: #9448BC;
 $warn-color: #D00000;
 
-$theme: $okay-light-theme($primary-color, $accent-color, $warn-color);
+$theme: okay-light-theme($primary-color, $accent-color, $warn-color);
+
+

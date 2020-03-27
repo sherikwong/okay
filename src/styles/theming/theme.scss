@@ -1,0 +1,7 @@
+@import "~@angular/material/theming";
+@import './color-palette';
+
+
+    .okay-theme {
+        @include angular-material-theme($theme);
+    }

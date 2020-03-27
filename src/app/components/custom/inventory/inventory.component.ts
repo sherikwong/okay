@@ -1,8 +1,6 @@
+import { Validators, FormBuilder, FormGroup, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { ItemService } from '../../../services/item.service';
 import { Component, OnInit } from '@angular/core';
-// import { ItemService } from '../../services/item.service';
-import { IBaseItem, ICompositeItem } from '../../models/item.interface';
-import { ItemService } from '../../services/item.service';
-import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn, ValidationErrors, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'okay-inventory',

@@ -22,6 +22,7 @@ sequelize.authenticate()
   .then(() => console.log('Connected to DB'))
   .catch(() => console.log('Failed to connect to DB'));
 
+
 fs
   .readdirSync(__dirname)
   .filter(file => {

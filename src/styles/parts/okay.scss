@@ -1,0 +1,16 @@
+.okay-header {
+  .okay-header__logo {
+    background-image: url('/assets/images/okay.svg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    transform: scaleX(-1);
+    height: 5rem;
+    width: 5rem;
+  }
+
+  .okay-header__text {
+    font-family: 'Sacramento', cursive;
+    font-size: 6rem;
+  }
+}

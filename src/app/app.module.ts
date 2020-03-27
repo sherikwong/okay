@@ -9,12 +9,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { InventoryComponent } from './components/inventory/inventory.component';
-import { TasksListComponent } from './components/tasks/list/list.component';
+
 import { ItemService } from './services/item.service';
 import { TasksService } from './services/tasks.service';
 import { HttpInterceptorService } from './services/http-interceptor.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { HeaderComponent } from './components/custom/header/header.component';
+import { InventoryComponent } from './components/custom/inventory/inventory.component';
+import { HomeComponent } from './components/custom/home/home.component';
 
 @NgModule({
   imports: [
@@ -38,7 +41,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     // ItemComponent,
     // EditItemComponent,
     InventoryComponent,
-    TasksListComponent
+    // TasksListComponent,
+    HomeComponent,
+    HeaderComponent
   ],
   providers: [
     ItemService,

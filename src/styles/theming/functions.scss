@@ -1,0 +1,97 @@
+@import "../functions";
+
+/// Calculates level of darkness using yiq formula
+/// @group color-manipulation
+/// @param {color} color
+/// @return {number} A number from 0 to 255 where `$color` is the darkest or lightest respectively
+@function calculate-brightness($color) {
+    $r: red($color);
+    $g: green($color);
+    $b: blue($color);
+
+    @return (($r * 299) + ($g * 587) + ($b * 114))/1000;
+}
+
+/// Is `$color` a light color?
+/// @group color-manipulation
+/// @param {color} $color
+/// @param {number} $yiq-tolerance [128] - The lower the tolerance, the darker the color
+/// @return {boolean} If true, the color is light. If false, the color is dark.
+@function is-light-color($color, $yiq-tolerance: 128) {
+    @return calculate-brightness($color) >= $yiq-tolerance;
+}
+
+
+/// Automated creation of palettes based on [https://material.io/design/color/#color-theme-creation](Material's palettes)
+/// @group theming
+/// @param {color} $base-color
+/// @param {color} $dark-font [#000] - Optional. If truthy, this color will be used if there is a light colors.
+/// @param {color} $light-font [#fff]- Optional. If truthy, this color will be used if there is a dark colors.
+@function okay-color-palette($base-color, $dark-font: #000, $light-font: #fff) {
+    $saturated-base-color: saturate($base-color, 70%);
+
+    /// ![Intervals derived from difference in steps of default mat color palettes, such as `mat-blue` or `mat-grey`](https://dl.boxcloud.com/api/2.0/internal_files/550260477298/versions/583275494098/representations/png_paged_2048x2048/content/1.png?access_token=1!mjv6l2n_Mn1oeiyYZpOePOoVKdx0grLy4xAlWEPPEBbUIolET0TWoiKJHtHT-QCIc3xSmw9SpRKnBIRz6W18kLrawm2wAlrvMbFkwEutX3OUuiXbWlRgcy1DrcKhvw5ub4Ao8kN_ME5lh9emdfxr5czpoQulDezYLxVh2SqrSfFTS_t_Z4LwyMaB48boqsDkCcai3WpB9J9xEFLUA7J-Bm7N9hLiA6sZzYw_lhB7osa65o6nRAE6dViP85zXpqLL7jJ0IYAKZUeK3w2-w2R8wdvfZeUKX6QKGrJJ9KaKvbAgVb2CI5dKaXROtR8SWHUMhQc4t3nIKziGRv1VmE4CGtIGwNs4VsXS-y0HCfYbQm5y-TB-zw5Rh_Zr-TClg23yoxPPxyB7yHoLBtJ-2OaS8ksKgpO1mJb1B_wEKAIDpCgguNg-twucJRuLYCjFulkedDRkIEvgjFwC2I8zr-O6_qjsKhxCxNZ5pY2W-Fk6S2VcfU_hZRr4zDYMNctZNJVIvCpHZYRiAeV-HRstt2leM3bsE9oNKFb00WlM4FsZ5HwH6XWrnjsSvg9-HR0P7ZOoOA..&box_client_name=box-content-preview&box_client_version=2.23.0)
+    $mat-base-color-palette: (
+        50: lighten($base-color, 35%),
+        100: lighten($base-color, 28%),
+        200: lighten($base-color, 21%),
+        300: lighten($base-color, 14%),
+        400: lighten($base-color, 7%),
+        500: $base-color,
+        600: darken($base-color, 7%),
+        700: darken($base-color, 14%),
+        800: darken($base-color, 21%),
+        900: darken($base-color, 25%),
+        A100: lighten($saturated-base-color, 28%),
+        A200: lighten($saturated-base-color, 20%),
+        A400: $saturated-base-color,
+        A700: darken($saturated-base-color, 20%)
+    );
+
+    $contrast: ();
+
+    @each $level, $color in $mat-base-color-palette {
+        $contrast: map-merge(
+            $contrast,
+            (
+                $level: if(is-light-color($color), $dark-font, $light-font)
+            )
+        );
+    }
+
+    @return map-merge(
+        $mat-base-color-palette,
+        (
+            contrast: $contrast
+        )
+    );
+}
+
+/// Uses Material's theme mixin with our custom colors to create a **light** theme
+/// @group theming
+/// @param {color} $primary-color
+/// @param {color} $accent-color
+/// @param {color} $warning-color
+/// @return {map} Material Theme Map
+@function okay-light-theme($primary-color, $accent-color, $warning-color) {
+    $primary-palette: mat-palette(okay-color-palette($primary-color)); /// `mat-palette($color-palette)` assigns colors to 'default', 'light', 'darker', their contrast and etc.
+    $accent-palette: mat-palette(okay-color-palette($accent-color));
+    $warning-palette: mat-palette(okay-color-palette($warning-color));
+
+    @return mat-light-theme($primary-palette, $accent-palette, $warning-palette);
+}
+
+/// Uses material's theme mixin with our custom colors to create a **dark** theme
+/// @group theming
+/// @param {color} $primary-color
+/// @param {color} $accent-color
+/// @param {color} $warning-color
+/// @return {map} Material Theme Map
+@function okay-dark-theme($primary-color, $accent-color, $warning-color) {
+    $primary-palette: mat-palette(okay-color-palette($primary-color));
+    $accent-palette: mat-palette(okay-color-palette($accent-color));
+    $warning-palette: mat-palette(okay-color-palette($warning-color));
+
+    @return mat-dark-theme($primary-palette, $accent-palette, $warning-palette);
+}
+

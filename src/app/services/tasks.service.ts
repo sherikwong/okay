@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { tasks } from '../../dummy';
+// import { tasks } from '../../../../dummy';
 import { ITask } from '../interfaces/task.interface';
 
 @Injectable({
@@ -19,13 +19,6 @@ export class TasksService {
 
   // Load all tasks
   // Paginate
-  private load(): void {
-    const tasksMap = new Map<string, ITask>();
-    tasks.forEach((task: ITask) => tasksMap.set(task.id, task));
-    console.log(tasks);
-
-    this.tasks.next(tasksMap);
-  }
 
   // Static data for one ITask
   // Should I allow internal access to tasks?

@@ -1,6 +1,6 @@
 .okay-header {
   .okay-header__logo {
-    background-image: url('/assets/images/okay.svg');
+    background-image: url('/assets/images/logo/okay.svg');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -13,7 +13,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
-    height: 100%;
+    height: 15rem;
     width: 100%;
   }
 
@@ -25,15 +25,7 @@
 
 .okay-theme--sofa {
   .okay-header__banner {
-    // background-image: url('/assets/images/theme/sofa.jpg');
+    background-image: url('/assets/images/theme/sofa.jpg');
   }
 }
 
-// .okay-body {
-//   background-image: url('/assets/images/theme/sofa.jpg');
-//   background-repeat: no-repeat;
-//   background-position: center center;
-//   background-size: contain;
-//   height: 100%;
-//   width: 100%;
-// }

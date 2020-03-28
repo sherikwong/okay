@@ -4,6 +4,18 @@
   &.align-items-end {
     align-items: flex-end
   }
+
+  &.align-items-center {
+    align-items: center
+  }
+
+  &.justify-content-center {
+    justify-content: center;
+  }
+
+  &.flex-column {
+    flex-direction: column;
+  }
 }
 
 .w-100 {

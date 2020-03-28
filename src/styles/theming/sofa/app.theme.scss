@@ -1,0 +1,16 @@
+@mixin okay-theme__app--sofa($theme) {
+  $background-color: x-map-get($theme, 'background', 'background');
+
+  $primary-color: x-map-get($theme, 'primary', 'A400');
+  $warn-color: x-map-get($theme, 'warn', 'A400');
+  $accent-color: x-map-get($theme, 'accent', 'A400');
+
+  $text-color: x-map-get($theme, 'default', 'text');
+
+  background-color: $background-color;
+
+  .okay-header__text {
+    color: $text-color;
+    text-shadow: -10px 0 rgba($primary-color, .4) , 10px 0 rgba($accent-color, .4);
+  }
+}

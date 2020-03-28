@@ -1,7 +1,35 @@
 @import '../functions';
+@import './app.theme';
 
 $primary-color: #007c84; // Plant
 $accent-color: #cf5994;
 $warn-color: #e7403a;
 
+$text-color: #402a4b;
+
+$background-color: #fbf1e8;
+
+
+
 $sofa-theme: okay-light-theme($primary-color, $accent-color, $warn-color);
+$sofa-theme: x-map-merge(
+  $sofa-theme,
+  (
+    background: (
+      background: $background-color
+    ),
+    default: (
+      text: $text-color
+    )
+  )
+);
+
+@debug $sofa-theme;
+
+
+.okay-theme--sofa {
+  @include angular-material-theme($sofa-theme);
+  @include okay-theme__app--sofa($sofa-theme);
+}
+
+$DEBUG: (primary: (50: #38f3ff, 100: #14f1ff, 200:#00e1ef, 300: #00bfcb, 400: #009ea8, 500: #007c84, 600: #005a60, 700: #00393d, 800: #001719, 900: #000405, A100: #14f1ff, A200: #00dcea, A400: #007c84, A700: #001c1e, contrast: (50: #000, 100: #000, 200: #000, 300: #000, 400: #fff, 500: #fff, 600: #fff, 700: #fff, 800: #fff,900: #fff, A100: #000, A200: #000, A400: #fff, A700: #fff), default: #007c84, lighter: #14f1ff, darker: #00393d, text: #007c84, default-contrast: #fff, lighter-contrast: #000, darker-contrast: #fff, "50-contrast": #000, "100-contrast": #000, "200-contrast": #000, "300-contrast": #000, "400-contrast": #fff, "500-contrast": #fff, "600-contrast": #fff, "700-contrast":#fff, "800-contrast": #fff, "900-contrast": #fff, "A100-contrast": #000, "A200-contrast": #000, "A400-contrast": #fff, "A700-contrast": #fff, "contrast-contrast": null), accent: (50: #f7e3ed, 100: #efc8db, 200: #e7acca, 300: #df90b8, 400: #d775a6, 500: #cf5994, 600: #c73d82,700: #ae3270, 800: #932a5e, 900: #832654, A100: #ffb8db, A200: #ff8fc7, A400: #ff2994, A700: #c20061, contrast: (50: #000, 100: #000, 200: #000, 300: #000, 400: #000, 500: #000, 600: #fff, 700: #fff, 800: #fff, 900: #fff, A100: #000, A200: #000, A400: #fff, A700: #fff), default: #cf5994, lighter: #efc8db, darker: #ae3270, text: #cf5994, default-contrast: #000, lighter-contrast: #000, darker-contrast: #fff, "50-contrast": #000, "100-contrast": #000, "200-contrast": #000, "300-contrast": #000, "400-contrast": #000, "500-contrast": #000, "600-contrast": #fff, "700-contrast": #fff, "800-contrast": #fff, "900-contrast": #fff, "A100-contrast": #000, "A200-contrast": #000, "A400-contrast": #fff, "A700-contrast": #fff, "contrast-contrast": null), warn: (50: #fadad9, 100: #f7bbb9, 200: #f39d99, 300: #ef7e7a, 400: #eb5f5a, 500: #e7403a, 600: #e2221c, 700: #c21e18, 800: #a21914, 900: #901612, A100: #ffb4b1, A200: #ff8c88, A400: #ff2a22, A700: #bb0600, contrast: (50: #000, 100: #000, 200: #000, 300: #000, 400: #000, 500: #fff, 600: #fff, 700: #fff, 800: #fff, 900: #fff, A100: #000, A200: #000, A400: #fff, A700: #fff), default: #e7403a, lighter: #f7bbb9, darker: #c21e18, text: #e7403a, default-contrast: #fff, lighter-contrast: #000, darker-contrast: #fff, "50-contrast": #000, "100-contrast": #000, "200-contrast": #000, "300-contrast": #000, "400-contrast": #000, "500-contrast": #fff, "600-contrast": #fff, "700-contrast": #fff, "800-contrast": #fff, "900-contrast": #fff, "A100-contrast": #000, "A200-contrast": #000, "A400-contrast": #fff, "A700-contrast": #fff, "contrast-contrast": null), is-dark: false, foreground: (base: black, divider: rgba(0, 0, 0, 0.12), dividers: rgba(0, 0, 0, 0.12), disabled: rgba(0, 0, 0, 0.38), disabled-button: rgba(0, 0, 0, 0.26), disabled-text: rgba(0, 0, 0, 0.38), elevation: black, hint-text: rgba(0, 0, 0, 0.38), secondary-text: rgba(0, 0, 0, 0.54), icon: rgba(0, 0, 0, 0.54), icons: rgba(0, 0, 0, 0.54), text: rgba(0, 0, 0, 0.87), slider-min: rgba(0, 0, 0, 0.87), slider-off:rgba(0, 0, 0, 0.26), slider-off-active: rgba(0, 0, 0, 0.38)), background: (status-bar: #e0e0e0, app-bar: #f5f5f5, background: #fbf1e8, hover: rgba(0, 0, 0, 0.04), card: white, dialog:white, disabled-button: rgba(0, 0, 0, 0.12), raised-button: white, focused-button: rgba(0, 0, 0, 0.12), selected-button: #e0e0e0, selected-disabled-button: #bdbdbd, disabled-button-toggle: #eeeeee, unselected-chip: #e0e0e0, disabled-list-option: #eeeeee, tooltip: #616161))

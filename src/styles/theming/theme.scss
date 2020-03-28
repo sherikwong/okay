@@ -5,6 +5,5 @@
     .okay-theme {
         .okay-theme--sofa {
             @include angular-material-theme($sofa-theme);
-
         }
     }

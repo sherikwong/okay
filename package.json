@@ -26,6 +26,7 @@
     "@angular/router": "^9.0.6",
     "@types/express": "^4.17.3",
     "@types/sequelize": "^4.28.8",
+    "angularx-qrcode": "^2.1.0",
     "cookie-parser": "~1.4.3",
     "core-js": "^2.5.4",
     "cors": "^2.8.5",

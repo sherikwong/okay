@@ -9,17 +9,31 @@
     width: 5rem;
   }
 
+  .okay-header__banner {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+  }
+
   .okay-header__text {
     font-family: 'Sacramento', cursive;
     font-size: 6rem;
   }
 }
 
-.okay-body {
-  background-image: url('/assets/images/theme/beach-1.jpg');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  height: 100%;
-  width: 100%;
+.okay-theme--sofa {
+  .okay-header__banner {
+    // background-image: url('/assets/images/theme/sofa.jpg');
+  }
 }
+
+// .okay-body {
+//   background-image: url('/assets/images/theme/sofa.jpg');
+//   background-repeat: no-repeat;
+//   background-position: center center;
+//   background-size: contain;
+//   height: 100%;
+//   width: 100%;
+// }

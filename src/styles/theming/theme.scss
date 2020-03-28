@@ -1,7 +1,10 @@
 @import "~@angular/material/theming";
-@import './color-palette';
-
+// @import './color-palette';
+@import './sofa/sofa.theme';
 
     .okay-theme {
-        @include angular-material-theme($theme);
+        .okay-theme--sofa {
+            @include angular-material-theme($sofa-theme);
+
+        }
     }

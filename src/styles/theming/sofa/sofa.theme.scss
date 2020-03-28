@@ -1,0 +1,7 @@
+@import '../functions';
+
+$primary-color: #007c84; // Plant
+$accent-color: #cf5994;
+$warn-color: #e7403a;
+
+$sofa-theme: okay-light-theme($primary-color, $accent-color, $warn-color);

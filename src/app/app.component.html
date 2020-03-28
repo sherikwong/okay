@@ -1,3 +1,17 @@
 <div class="okay-theme okay-theme--sofa okay-flex flex-column w-100 h-100">
-  <okay-header class="okay-header h-100 w-100"></okay-header>
+  <mat-sidenav-container>
+    <mat-sidenav mode="side">
+      <okay-sidebar></okay-sidebar>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="okay-hamburger">
+        <button class="hamburger hamburger--squeeze" type="button">
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+        </button>
+      </div>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>

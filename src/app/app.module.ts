@@ -18,6 +18,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/custom/header/header.component';
 import { InventoryComponent } from './components/custom/inventory/inventory.component';
 import { HomeComponent } from './components/custom/home/home.component';
+import { DashboardComponent } from './components/custom/dashboard/dashboard.component';
+import { SidebarComponent } from './components/custom/sidebar/sidebar.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
   imports: [
@@ -32,10 +35,11 @@ import { HomeComponent } from './components/custom/home/home.component';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    MatSidenavModule
   ],
   declarations: [
     AppComponent,
-    // DashboardComponent,
+    DashboardComponent,
     // UpdateComponent,
     // CalendarComponent,
     // ItemComponent,
@@ -43,7 +47,8 @@ import { HomeComponent } from './components/custom/home/home.component';
     InventoryComponent,
     // TasksListComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    SidebarComponent
   ],
   providers: [
     ItemService,

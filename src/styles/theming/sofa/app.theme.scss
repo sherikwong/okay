@@ -10,7 +10,10 @@
   background-color: $background-color;
 
   .okay-header__text {
-    color: $text-color;
-    text-shadow: -10px 0 rgba($primary-color, .4) , 10px 0 rgba($accent-color, .4);
+    // color: $text-color;
+    // text-shadow: 4px 3px 0 $primary-color, 6px 6px 0 $accent-color;
+    color: #FFFFFF;
+// background: #000000;
+text-shadow: 4px 3px 0 $primary-color;
   }
 }

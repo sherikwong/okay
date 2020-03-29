@@ -1,18 +1,12 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { cloneDeep } from 'lodash';
 import { HomeComponent } from './components/custom/home/home.component';
 import { InventoryComponent } from './components/custom/inventory/inventory.component';
 import { TasksListComponent } from './components/custom/tasks/list/list.component';
-import { cloneDeep } from 'lodash';
-import { overlayRoutes } from './components/custom/overlay/overlay.routing';
+import { AppRoutes } from './enums/routes.enum';
 
-export enum AppRoutes {
-  Home = '',
-  Tasks = 'tasks',
-  Inventory = 'inventory'
-}
-
-export const routes: Routes = [
+export const appRoutes: Routes = [
   {
     path: AppRoutes.Home,
     component: HomeComponent,
@@ -44,7 +38,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(cloneDeep(routes))],
+  imports: [RouterModule.forRoot(cloneDeep(appRoutes))],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

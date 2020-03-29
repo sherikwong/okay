@@ -1,7 +1,8 @@
-import { Component, Inject, OnInit, Optional } from '@angular/core';
-import { Router } from '@angular/router';
-import { AppRoutes, routes } from '../../app.routing';
-import { OverlayService, OverlayToken } from '../../services/overlay.service';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { appRoutes } from '../../app.routing';
+import { OverlayService } from '../../services/overlay.service';
+import { AppRoutes, OverlayRoutes } from '../../enums/routes.enum';
 
 @Component({
   selector: 'okay-menu',
@@ -9,27 +10,24 @@ import { OverlayService, OverlayToken } from '../../services/overlay.service';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-  // public routes = routes;
+  public routes = appRoutes;
 
   constructor(
     private router: Router,
+    private activeRoute: ActivatedRoute,
     private overlayService: OverlayService
   ) {
   }
 
   ngOnInit(): void {
-    console.log('Router', this.router);
+    console.log('Router', this.routes, this.router);
   }
 
   public navigate(route: AppRoutes) {
-    // this.overlayService.close();
-    // this.router.navigate([
-    //   route,
-    //   // {
-    //   //   outlets: {
-    //   //     overlay: OverlayRoutes.Menu
-    //   //   }
-    //   // }
-    // ]);
+    this.overlayService.close();
+    this.router.navigateByUrl(route);
+    // , {
+    //   relativeTo: this.activeRoute.parent
+    // });
   }
 }

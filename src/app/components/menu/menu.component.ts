@@ -12,8 +12,8 @@ export class MenuComponent implements OnInit {
   // public routes = routes;
 
   constructor(
-    // private router: Router,
-    // @Optional() @Inject(OverlayToken) private overlayService: OverlayService
+    private router: Router,
+    private overlayService: OverlayService
   ) {
   }
 

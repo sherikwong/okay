@@ -1,7 +1,7 @@
 import { Injectable, InjectionToken } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { OverlayRoutes } from '../components/custom/overlay/overlay.routing';
+import { OverlayRoutes } from '../enums/routes.enum';
 
 export enum BackgroundColor {
   Primary = 'primary',

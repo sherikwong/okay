@@ -23,11 +23,9 @@ import { TaskComponent } from './components/custom/tasks/task/task.component';
 import { InputComponent } from './components/generic/input/input.component';
 import { HttpInterceptorService } from './services/http-interceptor.service';
 import { ItemService } from './services/item.service';
-import { OverlayService } from './services/overlay.service';
 import { TasksService } from './services/tasks.service';
 
 export const OverlayToken = new InjectionToken('overlayService');
-
 
 @NgModule({
   imports: [
@@ -72,7 +70,6 @@ export const OverlayToken = new InjectionToken('overlayService');
       useClass: HttpInterceptorService,
       multi: true,
     },
-    OverlayService,
   ],
   bootstrap: [AppComponent]
 })

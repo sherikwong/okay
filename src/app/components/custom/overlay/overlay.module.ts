@@ -3,15 +3,16 @@ import { RouterModule } from '@angular/router';
 import { OverlayService } from '../../../services/overlay.service';
 import { MenuComponent } from '../../menu/menu.component';
 import { OverlayComponent } from "./overlay.component";
-import { OverlayRoutingModule } from './overlay.routing';
+import { overlayRoutes } from './overlay.routing';
 
 @NgModule({
   imports: [
-    OverlayRoutingModule
+    [RouterModule.forRoot(overlayRoutes)]
   ],
   exports: [
     RouterModule,
-    OverlayComponent
+    OverlayComponent,
+
   ],
   bootstrap: [OverlayComponent],
   declarations: [
@@ -24,10 +25,7 @@ export class OverlayModule{
     return {
       ngModule: OverlayModule,
       providers: [
-        {
-          provide: OverlayToken,
-          useValue: OverlayService
-        }
+        OverlayService,
       ]
     }
   }

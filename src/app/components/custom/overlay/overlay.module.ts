@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [
-    [RouterModule.forRoot(overlayRoutes)],
+    [RouterModule.forChild(overlayRoutes)],
     MatListModule,
     MatIconModule,
     CommonModule

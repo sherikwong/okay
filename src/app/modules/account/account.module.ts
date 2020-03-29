@@ -20,14 +20,28 @@ let config = new AuthServiceConfig([
 
 const accountRoutes = [
   {
-    path: 'login',
-    component: LoginComponent
+    path: '',
+    component: AccountComponent,
+    children: [
+      {
+        path: 'login',
+        component: LoginComponent
+      },
+      {
+        path: '**',
+        redirectTo: ''
+      }
+    ]
+  },
+  {
+    path: '**',
+    redirectTo: ''
   }
 ]
 
 @NgModule({
   imports: [
-    [RouterModule.forRoot(accountRoutes)],
+    [RouterModule.forChild(accountRoutes)],
     MatIconModule,
     MatButtonModule
   ],

@@ -6,5 +6,5 @@ export enum AppRoutes {
   Home = '',
   Tasks = 'tasks',
   Inventory = 'inventory',
-  Account = 'Account'
+  Account = 'account'
 }

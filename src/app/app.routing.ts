@@ -34,7 +34,11 @@ export const appRoutes: Routes = [
   },
   {
     path: AppRoutes.Account,
-    loadChildren: () => AccountModule
+    loadChildren: './modules/account/account.module#AccountModule',
+    data: {
+      title: 'Account',
+      icon: 'person'
+    }
   },
   {
     path: '**',

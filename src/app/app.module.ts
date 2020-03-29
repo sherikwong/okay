@@ -25,6 +25,10 @@ import { MatDividerModule } from '../../node_modules/@angular/material/divider';
 import { HamburgerComponent } from './components/custom/hamburger/hamburger.component';
 import { OverlayComponent } from './components/custom/overlay/overlay.component';
 import { OverlayModule } from './components/custom/overlay/overlay.module';
+import { TaskComponent } from './components/custom/tasks/task/task.component';
+import { NewComponent } from './components/custom/tasks/task/new/new.component';
+import { EditComponent } from './components/custom/tasks/task/edit/edit.component';
+import { InputComponent } from './components/generic/input/input.component';
 
 @NgModule({
   imports: [
@@ -57,7 +61,11 @@ import { OverlayModule } from './components/custom/overlay/overlay.module';
     HomeComponent,
     HeaderComponent,
     MenuComponent,
-    HamburgerComponent
+    HamburgerComponent,
+    TaskComponent,
+    NewComponent,
+    EditComponent,
+    InputComponent
   ],
   providers: [
     ItemService,

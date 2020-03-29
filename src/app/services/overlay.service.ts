@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, InjectionToken } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { OverlayRoutes } from '../components/custom/overlay/overlay.routing';
@@ -17,7 +17,7 @@ const routeColors = new Map([
   providedIn: 'root'
 })
 export class OverlayService {
-  public _opened_subj: BehaviorSubject<BackgroundColor | undefined> = new BehaviorSubject(undefined);
+  private _opened_subj: BehaviorSubject<BackgroundColor | undefined> = new BehaviorSubject(undefined);
   public get opened(): BackgroundColor | undefined { return this._opened_subj.value; }
 
   constructor(

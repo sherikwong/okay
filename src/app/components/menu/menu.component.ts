@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppRoutes, routes } from '../../app.routing';
-import { OverlayService } from '../../services/overlay.service';
+import { OverlayService, OverlayToken } from '../../services/overlay.service';
 
 @Component({
   selector: 'okay-menu',
@@ -12,9 +12,10 @@ export class MenuComponent implements OnInit {
   // public routes = routes;
 
   constructor(
-    private router: Router,
-    // private overlayService: OverlayService
-  ) { }
+    // private router: Router,
+    // @Optional() @Inject(OverlayToken) private overlayService: OverlayService
+  ) {
+  }
 
   ngOnInit(): void {
     console.log('Router', this.router);

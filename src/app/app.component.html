@@ -1,5 +1,5 @@
 <div class="okay-theme okay-theme--sofa okay-flex flex-column w-100 h-100">
-  <okay-overlay *ngIf="overlayService.opened"></okay-overlay>
   <okay-hamburger></okay-hamburger>
-  <router-outlet></router-outlet>
+  <okay-overlay *ngIf="overlayService.opened"></okay-overlay>
+  <router-outlet *ngIf="!overlayService.opened"></router-outlet>
 </div>

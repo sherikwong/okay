@@ -1,1 +1,3 @@
-<router-outlet></router-outlet>
+<div class="w-100 h-100" [ngClass]="'bg-' + overlayService.opened">
+  <router-outlet name="overlay"></router-outlet>
+</div>

@@ -8,13 +8,20 @@ export enum OverlayRoutes {
   Menu = 'menu'
 }
 
-export const overlayRoutes: Routes = [
+const overlayRoutes: Routes = [
   {
     path: OverlayRoutes.Menu,
-    component: MenuComponent,
-    data: {
-      color: BackgroundColor.Accent
-    }
+    component: MenuComponent
+  }
+].map(route => ({
+  ...route,
+  ...{outlet: 'overlay'}
+}));
+
+const overlayRoute = [
+  {
+    path: 'overlay',
+    children: overlayRoutes
   }
 ];
 

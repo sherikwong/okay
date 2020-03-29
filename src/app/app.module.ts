@@ -24,6 +24,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatDividerModule } from '../../node_modules/@angular/material/divider';
 import { HamburgerComponent } from './components/custom/hamburger/hamburger.component';
 import { OverlayComponent } from './components/custom/overlay/overlay.component';
+import { OverlayModule } from './components/custom/overlay/overlay.module';
 
 @NgModule({
   imports: [

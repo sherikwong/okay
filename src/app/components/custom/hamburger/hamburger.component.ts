@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { OverlayService } from '../../../services/overlay.service';
 import { OverlayRoutes } from '../overlay/overlay.routing';
 
@@ -8,13 +9,17 @@ import { OverlayRoutes } from '../overlay/overlay.routing';
   styleUrls: ['./hamburger.component.css']
 })
 export class HamburgerComponent implements OnInit {
-  menuRoute = OverlayRoutes.Menu;
-
   constructor(
-    public overlayService: OverlayService
+    private overlayService: OverlayService,
+    private router: Router
   ){}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
   }
 
+  public toggle(): void {
+    this.overlayService.opened
+    ? this.overlayService.close()
+    : this.overlayService.open(OverlayRoutes.Menu);
+  }
 }

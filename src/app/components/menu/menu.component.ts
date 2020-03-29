@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { routes } from '../../app-routing.module';
+import { Router } from '@angular/router';
+import { AppRoutes, routes } from '../../app.routing';
+import { OverlayService } from '../../services/overlay.service';
 
 @Component({
   selector: 'okay-menu',
@@ -7,11 +9,26 @@ import { routes } from '../../app-routing.module';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-  public routes = routes;
+  // public routes = routes;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    // private overlayService: OverlayService
+  ) { }
 
   ngOnInit(): void {
+    console.log('Router', this.router);
   }
 
+  public navigate(route: AppRoutes) {
+    // this.overlayService.close();
+    // this.router.navigate([
+    //   route,
+    //   // {
+    //   //   outlets: {
+    //   //     overlay: OverlayRoutes.Menu
+    //   //   }
+    //   // }
+    // ]);
+  }
 }

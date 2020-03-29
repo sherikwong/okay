@@ -25,6 +25,7 @@
     "@angular/platform-browser-dynamic": "^9.0.6",
     "@angular/router": "^9.0.6",
     "@types/express": "^4.17.3",
+    "@types/lodash": "^4.14.149",
     "@types/sequelize": "^4.28.8",
     "angularx-qrcode": "^2.1.0",
     "bootstrap": "^4.4.1",

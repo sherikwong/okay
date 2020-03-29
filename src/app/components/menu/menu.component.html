@@ -1,8 +1,8 @@
 <mat-list>
   <div *ngFor="let route of routes; let i = index" class="okay-list-item--align-items-center">
-    <mat-list-item [routerLink]="['/', route.path]">
-        <mat-icon mat-list-icon>{{route.data.icon}}</mat-icon>
-        <div mat-line>{{route.data.title}}</div>
+    <mat-list-item (click)="navigate(route)">
+        <mat-icon mat-list-icon>{{route.data?.icon}}</mat-icon>
+        <div mat-line>{{route.data?.title}}</div>
     </mat-list-item>
     <mat-divider *ngIf="i !== routes.length - 1"></mat-divider>
   </div>

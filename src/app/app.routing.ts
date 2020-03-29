@@ -3,10 +3,18 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/custom/home/home.component';
 import { InventoryComponent } from './components/custom/inventory/inventory.component';
 import { TasksListComponent } from './components/custom/tasks/list/list.component';
+import { cloneDeep } from 'lodash';
+import { overlayRoutes } from './components/custom/overlay/overlay.routing';
+
+export enum AppRoutes {
+  Home = '',
+  Tasks = 'tasks',
+  Inventory = 'inventory'
+}
 
 export const routes: Routes = [
   {
-    path: '',
+    path: AppRoutes.Home,
     component: HomeComponent,
     data: {
       title: 'Home',
@@ -14,7 +22,7 @@ export const routes: Routes = [
     }
   },
   {
-    path: 'tasks',
+    path: AppRoutes.Tasks,
     component: TasksListComponent,
     data: {
       title: 'Tasks',
@@ -22,18 +30,21 @@ export const routes: Routes = [
     }
   },
   {
-    path: 'inventory',
+    path: AppRoutes.Inventory,
     component: InventoryComponent,
     data: {
       title: 'Inventory',
       icon: 'fastfood'
     }
-  },
+  }, {
+    path: '**',
+    redirectTo: AppRoutes.Home
+  }
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(cloneDeep(routes))],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

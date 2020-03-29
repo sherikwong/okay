@@ -1,14 +1,12 @@
-import { MenuComponent } from '../../menu/menu.component';
-import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { OverlayComponent } from './overlay.component';
-import { BackgroundColor } from '../../../services/overlay.service';
+import { RouterModule, Routes } from '@angular/router';
+import { MenuComponent } from '../../menu/menu.component';
 
 export enum OverlayRoutes {
   Menu = 'menu'
 }
 
-const overlayRoutes: Routes = [
+export const overlayRoutes: Routes = [
   {
     path: OverlayRoutes.Menu,
     component: MenuComponent
@@ -17,13 +15,6 @@ const overlayRoutes: Routes = [
   ...route,
   ...{outlet: 'overlay'}
 }));
-
-const overlayRoute = [
-  {
-    path: 'overlay',
-    children: overlayRoutes
-  }
-];
 
 @NgModule({
   imports: [RouterModule.forRoot(overlayRoutes)],

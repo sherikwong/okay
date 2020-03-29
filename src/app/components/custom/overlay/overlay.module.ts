@@ -1,13 +1,15 @@
-import { OverlayComponent } from "./overlay.component";
-import { OverlayRoutingModule } from "./overlay.routing";
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { OverlayService } from "../../../services/overlay.service";
+import { OverlayComponent } from "./overlay.component";
+import { OverlayRoutingModule } from './overlay.routing';
 
 @NgModule({
   imports: [
     OverlayRoutingModule
   ],
   exports: [
+    RouterModule,
     OverlayComponent
   ],
   bootstrap: [OverlayComponent],
@@ -24,5 +26,4 @@ export class OverlayModule{
       ]
     }
   }
-
 }

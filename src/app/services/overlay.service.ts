@@ -18,11 +18,7 @@ const routeColors = new Map([
 })
 export class OverlayService {
   private _opened_subj: BehaviorSubject<BackgroundColor | undefined> = new BehaviorSubject(undefined);
-  public get opened(): BackgroundColor | undefined {
-    console.log(this._opened_subj.value);
-    return this._opened_subj.value;
-  }
-
+  public opened: BackgroundColor | undefined = this._opened_subj.value;
 
   constructor(
     private router: Router
@@ -33,7 +29,6 @@ export class OverlayService {
     this._opened_subj.next(color);
     this.router.navigate([{
       outlets: {
-        // primary: 'overlay',
         overlay: OverlayRoutes.Menu
       }
     }], { skipLocationChange: true });

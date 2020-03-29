@@ -2,6 +2,7 @@ import { Injectable, InjectionToken } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { OverlayRoutes } from '../enums/routes.enum';
+import { delay } from 'q';
 
 export enum BackgroundColor {
   Primary = 'primary',
@@ -17,9 +18,9 @@ const routeColors = new Map([
   providedIn: 'root'
 })
 export class OverlayService {
-  private _opened_subj: BehaviorSubject<BackgroundColor | undefined> = new BehaviorSubject(undefined);
-  public get opened(): BackgroundColor | undefined { return this._opened_subj.value; }
-
+  private _opened_subj: BehaviorSubject<BackgroundColor | string> = new BehaviorSubject(undefined);
+  public get opened(): BackgroundColor | string { return this._opened_subj.value; }
+  public expandBackground = '';
   constructor(
     private router: Router
   ) {
@@ -27,17 +28,23 @@ export class OverlayService {
 
   public open(route: OverlayRoutes): void {
     const color = routeColors.get(route);
-    console.log(color);
     this._opened_subj.next(color);
-    console.log(this.opened);
     this.router.navigate([{
       outlets: {
         overlay: OverlayRoutes.Menu
       }
     }], { skipLocationChange: true });
+    setTimeout(() => this.expandBackground = 'okay-overlay__background--open', 100);
   }
 
   public close(): void {
-    this._opened_subj.next(undefined);
+    setTimeout(() => this.expandBackground = '', 100);
+    this._opened_subj.next('');
+  }
+
+  public get backgroundClass(): string {
+    return this.opened
+    ? `okay-overlay__background--${this.opened}`
+    : '';
   }
 }

@@ -1,7 +1,7 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule, InjectionToken } from '@angular/core';
+import { InjectionToken, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -10,7 +10,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDividerModule } from '../../node_modules/@angular/material/divider';
+import { SocialLoginModule } from "angularx-social-login";
+import { MatDividerModule } from '@angular/material/divider';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
 import { HamburgerComponent } from './components/custom/hamburger/hamburger.component';
@@ -24,6 +25,7 @@ import { InputComponent } from './components/generic/input/input.component';
 import { HttpInterceptorService } from './services/http-interceptor.service';
 import { ItemService } from './services/item.service';
 import { TasksService } from './services/tasks.service';
+import { AccountModule } from './modules/account/account.module';
 
 export const OverlayToken = new InjectionToken('overlayService');
 
@@ -44,23 +46,20 @@ export const OverlayToken = new InjectionToken('overlayService');
     MatListModule,
     MatIconModule,
     MatDividerModule,
-    OverlayModule.forRoot()
+    OverlayModule.forRoot(),
+    SocialLoginModule,
+    AccountModule
   ],
   declarations: [
     AppComponent,
     HomeComponent,
-    // UpdateComponent,
-    // CalendarComponent,
-    // ItemComponent,
-    // EditItemComponent,
     InventoryComponent,
-    // TasksListComponent,
     HomeComponent,
     HeaderComponent,
     HamburgerComponent,
     TaskComponent,
     EditComponent,
-    InputComponent
+    InputComponent,
   ],
   providers: [
     ItemService,

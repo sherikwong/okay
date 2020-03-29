@@ -5,5 +5,6 @@ export enum OverlayRoutes {
 export enum AppRoutes {
   Home = '',
   Tasks = 'tasks',
-  Inventory = 'inventory'
+  Inventory = 'inventory',
+  Account = 'Account'
 }

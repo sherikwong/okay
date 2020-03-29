@@ -5,6 +5,7 @@ import { HomeComponent } from './components/custom/home/home.component';
 import { InventoryComponent } from './components/custom/inventory/inventory.component';
 import { TasksListComponent } from './components/custom/tasks/list/list.component';
 import { AppRoutes } from './enums/routes.enum';
+import { AccountModule } from './modules/account/account.module';
 
 export const appRoutes: Routes = [
   {
@@ -30,7 +31,12 @@ export const appRoutes: Routes = [
       title: 'Inventory',
       icon: 'fastfood'
     }
-  }, {
+  },
+  {
+    path: AppRoutes.Account,
+    loadChildren: () => AccountModule
+  },
+  {
     path: '**',
     redirectTo: AppRoutes.Home
   }

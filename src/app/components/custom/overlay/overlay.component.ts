@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { OverlayService, BackgroundColor } from '../../../services/overlay.service';
+import { OverlayService } from '../../../services/overlay.service';
 
 @Component({
   selector: 'okay-overlay',
   templateUrl: './overlay.component.html',
-  styleUrls: ['./overlay.component.css']
+  styleUrls: ['./overlay.component.scss']
 })
 export class OverlayComponent implements OnInit {
   constructor(
@@ -14,5 +14,4 @@ export class OverlayComponent implements OnInit {
   ngOnInit(): void {
 
   }
-
 }

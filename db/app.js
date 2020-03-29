@@ -8,6 +8,7 @@ const cors = require('cors');
 var indexRouter = require('./routes');
 var itemsRouter = require('./routes/route/items');
 var tasksRouter = require('./routes/route/tasks');
+var usersRouter = require('./routes/route/users');
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use(cors());
 app.use('/', indexRouter);
 app.use('/tasks', tasksRouter);
 app.use('/items', itemsRouter);
+app.use('/users', usersRouter);
 // okayRoutes.link(app);
 
 

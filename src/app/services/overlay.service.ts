@@ -17,16 +17,19 @@ const routeColors = new Map([
   providedIn: 'root'
 })
 export class OverlayService {
-  private _opened_subj: BehaviorSubject<BackgroundColor | undefined> = new BehaviorSubject(undefined);
-  public opened: BackgroundColor | undefined = this._opened_subj.value;
+  public _opened_subj: BehaviorSubject<BackgroundColor | undefined> = new BehaviorSubject(undefined);
+  public get opened(): BackgroundColor | undefined { return this._opened_subj.value; }
 
   constructor(
     private router: Router
-  ) { }
+  ) {
+  }
 
   public open(route: OverlayRoutes): void {
     const color = routeColors.get(route);
+    console.log(color);
     this._opened_subj.next(color);
+    console.log(this.opened);
     this.router.navigate([{
       outlets: {
         overlay: OverlayRoutes.Menu

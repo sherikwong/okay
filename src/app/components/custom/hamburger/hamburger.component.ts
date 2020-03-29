@@ -18,6 +18,7 @@ export class HamburgerComponent implements OnInit {
   }
 
   public toggle(): void {
+    console.log(this.overlayService.opened);
     this.overlayService.opened
     ? this.overlayService.close()
     : this.overlayService.open(OverlayRoutes.Menu);

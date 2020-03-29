@@ -32,14 +32,6 @@ export const appRoutes: Routes = [
       icon: 'fastfood'
     }
   },
-  // {
-  //   path: AppRoutes.Account,
-  //   // loadChildren: './modules/account/account.module#AccountModule',
-  //   data: {
-  //     title: 'Account',
-  //     icon: 'person'
-  //   }
-  // },
   {
     path: '**',
     redirectTo: AppRoutes.Home
@@ -48,7 +40,7 @@ export const appRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(cloneDeep(appRoutes))],
+  imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

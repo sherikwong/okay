@@ -1,8 +1,32 @@
 @import '../../../../../styles/common/mixins';
 
-.okay-google-icon {
+.okay-google--icon {
   @include background--centered;
   background: url('/assets/images/google.svg');
-  height: 5rem;
-  width: 5rem;
+  height: 1rem;
+  width: 1rem;
+}
+
+.okay-google--icon-container {
+  height: 1.4rem;
+  width: 1.4rem;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-right: 16px;
+}
+
+.okay-google--button {
+  width: 80%;
+  background-color: #4286f5;
+  color: white;
+}
+
+.okay-google--text-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 2;
 }

@@ -23,6 +23,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import {MatIconModule} from '@angular/material/icon';
 import { MatDividerModule } from '../../node_modules/@angular/material/divider';
 import { HamburgerComponent } from './components/custom/hamburger/hamburger.component';
+import { OverlayComponent } from './components/custom/overlay/overlay.component';
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import { HamburgerComponent } from './components/custom/hamburger/hamburger.comp
     MatSidenavModule,
     MatListModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    OverlayModule
   ],
   declarations: [
     AppComponent,
@@ -54,7 +56,7 @@ import { HamburgerComponent } from './components/custom/hamburger/hamburger.comp
     HomeComponent,
     HeaderComponent,
     MenuComponent,
-    HamburgerComponent,
+    HamburgerComponent
   ],
   providers: [
     ItemService,

@@ -1,4 +1,8 @@
-<button class="hamburger hamburger--squeeze" type="button">
+<button
+  class="hamburger hamburger--squeeze"
+  [ngClass]="overlayService.opened ? 'is-active' : ''"
+  type="button"
+  (click)="overlayService.opened ? overlayService.close() : overlayService.open(menuRoute)">
   <span class="hamburger-box">
     <span class="hamburger-inner"></span>
   </span>

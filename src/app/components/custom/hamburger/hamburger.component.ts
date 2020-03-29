@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { OverlayService } from '../../../services/overlay.service';
+import { OverlayRoutes } from '../overlay/overlay.routing';
 
 @Component({
   selector: 'okay-hamburger',
@@ -6,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./hamburger.component.css']
 })
 export class HamburgerComponent implements OnInit {
+  menuRoute = OverlayRoutes.Menu;
 
-  constructor() { }
+  constructor(
+    public overlayService: OverlayService
+  ){}
 
   ngOnInit(): void {
   }

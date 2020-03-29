@@ -1,15 +1,5 @@
 <div class="okay-theme okay-theme--sofa okay-flex flex-column w-100 h-100">
+  <okay-overlay *ngIf="overlayService.opened"></okay-overlay>
   <okay-hamburger></okay-hamburger>
-
-  <!-- <mat-sidenav-container>
-    <mat-sidenav mode="side">
-      <okay-sidebar></okay-sidebar>
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <div class="okay-hamburger">
-      </div>
-      <router-outlet></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container> -->
-  <okay-menu></okay-menu>
+  <router-outlet></router-outlet>
 </div>

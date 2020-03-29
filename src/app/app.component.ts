@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OverlayService } from './services/overlay.service';
 
 @Component({
   selector: 'okay-root',
@@ -8,6 +9,6 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent {
 
   constructor(
-
+    public overlayService: OverlayService
   ){}
 }

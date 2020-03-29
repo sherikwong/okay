@@ -1,12 +1,35 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DashboardComponent } from './components/custom/dashboard/dashboard.component';
+import { HomeComponent } from './components/custom/home/home.component';
+import { InventoryComponent } from './components/custom/inventory/inventory.component';
+import { TasksListComponent } from './components/custom/tasks/list/list.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent
-  }
+    component: HomeComponent,
+    data: {
+      title: 'Home',
+      icon: 'home'
+    }
+  },
+  {
+    path: 'tasks',
+    component: TasksListComponent,
+    data: {
+      title: 'Tasks',
+      icon: 'check'
+    }
+  },
+  {
+    path: 'inventory',
+    component: InventoryComponent,
+    data: {
+      title: 'Inventory',
+      icon: 'fastfood'
+    }
+  },
+
 ];
 
 @NgModule({

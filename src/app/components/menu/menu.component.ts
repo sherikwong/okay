@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { appRoutes } from '../../app.routing';
+import { AppRoutes } from '../../enums/routes.enum';
 import { OverlayService } from '../../services/overlay.service';
-import { AppRoutes, OverlayRoutes } from '../../enums/routes.enum';
 
 @Component({
   selector: 'okay-menu',
@@ -14,7 +14,6 @@ export class MenuComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private activeRoute: ActivatedRoute,
     private overlayService: OverlayService
   ) {
   }
@@ -26,8 +25,5 @@ export class MenuComponent implements OnInit {
   public navigate(route: AppRoutes) {
     this.overlayService.close();
     this.router.navigateByUrl(route);
-    // , {
-    //   relativeTo: this.activeRoute.parent
-    // });
   }
 }

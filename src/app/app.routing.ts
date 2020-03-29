@@ -32,14 +32,14 @@ export const appRoutes: Routes = [
       icon: 'fastfood'
     }
   },
-  {
-    path: AppRoutes.Account,
-    loadChildren: './modules/account/account.module#AccountModule',
-    data: {
-      title: 'Account',
-      icon: 'person'
-    }
-  },
+  // {
+  //   path: AppRoutes.Account,
+  //   // loadChildren: './modules/account/account.module#AccountModule',
+  //   data: {
+  //     title: 'Account',
+  //     icon: 'person'
+  //   }
+  // },
   {
     path: '**',
     redirectTo: AppRoutes.Home

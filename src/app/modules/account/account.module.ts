@@ -57,6 +57,10 @@ const accountRoutes = [
   ],
   bootstrap: [
     AccountComponent
+  ],
+  exports: [
+    LoginComponent,
+    AccountComponent
   ]
 })
 

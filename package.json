@@ -52,6 +52,7 @@
     "sequelize-cli": "^5.5.1",
     "sqlite3": "^4.1.1",
     "tslib": "^1.11.1",
+    "webfont": "^9.0.0",
     "zone.js": "^0.10.2"
   },
   "devDependencies": {

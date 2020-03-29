@@ -1,0 +1,8 @@
+@import '../../../../../styles/common/mixins';
+
+.okay-google-icon {
+  @include background--centered;
+  background: url('/assets/images/google.svg');
+  height: 5rem;
+  width: 5rem;
+}

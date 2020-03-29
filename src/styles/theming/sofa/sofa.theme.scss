@@ -24,9 +24,6 @@ $sofa-theme: x-map-merge(
   )
 );
 
-@debug $sofa-theme;
-
-
 .okay-theme--sofa {
   @include angular-material-theme($sofa-theme);
   @include okay-theme__app--sofa($sofa-theme);

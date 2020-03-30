@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { InputType } from '../../../../../components/input/input.component';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { group } from '../../../../../../../node_modules/@angular/animations';
+import { group } from '@angular/animations';
+import { InputType } from '../../../../generic/input/input.component';
 
 @Component({
   selector: 'okay-edit-task',

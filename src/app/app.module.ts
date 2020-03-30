@@ -16,14 +16,13 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
 import { HamburgerComponent } from './components/hamburger/hamburger.component';
 import { HeaderComponent } from './components/header/header.component';
-import { InputComponent } from './components/input/input.component';
 import { AccountModule } from './modules/account/account.module';
 import { HttpInterceptorService } from './services/http-interceptor.service';
 import { ItemService } from './services/item.service';
 import { TasksService } from './services/tasks.service';
-import { ContainerComponent } from './components/container/container.component';
 import { OverlayModule } from './modules/overlay/overlay.module';
 import { AuthenticatedModule } from './modules/authenticated/authenticated.module';
+import { MaterialModule } from './modules/material/material.module';
 
 export const OverlayToken = new InjectionToken('overlayService');
 
@@ -35,17 +34,6 @@ const AngularModules = [
   FormsModule,
   ReactiveFormsModule,
 ]
-
-const MaterialModules = [
-  DragDropModule,
-  MatSidenavModule,
-  MatListModule,
-  MatIconModule,
-  MatDividerModule,
-  MatListModule,
-  MatCardModule,
-  MatTableModule
-];
 
 const ThirdPartyModules = [
   SocialLoginModule,
@@ -60,17 +48,15 @@ const OkayModules = [
 
 @NgModule({
   imports: [
-  ...AngularModules,
-  ...MaterialModules,
-  ...ThirdPartyModules,
-  ...OkayModules
+    ...AngularModules,
+    ...ThirdPartyModules,
+    MaterialModule,
+    ...OkayModules,
   ],
   declarations: [
     AppComponent,
     HeaderComponent,
     HamburgerComponent,
-    InputComponent,
-    ContainerComponent,
   ],
   providers: [
     ItemService,

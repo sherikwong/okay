@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { appRoutes } from '../../app.routing';
-import { AppRoutes } from '../../enums/routes.enum';
+import { AuthenticatedRoutes } from '../../enums/routes.enum';
 import { OverlayService } from '../../services/overlay.service';
 
 @Component({
@@ -22,7 +22,7 @@ export class MenuComponent implements OnInit {
     console.log('Router', this.routes, this.router);
   }
 
-  public navigate(route: AppRoutes) {
+  public navigate(route: AuthenticatedRoutes) {
     this.overlayService.close();
     this.router.navigateByUrl(route);
   }

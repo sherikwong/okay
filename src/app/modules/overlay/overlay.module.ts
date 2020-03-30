@@ -1,12 +1,12 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { OverlayService } from '../../../services/overlay.service';
-import { MenuComponent } from '../../menu/menu.component';
 import { OverlayComponent } from "./overlay.component";
 import { overlayRoutes } from './overlay.routing';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { MenuComponent } from '../../components/menu/menu.component';
+import { OverlayService } from '../../services/overlay.service';
 
 @NgModule({
   imports: [

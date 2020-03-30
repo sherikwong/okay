@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { OverlayService } from '../../../services/overlay.service';
-import { OverlayRoutes } from '../../../enums/routes.enum';
+import { OverlayService } from '../../services/overlay.service';
+import { OverlayRoutes } from '../../enums/routes.enum';
 
 @Component({
   selector: 'okay-hamburger',

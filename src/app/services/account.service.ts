@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
 import { AuthService, GoogleLoginProvider } from 'angularx-social-login';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { User } from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
-  public user: any;
+  public user: User;
 
   constructor(
     private authService: AuthService
   ) {
     this.authService.authState.subscribe(user => {
       this.user = user;
-      console.log(user);
     });
   }
 

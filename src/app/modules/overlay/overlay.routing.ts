@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { MenuComponent } from '../../menu/menu.component';
-import { OverlayRoutes } from '../../../enums/routes.enum';
+import { MenuComponent } from '../../components/menu/menu.component';
+import { OverlayRoutes } from '../../enums/routes.enum';
 
 export const overlayRoutes: Routes = [
   {

@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthenticatedRoutes } from './enums/routes.enum';
-import { AccountModule } from './modules/account/account.module';
 
 export const appRoutes: Routes = [
   {

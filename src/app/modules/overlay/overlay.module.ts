@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MenuComponent } from '../../components/menu/menu.component';
 import { OverlayService } from '../../services/overlay.service';
+import { ProxyRouteComponent } from './proxy-route.component';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { OverlayService } from '../../services/overlay.service';
   declarations: [
     OverlayComponent,
     MenuComponent,
+    ProxyRouteComponent
   ]
 })
 export class OverlayModule{

@@ -7,6 +7,7 @@ import { HomeComponent } from '../account/dashboard/home.component';
 import { InventoryComponent } from '../account/inventory/inventory.component';
 import { TaskComponent } from '../account/tasks/task/task.component';
 import { EditComponent } from '../account/tasks/task/edit/edit.component';
+// import { AuthenticatedRoutingModule } from './authenticated.routes';
 
 
 
@@ -15,7 +16,8 @@ import { EditComponent } from '../account/tasks/task/edit/edit.component';
     CommonModule,
     MatIconModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    // AuthenticatedRoutingModule
   ],
   declarations: [
     HomeComponent,
@@ -28,6 +30,7 @@ import { EditComponent } from '../account/tasks/task/edit/edit.component';
     InventoryComponent,
     TaskComponent,
     EditComponent,
+    // AuthenticatedRoutingModule
   ]
 })
 export class AuthenticatedModule { }

@@ -13,7 +13,7 @@ export class AccountService {
     private authService: AuthService
   ) {
     this.authService.authState.subscribe(user => {
-      console.log('User', user);
+
       this.user = user;
     });
   }

@@ -16,7 +16,7 @@ import { OverlayService } from '../../services/overlay.service';
   exports: [
     RouterModule,
     OverlayComponent,
-
+    MenuComponent,
   ],
   bootstrap: [OverlayComponent],
   declarations: [

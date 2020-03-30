@@ -46,17 +46,21 @@ const MaterialModules = [
   MatTableModule
 ];
 
+const ThirdPartyModules = [
+  SocialLoginModule,
+];
+
 const OkayModules = [
+  AppRoutingModule,
   OverlayModule.forRoot(),
   AccountModule,
-  SocialLoginModule,
-  AppRoutingModule,
 ];
 
 @NgModule({
   imports: [
   ...AngularModules,
   ...MaterialModules,
+  ...ThirdPartyModules,
   ...OkayModules
   ],
   declarations: [

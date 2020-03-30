@@ -21,7 +21,6 @@ export class OverlayComponent implements OnInit {
 
 
   public get backgroundClass(): string {
-    console.log(this.overlayService.opened);
     if (this.overlayService) {
       setTimeout((function() {
         this.expandBackground = this.overlayService.opened

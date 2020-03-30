@@ -24,4 +24,8 @@ export class HamburgerComponent implements OnInit {
     ? this.overlayService.close()
     : this.overlayService.open(OverlayRoutes.Menu);
   }
+
+  public get hide(): boolean {
+    return !!this.accountService.user;
+  }
 }

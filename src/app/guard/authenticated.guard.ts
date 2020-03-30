@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { delay, map } from 'rxjs/operators';
 import { AccountService } from '../services/account.service';
-import { ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +18,13 @@ export class AuthenticatedGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> {
 
-    return this.accountService.getUpdatedUser.pipe(
-      map(user => {
-        if (user) {
+    console.log('Authenticating user...');
+
+    return of(null).pipe(
+      delay(2000),
+      map(() => {
+        console.log('User', this.accountService.user)
+        if (this.accountService.user) {
           return true;
         }
         this.router.navigate(['/login']);

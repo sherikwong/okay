@@ -1,5 +1,5 @@
 <button
-  *ngIf="accountService.user"
+  *ngIf="hide"
   class="hamburger hamburger--squeeze"
   [ngClass]="(overlayService && overlayService.opened ? 'is-active' : '') || ''"
   type="button"

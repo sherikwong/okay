@@ -20,11 +20,11 @@ export class OverlayComponent implements OnInit {
 
   public get backgroundClass(): string {
     if (this.overlayService) {
-      setTimeout(function() {
+      setTimeout((function() {
         this.expandBackground = this.overlayService.opened
         ? 'okay-overlay__background--open'
         : '';
-      }, 2000)
+      }).bind(this), 2000)
 
       return this.overlayService.opened
       ? `okay-overlay__background--${this.overlayService.opened}`

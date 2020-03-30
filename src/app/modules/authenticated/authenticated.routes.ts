@@ -44,9 +44,9 @@ export const appRoutes: Routes = [
     canActivate: [AuthenticatedGuard]
   }
 ];
-
 @NgModule({
   imports: [RouterModule.forChild(appRoutes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+

@@ -19,7 +19,6 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('Router', this.routes, this.router);
   }
 
   public navigate(route: AuthenticatedRoutes) {

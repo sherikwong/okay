@@ -1,6 +1,7 @@
-import { Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { MenuComponent } from '../../components/menu/menu.component';
 import { OverlayRoutes } from '../../enums/routes.enum';
+import { NgModule } from '@angular/core';
 
 export const overlayRoutes: Routes = [
   {
@@ -11,3 +12,10 @@ export const overlayRoutes: Routes = [
   ...route,
   ...{outlet: 'overlay'}
 }));
+
+@NgModule({
+  imports: [RouterModule.forChild(overlayRoutes)],
+  exports: [RouterModule]
+})
+
+export class OverlayRoutingModule {}

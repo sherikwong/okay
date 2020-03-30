@@ -2,5 +2,5 @@
   <div class="okay-overlay__background--container">
     <div class="okay-overlay__background" [ngClass]="[(backgroundClass || ''), (expandBackground || '')]"></div>
   </div>
-  <router-outlet name="overlay"></router-outlet>
+  <okay-menu *ngIf="overlayService.opened === routes.Menu"></okay-menu>
 </div>

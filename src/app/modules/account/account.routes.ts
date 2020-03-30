@@ -16,7 +16,7 @@ const accountRoutes: Routes = [
         redirectTo: ''
       }
     ],
-    canActivate: [AuthenticatedGuard]
+    // canActivate: [AuthenticatedGuard]
   },
   {
     path: 'login',

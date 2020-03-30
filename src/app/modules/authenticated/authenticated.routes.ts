@@ -41,7 +41,7 @@ export const appRoutes: Routes = [
         redirectTo: AuthenticatedRoutes.Home
       }
     ],
-    canActivate: [AuthenticatedGuard]
+    // canActivate: [AuthenticatedGuard]
   }
 ];
 @NgModule({

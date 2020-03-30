@@ -1,3 +1,4 @@
+import { OverlayRoutes } from './../../enums/routes.enum';
 import { Component, OnInit } from '@angular/core';
 import { OverlayService } from '../../services/overlay.service';
 
@@ -8,6 +9,7 @@ import { OverlayService } from '../../services/overlay.service';
 })
 export class OverlayComponent implements OnInit {
   public expandBackground: string;
+  public routes = OverlayRoutes;
 
   constructor(
     public overlayService: OverlayService
@@ -19,6 +21,7 @@ export class OverlayComponent implements OnInit {
 
 
   public get backgroundClass(): string {
+    console.log(this.overlayService.opened);
     if (this.overlayService) {
       setTimeout((function() {
         this.expandBackground = this.overlayService.opened

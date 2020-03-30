@@ -16,12 +16,16 @@ export class AccountGuard implements CanActivate {
 
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> {
+    state: RouterStateSnapshot
+  ): Observable<boolean> {
 
     return this.accountService.getUpdatedUser.pipe(
       map(user => {
         if (!user) {
           console.log('There is no user.')
+          return false;
+        }
+        if (next.url[0].path === '/home') {
           return false;
         }
         console.log('User exists. Redirecting to home');

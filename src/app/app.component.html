@@ -1,9 +1,9 @@
 <okay-container class="okay-theme okay-theme--sofa">
-  <okay-hamburger></okay-hamburger>
-  <!--
   <okay-overlay *ngIf="overlayService.opened"></okay-overlay>
-  <router-outlet *ngIf="!overlayService.opened"></router-outlet> -->
+  <okay-hamburger></okay-hamburger>
   <okay-container>
-    <okay-login></okay-login>
+    <router-outlet *ngIf="!overlayService.opened"></router-outlet>
   </okay-container>
 </okay-container>
+
+<!-- <okay-hamburger></okay-hamburger> -->

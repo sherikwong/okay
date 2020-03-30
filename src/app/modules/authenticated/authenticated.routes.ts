@@ -6,7 +6,7 @@ import { AuthenticatedRoutes } from '../../enums/routes.enum';
 import { HomeComponent } from '../account/dashboard/home.component';
 import { TasksListComponent } from '../account/tasks/list/list.component';
 import { InventoryComponent } from '../account/inventory/inventory.component';
-import { AuthenticatedGuard } from '../../guard/app.guard';
+import { AuthenticatedGuard } from '../../guard/authenticated.guard';
 
 export const appRoutes: Routes = [
   {

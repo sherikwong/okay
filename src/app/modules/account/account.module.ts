@@ -4,9 +4,10 @@ import { NgModule } from "@angular/core";
 import { LoginComponent } from './components/login/login.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from "@angular/material/button";
-import { RouterModule } from '@angular/router';
+import { RouterModule, CanActivate, Routes } from '@angular/router';
 import { AccountComponent } from './components/account/account.component';
 import {Google} from '../../../../secret';
+import { AccountGuard } from "../../guard/account.guard";
 
 let config = new AuthServiceConfig([
   {
@@ -19,15 +20,11 @@ let config = new AuthServiceConfig([
   }
 ]);
 
-const accountRoutes = [
+const accountRoutes: Routes = [
   {
-    path: '',
+    path: 'account',
     component: AccountComponent,
     children: [
-      {
-        path: 'login',
-        component: LoginComponent
-      },
       {
         path: '**',
         redirectTo: ''
@@ -35,10 +32,17 @@ const accountRoutes = [
     ]
   },
   {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [AccountGuard]
+  },
+  {
     path: '**',
-    redirectTo: ''
+    redirectTo: '/login'
   }
-]
+];
+
+// accountRoutes.forEach((route, i) => accountRoutes[i].canActivate = [AccountGuard])
 
 @NgModule({
   imports: [

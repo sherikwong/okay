@@ -1,0 +1,31 @@
+import { Injectable } from '@angular/core';
+import { AccountService } from '../services/account.service';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AccountGuard implements CanActivate {
+
+  constructor(
+    private accountService: AccountService,
+    private router: Router
+  ) { }
+
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean> {
+
+    return this.accountService.getUpdatedUser.pipe(
+      map(user => {
+        if (!user) {
+          return true;
+        }
+        this.router.navigate(['/home']);
+        return false;
+      })
+    );
+  }
+}

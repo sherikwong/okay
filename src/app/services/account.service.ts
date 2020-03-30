@@ -1,3 +1,4 @@
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AuthService, GoogleLoginProvider } from 'angularx-social-login';
 import { User } from '../interfaces/user.interface';
@@ -6,7 +7,7 @@ import { User } from '../interfaces/user.interface';
   providedIn: 'root'
 })
 export class AccountService {
-  public user: User;
+  private user_obsv: BehaviorSubject<User> = new BehaviorSubject(null);
 
   constructor(
     private authService: AuthService
@@ -14,6 +15,18 @@ export class AccountService {
     this.authService.authState.subscribe(user => {
       this.user = user;
     });
+  }
+
+  public get user(): User {
+    return this.user_obsv.value;
+  }
+
+  public set user(user: User) {
+    this.user_obsv.next(user);
+  }
+
+  public getUpdatedUser(): Observable<User> {
+    return this.user_obsv.asObservable();
   }
 
   public login(): void {

@@ -1,14 +1,11 @@
-import { MaterialModule } from './../material/material.module';
-import { CommonModule } from '@angular/common';
 import { NgModule } from "@angular/core";
-import { MatButtonModule } from "@angular/material/button";
-import { MatIconModule } from '@angular/material/icon';
 import { AuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
+import { Google } from '../../../../secret';
+import { GenericModule } from './../generic/generic.module';
 import { AccountRoutingModule } from "./account.routes";
-
-import {Google} from '../../../../secret';
-import { LoginComponent } from './login/login.component';
 import { AccountComponent } from './account/account.component';
+import { LoginComponent } from './login/login.component';
+
 
 let config = new AuthServiceConfig([
   {
@@ -19,9 +16,8 @@ let config = new AuthServiceConfig([
 
 @NgModule({
   imports: [
-    MaterialModule,
+    GenericModule,
     AccountRoutingModule,
-    CommonModule
   ],
   declarations: [
     LoginComponent,

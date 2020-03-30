@@ -43,6 +43,7 @@ export class EditTaskComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(this.inputs);
     const controls = this.inputs.reduce((group, input) => (group[input.formControlName] = this.fb.control('')), {});
     this.form = this.fb.group(controls);
   }

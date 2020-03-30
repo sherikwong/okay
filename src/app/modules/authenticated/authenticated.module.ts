@@ -1,21 +1,14 @@
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
+import { GenericModule } from '../generic/generic.module';
 import { HomeComponent } from './dashboard/home.component';
 import { InventoryComponent } from './inventory/inventory.component';
-import { TaskComponent } from './tasks/task/task.component';
+import { TasksListComponent } from './tasks/list/list.component';
 import { EditTaskComponent } from './tasks/task/edit/edit.component';
-import {MatInputModule} from '@angular/material/input';
-import { MaterialModule } from '../material/material.module';
-import { GenericModule } from '../generic/generic.module';
+import { TaskComponent } from './tasks/task/task.component';
 
 
 @NgModule({
   imports: [
-    MaterialModule,
-    CommonModule,
     GenericModule,
   ],
   declarations: [
@@ -23,12 +16,14 @@ import { GenericModule } from '../generic/generic.module';
     InventoryComponent,
     TaskComponent,
     EditTaskComponent,
+    TasksListComponent
   ],
   exports: [
     HomeComponent,
     InventoryComponent,
     TaskComponent,
     EditTaskComponent,
+    TasksListComponent
   ]
 })
 export class AuthenticatedModule { }

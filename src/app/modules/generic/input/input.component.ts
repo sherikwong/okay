@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormControlDirective } from '@angular/forms';
+import { FormControlDirective, NgControl } from '@angular/forms';
 
 export enum InputType {
   Number,
@@ -22,7 +22,7 @@ export class InputComponent implements OnInit {
   @Input('for') details: Input;
 
   constructor(
-    public formControlName: FormControlDirective
+    private control: NgControl
   ) { }
 
   ngOnInit(): void {

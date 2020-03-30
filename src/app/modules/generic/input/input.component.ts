@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Self } from '@angular/core';
 import { FormControlDirective, NgControl } from '@angular/forms';
 
 export enum InputType {
@@ -19,13 +19,14 @@ export interface IInput {
   styleUrls: ['./input.component.css']
 })
 export class InputComponent implements OnInit {
-  @Input('for') details: Input;
+  @Input('for') details: IInput;
 
   constructor(
-    private control: NgControl
+    @Self() private control: NgControl
   ) { }
 
   ngOnInit(): void {
+    console.log(this.control);
   }
 
 }

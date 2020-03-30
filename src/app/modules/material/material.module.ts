@@ -1,3 +1,4 @@
+import { MatInputModule } from '@angular/material/input';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,7 +20,8 @@ import { MatTableModule } from '@angular/material/table';
     MatCardModule,
     MatListModule,
     DragDropModule,
-    MatTableModule
+    MatTableModule,
+    MatInputModule
   ],
   exports: [
     MatIconModule,
@@ -29,7 +31,8 @@ import { MatTableModule } from '@angular/material/table';
     MatCardModule,
     MatListModule,
     DragDropModule,
-    MatTableModule
+    MatTableModule,
+    MatInputModule
   ]
 })
 export class MaterialModule { }

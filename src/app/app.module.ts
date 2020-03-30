@@ -23,6 +23,7 @@ import { ItemService } from './services/item.service';
 import { TasksService } from './services/tasks.service';
 import { ContainerComponent } from './components/container/container.component';
 import { OverlayModule } from './modules/overlay/overlay.module';
+import { AuthenticatedModule } from './modules/authenticated/authenticated.module';
 
 export const OverlayToken = new InjectionToken('overlayService');
 
@@ -54,6 +55,7 @@ const OkayModules = [
   AppRoutingModule,
   OverlayModule.forRoot(),
   AccountModule,
+  AuthenticatedModule,
 ];
 
 @NgModule({

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from '@angular/material/icon';
@@ -18,11 +19,12 @@ let config = new AuthServiceConfig([
   imports: [
     AccountRoutingModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    CommonModule
   ],
   declarations: [
     LoginComponent,
-    AccountComponent,
+    AccountComponent
   ],
   providers: [
     {

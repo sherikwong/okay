@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'okay-edit',
+  selector: 'okay-edit-item',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css']
 })
-export class EditComponent implements OnInit {
+export class EditItemComponent implements OnInit {
   public inputs = {
     name: 'Name',
     priority: 'Priority',

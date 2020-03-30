@@ -4,7 +4,7 @@ import { FormControlDirective } from '@angular/forms';
 export enum InputType {
   Number,
   Date,
-  Text
+  String
 }
 
 export interface IInput {
@@ -19,7 +19,7 @@ export interface IInput {
   styleUrls: ['./input.component.css']
 })
 export class InputComponent implements OnInit {
-  @Input('for') details: IInput;
+  @Input('for') details: Input;
 
   constructor(
     public formControlName: FormControlDirective

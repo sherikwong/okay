@@ -3,11 +3,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { HomeComponent } from '../account/dashboard/home.component';
-import { InventoryComponent } from '../account/inventory/inventory.component';
-import { TaskComponent } from '../account/tasks/task/task.component';
-import { EditComponent } from '../account/tasks/task/edit/edit.component';
+import { HomeComponent } from './dashboard/home.component';
+import { InventoryComponent } from './inventory/inventory.component';
+import { TaskComponent } from './tasks/task/task.component';
 // import { AuthenticatedRoutingModule } from './authenticated.routes';
+import { EditTaskComponent } from './tasks/task/edit/edit.component';
 
 
 
@@ -23,14 +23,13 @@ import { EditComponent } from '../account/tasks/task/edit/edit.component';
     HomeComponent,
     InventoryComponent,
     TaskComponent,
-    EditComponent,
+    EditTaskComponent,
   ],
   exports: [
     HomeComponent,
     InventoryComponent,
     TaskComponent,
-    EditComponent,
-    // AuthenticatedRoutingModule
+    EditTaskComponent,
   ]
 })
 export class AuthenticatedModule { }

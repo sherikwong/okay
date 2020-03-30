@@ -1,17 +1,15 @@
 
 
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { AuthenticatedRoutes } from '../../enums/routes.enum';
-import { HomeComponent } from '../account/dashboard/home.component';
 import { InventoryComponent } from '../account/inventory/inventory.component';
 import { TasksListComponent } from '../account/tasks/list/list.component';
-import { AuthenticatedGuard } from '../../guard/authenticated.guard';
 
 export const authenticatedRoutes: Routes = [
       {
         path: AuthenticatedRoutes.Home,
-        component: HomeComponent,
+        // component: HomeComponent,
+        component: TasksListComponent,
         data: {
           title: 'Home',
           icon: 'home'

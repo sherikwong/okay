@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AccountService } from '../services/account.service';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -21,10 +21,12 @@ export class AccountGuard implements CanActivate {
     return this.accountService.getUpdatedUser.pipe(
       map(user => {
         if (!user) {
-          return true;
+          console.log('There is no user.')
+          return false;
         }
+        console.log('User exists. Redirecting to home');
         this.router.navigate(['/home']);
-        return false;
+        return true;
       })
     );
   }

@@ -1,7 +1,7 @@
 <button
   *ngIf="accountService.user"
   class="hamburger hamburger--squeeze"
-  [ngClass]="overlayService.opened ? 'is-active' : ''"
+  [ngClass]="(overlayService.opened ? 'is-active' : '') || ''"
   type="button"
   (click)="toggle()">
   <span class="hamburger-box">

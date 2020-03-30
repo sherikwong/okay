@@ -4,6 +4,7 @@ import { AccountComponent } from './components/account/account.component';
 import { LoginComponent } from './components/login/login.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { AuthenticatedGuard } from '../../guard/authenticated.guard';
 
 const accountRoutes: Routes = [
   {
@@ -14,7 +15,8 @@ const accountRoutes: Routes = [
         path: '**',
         redirectTo: ''
       }
-    ]
+    ],
+    canActivate: [AuthenticatedGuard]
   },
   {
     path: 'login',

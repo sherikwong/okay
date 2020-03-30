@@ -1,6 +1,6 @@
 <div class="w-100 h-100">
   <div class="okay-overlay__background--container">
-    <div class="okay-overlay__background" [ngClass]="[backgroundClass, expandBackground]"></div>
+    <div class="okay-overlay__background" [ngClass]="[(backgroundClass || ''), (expandBackground || '')]"></div>
   </div>
   <router-outlet name="overlay"></router-outlet>
 </div>

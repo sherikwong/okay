@@ -4,9 +4,10 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from '@angular/material/icon';
 import { AuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
 import { AccountRoutingModule } from "./account.routes";
-import { AccountComponent } from './components/account/account.component';
-import { LoginComponent } from './components/login/login.component';
+
 import {Google} from '../../../../secret';
+import { LoginComponent } from './login/login.component';
+import { AccountComponent } from './account/account.component';
 
 let config = new AuthServiceConfig([
   {

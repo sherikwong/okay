@@ -2,8 +2,8 @@
 
 import { Routes } from '@angular/router';
 import { AuthenticatedRoutes } from '../../enums/routes.enum';
-import { InventoryComponent } from '../account/inventory/inventory.component';
-import { TasksListComponent } from '../account/tasks/list/list.component';
+import { TasksListComponent } from './tasks/list/list.component';
+import { InventoryComponent } from './inventory/inventory.component';
 
 export const authenticatedRoutes: Routes = [
       {

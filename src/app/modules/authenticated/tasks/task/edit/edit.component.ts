@@ -1,22 +1,50 @@
 import { Component, OnInit } from '@angular/core';
+import { InputType } from '../../../../../components/input/input.component';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { group } from '../../../../../../../node_modules/@angular/animations';
 
 @Component({
-  selector: 'okay-edit-item',
+  selector: 'okay-edit-task',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css']
 })
-export class EditItemComponent implements OnInit {
-  public inputs = {
-    name: 'Name',
-    priority: 'Priority',
-    dueDate: 'Due Date',
-    room: 'Located in',
-    description: 'Description'
-  };
+export class EditTaskComponent implements OnInit {
+  public form: FormGroup;
+  public inputs = [
+    {
+      type: InputType.String,
+      name: 'Name',
+      formControlName: 'name'
+    },
+    {
+      type: InputType.String,
+      priority: 'Priority',
+      formControlName: 'priority'
+    },
+    {
+      type: InputType.String,
+      dueDate: 'Due Date',
+      formControlName: 'dueDate'
+    },
+    {
+      type: InputType.String,
+      room: 'Located in',
+      formControlName: 'room'
+    },
+    {
+      type: InputType.String,
+      description: 'Description',
+      formControlName: 'description'
+    },
+  ];
 
-  constructor() { }
+  constructor(
+    private fb: FormBuilder
+  ) { }
 
   ngOnInit(): void {
+    const controls = this.inputs.reduce((group, input) => (group[input.formControlName] = this.fb.control('')), {});
+    this.form = this.fb.group(controls);
   }
 
 }

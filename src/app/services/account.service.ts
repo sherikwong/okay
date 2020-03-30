@@ -25,7 +25,7 @@ export class AccountService {
     this.user_obsv.next(user);
   }
 
-  public getUpdatedUser(): Observable<User> {
+  public get getUpdatedUser(): Observable<User> {
     return this.user_obsv.asObservable();
   }
 

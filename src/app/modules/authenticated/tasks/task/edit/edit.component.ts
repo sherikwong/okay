@@ -49,5 +49,6 @@ export class EditTaskComponent implements OnInit {
       return group;
     }, {});
     this.form = this.fb.group(controls);
+    // console.log(this.form);
   }
 }

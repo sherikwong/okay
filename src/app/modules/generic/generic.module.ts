@@ -1,7 +1,7 @@
 import { RouterModule } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { NgModule, forwardRef } from '@angular/core';
 import { MaterialModule } from '../material/material.module';
 import { ContainerComponent } from './container/container.component';
 import { InputComponent } from './input/input.component';
@@ -31,10 +31,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     CommonModule,
     BrowserAnimationsModule,
-    FormsModule,
+    // FormsModule,
     ReactiveFormsModule,
     MaterialModule,
     RouterModule,
+  ],
+  providers: [
+
   ]
 })
 export class GenericModule { }

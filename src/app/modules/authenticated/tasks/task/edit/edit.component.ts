@@ -1,6 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { group } from '@angular/animations';
 import { InputType, IInput } from '../../../../generic/input/input.component';
 
@@ -15,27 +15,33 @@ export class EditTaskComponent implements OnInit {
     {
       type: InputType.String,
       name: 'Name',
-      formControlName: 'name'
+      formControlName: 'name',
+      validators: Validators.required
     },
     {
-      type: InputType.String,
+      type: InputType.Range,
       name: 'Priority',
-      formControlName: 'priority'
+      formControlName: 'priority',
+      validators: Validators.required
     },
     {
-      type: InputType.String,
+      type: InputType.Date,
       name: 'Due Date',
-      formControlName: 'dueDate'
+      formControlName: 'dueDate',
+      validators: Validators.required
     },
     {
-      type: InputType.String,
+      type: InputType.Dropdown,
       name: 'Located in',
-      formControlName: 'room'
+      formControlName: 'room',
+      validators: Validators.required,
+      options: Location
     },
     {
       type: InputType.String,
       name: 'Description',
-      formControlName: 'description'
+      formControlName: 'description',
+      validators: Validators.required
     },
   ];
 
@@ -49,6 +55,6 @@ export class EditTaskComponent implements OnInit {
       return group;
     }, {});
     this.form = this.fb.group(controls);
-    // console.log(this.form);
+    console.log(this.form);
   }
 }

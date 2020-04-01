@@ -1,3 +1,11 @@
-<mat-form-field>
-  <input matInput [value]="details?.name">
+<mat-form-field *ngIf="details?.type === inputTypes.Input">
+  <input matInput [value]="details?.name" [ngClass]="isRequiredClass">
+</mat-form-field>
+
+<mat-form-field *ngIf="details?.type === inputTypes.Dropdown">
+  <mat-select>
+    <mat-option *ngFor="let food of foods" [value]="food.value">
+
+    </mat-option>
+  </mat-select>
 </mat-form-field>

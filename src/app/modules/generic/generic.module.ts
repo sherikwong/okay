@@ -1,7 +1,7 @@
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { NgModule, forwardRef } from '@angular/core';
+import { NgModule, forwardRef, ModuleWithProviders } from '@angular/core';
 import { MaterialModule } from '../material/material.module';
 import { ContainerComponent } from './container/container.component';
 import { InputComponent } from './input/input.component';
@@ -40,4 +40,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
   ]
 })
-export class GenericModule { }
+export class GenericModule {
+  public forRoot(): ModuleWithProviders {
+    return {
+      ngModule: GenericModule,
+      providers: [
+        {
+          provide: NG_VALUE_ACCESSOR,
+          multi: true,
+          useExisting: forwardRef(() => InputComponent)
+        }
+      ]
+    }
+  }
+}

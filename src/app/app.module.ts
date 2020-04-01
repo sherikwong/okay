@@ -12,7 +12,7 @@ import { MaterialModule } from './modules/material/material.module';
 import { OverlayModule } from './modules/overlay/overlay.module';
 import { HttpInterceptorService } from './services/http-interceptor.service';
 import { ItemService } from './services/item.service';
-import { TasksService } from './services/tasks.service';
+// import { TasksService } from './services/tasks.service';
 
 export const OverlayToken = new InjectionToken('overlayService');
 
@@ -41,7 +41,7 @@ const OkayModules = [
   ],
   providers: [
     ItemService,
-    TasksService,
+    // TasksService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorService,

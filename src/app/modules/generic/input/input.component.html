@@ -1,22 +1,24 @@
-<ng-container [ngSwitch]="details?.type">
-  <mat-form-field *ngSwitchCase="inputTypes.Input">
-    <input matInput [value]="details?.name" [ngClass]="isRequiredClass">
-  </mat-form-field>
+<mat-form-field *ngIf="details?.type === inputTypes.Input">
+  <mat-label>{{details?.name}}</mat-label>
+  <input matInput [ngClass]="isRequiredClass">
+</mat-form-field>
 
-  <mat-form-field *ngSwitchCase="inputTypes.Dropdown">
-    <mat-select>
-      <mat-option *ngFor="let option of details?.options | keyvalue">
+<mat-form-field *ngIf="details?.type === inputTypes.Dropdown">
+  <mat-label>{{details?.name}}</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let option of details?.options | keyvalue">
       <!-- <mat-option *ngFor="let option of details?.options | keyvalue" [value]="food.value"> -->
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+    </mat-option>
+  </mat-select>
+</mat-form-field>
 
-  <!-- <mat-form-field *ngSwitchCase="inputTypes.Date">
+<!-- <mat-form-field *ngIf="details?.type === inputTypes.Date">
     <mat-label>Choose a date</mat-label>
     <input matInput [matDatepicker]="picker">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field> -->
-
-  <mat-slider *ngSwitchCase="inputTypes.Range"></mat-slider>
-</ng-container>
+<div *ngIf="details?.type === inputTypes.Range">
+  <mat-label>{{details?.name}}</mat-label>
+  <mat-slider></mat-slider>
+</div>

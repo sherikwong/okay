@@ -1,4 +1,4 @@
-import { AccountService } from './../../services/account.service';
+import { AccountService } from '../../services/account.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { OverlayService } from '../../services/overlay.service';

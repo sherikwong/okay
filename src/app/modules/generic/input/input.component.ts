@@ -30,6 +30,7 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   public inputTypes = InputType;
   @Input('for') details: IInput;
   public isRequiredClass: string;
+  public _value: any;
 
   constructor(
     @Optional() @Self() private ngControl: NgControl
@@ -40,6 +41,15 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   ngOnInit(): void {
     if (this.ngControl.control) {this.isRequiredClass = FormUtil.isRequired(this.ngControl.control) ? 'okay-input--required' : '';}
     console.log(this.details.formControlName, this.details);
+  }
+
+  public get value(): any {
+    return this._value;
+  }
+
+  public set value(newVal: any) {
+    this._value = newVal;
+    this.ngControl.control.patchValue(newVal);
   }
 
   writeValue(obj: any): void {

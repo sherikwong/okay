@@ -1,4 +1,4 @@
-import { OverlayRoutes } from './../../enums/routes.enum';
+import { OverlayRoutes } from '../../enums/routes.enum';
 import { Component, OnInit } from '@angular/core';
 import { OverlayService } from '../../services/overlay.service';
 

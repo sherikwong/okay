@@ -1,1 +1,7 @@
-<p>edit-task works!</p>
+<okay-container [formGroup]="group" *ngIf="fields">
+  <mat-card>
+    <ng-container *ngFor="let field of fields">
+      <okay-input [for]="field" [formControlName]="field.formControlName"></okay-input>
+    </ng-container>
+  </mat-card>
+</okay-container>

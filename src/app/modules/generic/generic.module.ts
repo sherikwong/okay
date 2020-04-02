@@ -26,7 +26,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   exports: [
     ContainerComponent,
-    InputComponent,
     BrowserModule,
     HttpClientModule,
     CommonModule,
@@ -35,6 +34,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     MaterialModule,
     RouterModule,
+    InputComponent,
   ],
   providers: [
 

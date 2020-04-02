@@ -5,9 +5,15 @@ import { NgModule, forwardRef, ModuleWithProviders } from '@angular/core';
 import { MaterialModule } from '../material/material.module';
 import { ContainerComponent } from './container/container.component';
 import { InputComponent } from './input/input.component';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+export class MyHammerConfig extends HammerGestureConfig  {
+  overrides = <any>{
+      'swipe': {velocity: 0.4, threshold: 20} // override default settings
+  }
+}
 
 @NgModule({
   imports: [
@@ -49,7 +55,11 @@ export class GenericModule {
           provide: NG_VALUE_ACCESSOR,
           multi: true,
           useExisting: forwardRef(() => InputComponent)
-        }
+        },
+        {
+          provide: HAMMER_GESTURE_CONFIG,
+          useClass: MyHammerConfig
+      }
       ]
     }
   }

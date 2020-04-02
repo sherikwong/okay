@@ -8,11 +8,11 @@ export interface ITask {
   rating?: number;
   dueDate?: Date;
   queue?: number;
-  comments: Comment[];
+  comments?: Comment[];
   timeBegin?: Date;
   timeEnd?: Date;
   priority?: number;
-  completed: boolean;
+  completed?: boolean;
   repeat?: IRepeat[];
 }
 

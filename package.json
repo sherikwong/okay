@@ -38,6 +38,7 @@
     "debug": "~2.6.9",
     "express": "~4.16.0",
     "hamburgers": "^1.1.3",
+    "hammerjs": "^2.0.8",
     "http-errors": "~1.6.2",
     "install": "^0.13.0",
     "jade": "~1.11.0",

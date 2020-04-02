@@ -9,6 +9,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSliderModule} from '@angular/material/slider';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [],
@@ -23,7 +27,11 @@ import {MatSliderModule} from '@angular/material/slider';
     MatTableModule,
     MatInputModule,
     MatSelectModule,
-    MatSliderModule
+    MatSliderModule,
+    MatDatepickerModule,
+    MatCheckboxModule,
+    MatNativeDateModule,
+    MatExpansionModule
   ],
   exports: [
     MatIconModule,
@@ -36,7 +44,10 @@ import {MatSliderModule} from '@angular/material/slider';
     MatTableModule,
     MatInputModule,
     MatSelectModule,
-    MatSliderModule
+    MatSliderModule,
+    MatDatepickerModule,
+    MatCheckboxModule,
+    MatExpansionModule
   ]
 })
 export class MaterialModule { }

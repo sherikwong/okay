@@ -41,7 +41,6 @@ export class InputComponent implements OnInit, ControlValueAccessor {
 
   ngOnInit(): void {
     if (this.ngControl.control) {this.isRequiredClass = FormUtil.isRequired(this.ngControl.control) ? 'okay-input--required' : '';}
-    console.log(this.details.formControlName, this.details);
   }
 
   public get value(): any {

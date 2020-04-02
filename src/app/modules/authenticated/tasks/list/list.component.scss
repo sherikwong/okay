@@ -1,0 +1,44 @@
+:host::ng-deep {
+  .okay-list {
+    padding: 0;
+
+    .mat-list {
+      padding: 0;
+    }
+
+    // .okay-list-item {
+    //  display: flex;
+    //  align-items: center;
+
+    //  .mat-checkbox {
+    //    margin-right: 12px;
+
+    //    .mat-checkbox-layout {
+    //      margin: 0;
+    //    }
+    //  }
+    // }
+
+    .okay-list-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      margin: 6px 0 6px 0;
+
+      .okay-list-item-label--date {
+        font-size: 12px;
+      }
+    }
+
+    .mat-expansion-indicator {
+      display: none;
+    }
+
+    .mat-expansion-panel-header-title {
+      flex-grow: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

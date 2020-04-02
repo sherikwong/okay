@@ -2,6 +2,7 @@ import { Validators, FormGroup, FormBuilder, FormControl } from '@angular/forms'
 import { Component, OnInit } from '@angular/core';
 import { IInput, InputType } from '../../../generic/input/input.component';
 import { Room } from '../../../../interfaces/task.interface';
+import { TaskService } from '../../../../services/task.service';
 
 @Component({
   selector: 'okay-edit-task',
@@ -10,10 +11,11 @@ import { Room } from '../../../../interfaces/task.interface';
 })
 export class EditTaskComponent implements OnInit {
   fields: IInput[];
-  group: FormGroup = new FormGroup({});
+  form: FormGroup = new FormGroup({});
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private tasksService: TaskService
   ) { }
 
   ngOnInit(): void {
@@ -52,15 +54,14 @@ export class EditTaskComponent implements OnInit {
     ];
 
     this.fields.forEach(field => {
-      this.group.addControl(field.formControlName, new FormControl());
-      if (field.validators) this.group.get(field.formControlName).setValidators(field.validators);
+      this.form.addControl(field.formControlName, new FormControl());
+      if (field.validators) this.form.get(field.formControlName).setValidators(field.validators);
     });
-
-    this.group.valueChanges.subscribe(val => console.log(val));
   }
 
 
   public add(): void {
-
+    this.tasksService.update(this.form.value)
+      .subscribe(res => console.log(res));
   }
 }

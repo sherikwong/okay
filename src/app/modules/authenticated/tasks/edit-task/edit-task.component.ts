@@ -43,8 +43,12 @@ export class EditTaskComponent implements OnInit {
         name: 'Priority',
         formControlName: 'priority',
         validators: Validators.required,
-        // options?: '',
-      }
+      },
+      {
+        type: InputType.Textarea,
+        name: 'Description',
+        formControlName: 'description'
+      },
     ];
 
     this.fields.forEach(field => {

@@ -7,7 +7,8 @@ export enum InputType {
   Date,
   String,
   Dropdown,
-  Range
+  Range,
+  Textarea
 }
 
 export interface IInput {

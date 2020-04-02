@@ -1,11 +1,11 @@
 <mat-form-field *ngIf="details?.type === inputTypes.String">
   <mat-label>{{details?.name}}</mat-label>
-  <input matInput [ngClass]="isRequiredClass" [(ngModel)]="value">
+  <input matInput [ngClass]="isRequiredClass" [(ngModel)]="value" class="w-100">
 </mat-form-field>
 
 <mat-form-field *ngIf="details?.type === inputTypes.Dropdown">
   <mat-label>{{details?.name}}</mat-label>
-  <mat-select [(ngModel)]="value">
+  <mat-select [(ngModel)]="value" class="w-100">
     <mat-option *ngFor="let option of details?.options | keyvalue" [value]="option.value">
       {{option.value}}
     </mat-option>
@@ -14,12 +14,17 @@
 
 <mat-form-field *ngIf="details?.type === inputTypes.Date">
   <mat-label>Due date</mat-label>
-  <input matInput [matDatepicker]="picker" [(ngModel)]="value">
+  <input matInput [matDatepicker]="picker" [(ngModel)]="value" class="w-100">
   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-datepicker #picker></mat-datepicker>
 </mat-form-field>
 
-<div *ngIf="details?.type === inputTypes.Range">
+<div *ngIf="details?.type === inputTypes.Range" class="d-flex flex-column">
   <mat-label>{{details?.name}}</mat-label>
   <mat-slider [(ngModel)]="value"></mat-slider>
 </div>
+
+<mat-form-field *ngIf="details?.type === inputTypes.Textarea" appearance="fill">
+    <mat-label>{{details?.name}}</mat-label>
+    <textarea matInput [(ngModel)]="value"></textarea>
+  </mat-form-field>

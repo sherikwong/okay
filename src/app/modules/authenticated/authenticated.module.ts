@@ -3,8 +3,8 @@ import { GenericModule } from '../generic/generic.module';
 import { HomeComponent } from './dashboard/home.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { TasksListComponent } from './tasks/list/list.component';
-import { EditTaskComponent } from './tasks/task/edit/edit.component';
 import { TaskComponent } from './tasks/task/task.component';
+import { EditTaskComponent } from './tasks/edit-task/edit-task.component';
 
 
 @NgModule({
@@ -16,7 +16,9 @@ import { TaskComponent } from './tasks/task/task.component';
     InventoryComponent,
     TaskComponent,
     EditTaskComponent,
-    TasksListComponent
+    TasksListComponent,
+    EditTaskComponent,
+
   ],
   exports: [
     HomeComponent,

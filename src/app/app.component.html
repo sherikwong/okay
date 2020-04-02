@@ -1,9 +1,7 @@
 <div class="okay-theme okay-theme--sofa okay-container">
-  <!-- <okay-overlay *ngIf="overlayService.opened"></okay-overlay>
+  <okay-overlay *ngIf="overlayService.opened"></okay-overlay>
   <okay-hamburger></okay-hamburger>
-  <okay-container *ngIf="!overlayService.opened">
+  <div class="mt-5" *ngIf="!overlayService.opened">
     <router-outlet></router-outlet>
-  </okay-container> -->
-  <okay-tasks-list></okay-tasks-list>
-  <!-- <okay-edit-task></okay-edit-task> -->
+  </div>
 </div>

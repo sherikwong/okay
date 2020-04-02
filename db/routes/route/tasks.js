@@ -23,20 +23,20 @@ router.post('/', function (req, res, next) {
     .catch(error => res.status(400).send('Error inserting new task', error))
 });
 
-router.get('/id/:id', function (req, res, next) {
-  Tasks.findByPk(req.params.id)
+router.get('/:id', function (req, res, next) {
+  Tasks.findByPk(req.body)
     .then(found => {
       res.send(found);
     })
 });
 
-// router.post('/id/:id', function (req, res, next) {
-//   Tasks.update(task, {
-//     where: {
-//       id: req.params.id
-//     }
-//   })
-// })
+router.post('/:id', function (req, res, next) {
+  Tasks.update(req.body, {
+    where: {
+      id: req.params.id
+    }
+  })
+})
 
 router.get('/query/:query', function (req, res, next) {
   const query = req.params.query.split('&').reduce((sql, pair) => {

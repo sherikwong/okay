@@ -1,28 +1,6 @@
 <div class="m-4 okay-list">
-  <!-- <mat-card class="okay-card">
-    <div class="okay-list">
-      <mat-list cdkDropList>
-        <div *ngFor="let task of tasks; let i = index" cdkDrag (cdkDropListDropped)="drop($event)">
-          <mat-list-item (click)="select(task.id)">
-            <div class="okay-list-item">
-              <mat-checkbox (change)="markAsCompleted(task, $event)"></mat-checkbox>
-              <div class="okay-list-item-label">
-                <span>{{i}} {{task.name}}</span>
-                <span class="okay-list-item-label--date" *ngIf="task.dueDate">{{task.dueDate | date:'mediumDate'}}</span>
-              </div>
-              <div>
-                <mat-icon>chat_bubble_outline</mat-icon>
-              </div>
-            </div>
-          </mat-list-item>
-          <mat-divider *ngIf="i !== tasks.length - 1"></mat-divider>
-        </div>
-      </mat-list>
-    </mat-card> -->
-
-
   <mat-accordion cdkDropList>
-    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngFor="let task of tasks; let i = index"
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" *ngFor="let task of tasks | async; let i = index"
       cdkDrag (cdkDropListDropped)="drop($event)">
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -31,26 +9,23 @@
 
         <mat-panel-description>
           <div class="okay-list-item">
-            <span>{{i}} {{task.name}}</span>
+            <span>{{task.name}}</span>
             <span class="okay-list-item-label--date" *ngIf="task.dueDate">{{task.dueDate | date:'mediumDate'}}</span>
           </div>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <p>I'm visible because I am open</p>
+
+      <div class="okay-list-item-icons-container">
+        <button mat-icon-button color="primary">
+          <mat-icon>chat_bubble_outline</mat-icon>
+        </button>
+        <button mat-icon-button color="primary">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
     </mat-expansion-panel>
   </mat-accordion>
 </div>
-
-<!--
-<div class="okay-list-item">
-
-    <div class="okay-list-item-label">
-      <span>{{i}} {{task.name}}</span>
-      <span class="okay-list-item-label--date" *ngIf="task.dueDate">{{task.dueDate | date:'mediumDate'}}</span>
-    </div>
-
-    <div>
-      <mat-icon>chat_bubble_outline</mat-icon>
-    </div>
-
-  </div> -->

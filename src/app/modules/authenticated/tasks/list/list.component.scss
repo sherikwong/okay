@@ -2,23 +2,6 @@
   .okay-list {
     padding: 0;
 
-    .mat-list {
-      padding: 0;
-    }
-
-    // .okay-list-item {
-    //  display: flex;
-    //  align-items: center;
-
-    //  .mat-checkbox {
-    //    margin-right: 12px;
-
-    //    .mat-checkbox-layout {
-    //      margin: 0;
-    //    }
-    //  }
-    // }
-
     .okay-list-item {
       display: flex;
       flex-direction: column;
@@ -39,6 +22,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+
+    .okay-list-item-icons-container {
+      padding-left: 32px;
+      display: flex;
+      justify-content: space-between;
     }
   }
 }

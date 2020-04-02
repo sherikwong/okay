@@ -59,4 +59,8 @@ export class EditTaskComponent implements OnInit {
     this.group.valueChanges.subscribe(val => console.log(val));
   }
 
+
+  public add(): void {
+
+  }
 }

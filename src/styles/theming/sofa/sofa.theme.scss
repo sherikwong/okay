@@ -24,6 +24,8 @@ $sofa-theme: x-map-merge(
 );
 
 .okay-theme--sofa {
+  background-color: $background-color;
+
   @include angular-material-theme($sofa-theme);
   @include okay-menu($sofa-theme);
 }

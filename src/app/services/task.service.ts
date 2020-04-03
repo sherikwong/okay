@@ -36,7 +36,7 @@ export class TaskService {
   }
 
   public getById(id: any): any {
-    return this.http.get(`/tasks/id/${id}`);
+    return this.http.get(`/tasks/${id}`);
 
   }
   // Static data for all

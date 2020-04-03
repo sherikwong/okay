@@ -3,6 +3,7 @@ import { TaskService } from '../../../../services/task.service';
 import { ITask } from '../../../../interfaces/task.interface';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '../../../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'okay-tasks-list',
@@ -14,7 +15,8 @@ export class TasksListComponent implements OnInit {
 
   constructor(
     private tasksService: TaskService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -27,19 +29,14 @@ export class TasksListComponent implements OnInit {
   }
 
   markAsCompleted(task: ITask, change: any) {
-    console.log(change);
-    // this.tasksService.update({...task, completed: true});
+    this.tasksService.update({...task, completed: change.checked});
   }
 
   drop(event: CdkDragDrop<string[]>) {
     // moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
   }
 
-  swipeLeft(task: ITask) {
-    console.log(task);
-  }
-
-  select() {
-
+  select(task: ITask) {
+    this.router.navigate(['tasks', task.id]);
   }
 }

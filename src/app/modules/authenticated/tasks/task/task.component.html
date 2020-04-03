@@ -1,1 +1,22 @@
-<p>task works!</p>
+<mat-card class="d-flex flex-column m-4" *ngIf="task">
+  <div class="d-flex align-items-center">
+    <mat-checkbox></mat-checkbox>
+    <div class="ml-4 d-flex flex-column">
+      <mat-card-title>{{task.name}}</mat-card-title>
+      <mat-card-subtitle>
+        {{task.dueDate | date:'mediumDate'}}
+      </mat-card-subtitle>
+    </div>
+  </div>
+  <mat-card-content>
+    <mat-divider></mat-divider>
+
+    <div>
+      <span>
+        {{description}}
+      </span>
+    </div>
+
+
+  </mat-card-content>
+</mat-card>

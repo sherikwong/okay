@@ -14,6 +14,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [],
@@ -33,7 +34,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatCheckboxModule,
     MatNativeDateModule,
     MatExpansionModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTabsModule,
   ],
   exports: [
     MatIconModule,
@@ -50,7 +52,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatDatepickerModule,
     MatCheckboxModule,
     MatExpansionModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTabsModule
   ]
 })
 export class MaterialModule { }

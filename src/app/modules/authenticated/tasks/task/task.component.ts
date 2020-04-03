@@ -6,7 +6,7 @@ import { ITask } from '../../../../interfaces/task.interface';
 @Component({
   selector: 'okay-task',
   templateUrl: './task.component.html',
-  styleUrls: ['./task.component.css']
+  styleUrls: ['./task.component.scss']
 })
 export class TaskComponent implements OnInit {
   // id: string;
@@ -18,9 +18,9 @@ export class TaskComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.tasksService.getAll().subscribe(val => console.log(val));
     this.route.params.subscribe(params => {
-      this.tasksService.getById(params.id)
+      // this.tasksService.getById(params.id)
+      this.tasksService.getById('2')
         .subscribe(task => {
           this.task = task;
           console.log(task);

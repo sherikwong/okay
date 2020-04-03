@@ -2,6 +2,7 @@
   <okay-overlay *ngIf="overlayService.opened"></okay-overlay>
   <okay-hamburger></okay-hamburger>
   <div class="mt-4" *ngIf="!overlayService.opened">
-    <router-outlet></router-outlet>
+    <!-- <router-outlet></router-outlet> -->
+    <okay-task></okay-task>
   </div>
 </div>

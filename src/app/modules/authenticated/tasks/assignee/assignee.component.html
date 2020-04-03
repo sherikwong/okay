@@ -1,16 +1,16 @@
-<button mat-icon-button>
+<button type="button" class="btn btn-outline-secondary mr-2" mat-icon-button placement="bottom" [ngbPopover]="assignee">
   <mat-icon>account_circle</mat-icon>
 </button>
 
-<form>
+
+<ng-template #assignee>
   <mat-form-field>
     <input matInput placeholder="Assignee" [matAutocomplete]="auto" [formControl]="stateCtrl">
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let user of users" [value]="user.id">
         <img [src]="user.photoUrl" height="25">
         <span>{{user.firstName}} {{user.lastName}}</span> |
-        <!-- <small>Population: {{state.population}}</small> -->
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
-</form>
+</ng-template>

@@ -9,6 +9,7 @@ import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angu
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QuillModule } from 'ngx-quill'
+import {NgbPopoverModule} from '@ng-bootstrap/ng-bootstrap';
 
 export class MyHammerConfig extends HammerGestureConfig  {
   overrides = <any>{
@@ -26,7 +27,8 @@ export class MyHammerConfig extends HammerGestureConfig  {
     MaterialModule,
     CommonModule,
     RouterModule,
-    QuillModule.forRoot()
+    QuillModule.forRoot(),
+    NgbPopoverModule
   ],
   declarations: [
     ContainerComponent,
@@ -38,12 +40,13 @@ export class MyHammerConfig extends HammerGestureConfig  {
     HttpClientModule,
     CommonModule,
     BrowserAnimationsModule,
-    // FormsModule,
+    FormsModule,
     ReactiveFormsModule,
     MaterialModule,
     RouterModule,
     InputComponent,
-    QuillModule
+    QuillModule,
+    NgbPopoverModule
   ],
   providers: [
 

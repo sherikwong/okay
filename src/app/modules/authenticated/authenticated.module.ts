@@ -5,6 +5,7 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { TasksListComponent } from './tasks/list/list.component';
 import { TaskComponent } from './tasks/task/task.component';
 import { EditTaskComponent } from './tasks/edit-task/edit-task.component';
+import { AssigneeComponent } from './tasks/assignee/assignee.component';
 
 
 @NgModule({
@@ -17,7 +18,7 @@ import { EditTaskComponent } from './tasks/edit-task/edit-task.component';
     TaskComponent,
     EditTaskComponent,
     TasksListComponent,
-    EditTaskComponent,
+    AssigneeComponent,
 
   ],
   exports: [
@@ -25,7 +26,8 @@ import { EditTaskComponent } from './tasks/edit-task/edit-task.component';
     InventoryComponent,
     TaskComponent,
     EditTaskComponent,
-    TasksListComponent
+    TasksListComponent,
+    AssigneeComponent
   ]
 })
 export class AuthenticatedModule { }

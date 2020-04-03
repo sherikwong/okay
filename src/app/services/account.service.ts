@@ -16,6 +16,7 @@ export class AccountService {
   ) {
     this.authService.authState.subscribe(user => {
       this.user = user;
+      this.storeInDb(user);
     });
   }
 
@@ -27,6 +28,10 @@ export class AccountService {
     this.user_obsv.next(user);
   }
 
+  public getAll(): Observable<Object> {
+    return this.http.get('/users');
+  }
+
   public get getUpdatedUser(): Observable<User> {
     return this.user_obsv.asObservable();
   }
@@ -36,6 +41,6 @@ export class AccountService {
   }
 
   private storeInDb(user: User) {
-    this.http.get('')
+    this.http.post('/users', user).subscribe(val => console.log(user));
   }
 }

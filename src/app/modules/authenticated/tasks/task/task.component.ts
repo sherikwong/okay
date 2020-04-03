@@ -23,11 +23,11 @@ export class TaskComponent implements OnInit {
   ngOnInit(): void {
     // this.route.params.subscribe(params => {
     // this.tasksService.getById(params.id)
-    this.tasksService.getById('2')
+    this.tasksService.getById('3')
       .subscribe(task => {
         // delete task.id;
-        console.log(task);
         this.task = task;
+        console.log(task);
       });
     // });
   }

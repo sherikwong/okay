@@ -46,7 +46,8 @@ export class TaskService {
   }
 
   public update<T>(updated: ITask): Observable<Object> {
-    return this.http.post(`/tasks/${updated.id}`, updated);
+    const url = updated.id ? `/${updated.id}` : '';
+    return this.http.post(`/tasks` + url, updated);
   }
 
   // Pipe item into Item class object to give functionality

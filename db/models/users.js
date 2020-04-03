@@ -1,5 +1,5 @@
 const User = (db, sequelize) => {
-  const model = db.define('item', {
+  const model = db.define('user', {
     id: { type: sequelize.STRING, allowNull: false, primaryKey: true },
     firstName: { type: sequelize.STRING, allowNull: false },
     lastName: { type: sequelize.STRING, allowNull: false },

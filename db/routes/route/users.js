@@ -12,21 +12,18 @@ router.get('/', function (req, res, next) {
   });
 });
 
-router.post('/', function (req, res, next) {
-  const params = req.body;
-  Users.create(params)
-    .then(user => {
-      res.send(user)
-    })
-    .catch(error => res.status(400).send('Error inserting new user', error))
-});
 
-router.get('/id/:id', function (req, res, next) {
-  Users.findByPk(req.params.id)
+router.post('/', function (req, res, next) {
+  const { id, firstName, lastName, email, photoUrl } = req.body;
+  console.log({ id, firstName, lastName, email, photoUrl });
+
+  Users.findOrCreate({ where: { id, firstName, lastName, email, photoUrl } })
     .then(found => {
+      console.log(found);
       res.send(found);
     })
 });
+
 
 // router.get('/query/:query', function (req, res, next) {
 //   const query = req.params.query.split('&').reduce((sql, pair) => {

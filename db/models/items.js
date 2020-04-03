@@ -1,7 +1,7 @@
 const Item = (db, sequelize) => {
   const model = db.define('item', {
     name: { type: sequelize.STRING, allowNull: false },
-    quantity: { type: sequelize.INTEGER, allowNull: true },
+    // quantity: { type: sequelize.INTEGER, allowNull: true },
     unit: { type: sequelize.STRING, allowNull: true },
     type: { type: sequelize.STRING, allowNull: true },
     location: { type: sequelize.STRING, allowNull: true },

@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AuthService, GoogleLoginProvider } from 'angularx-social-login';
@@ -10,10 +11,10 @@ export class AccountService {
   private user_obsv: BehaviorSubject<User> = new BehaviorSubject(null);
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private http: HttpClient
   ) {
     this.authService.authState.subscribe(user => {
-
       this.user = user;
     });
   }
@@ -32,5 +33,9 @@ export class AccountService {
 
   public login(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+  private storeInDb(user: User) {
+    this.http.get('')
   }
 }

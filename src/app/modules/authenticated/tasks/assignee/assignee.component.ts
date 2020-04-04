@@ -4,7 +4,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from '../../../../interfaces/user.interface';
 import { subscribeOn } from '../../../../../../node_modules/rxjs/operators';
 import { log } from 'util';
-import { NgbPopover } from '@ng-bootstrap/ng-bootstrap/popover/popover';
+import { NgbPopover } from '@ng-bootstrap/ng-bootstrap/';
 
 @Component({
   selector: 'okay-assignee',

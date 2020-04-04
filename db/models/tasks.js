@@ -7,6 +7,7 @@ const Task = (db, sequelize) => {
     dueDate: { type: sequelize.DATE, allowNull: true },
     completed: { type: sequelize.BOOLEAN, allowNull: true },
     description: { type: sequelize.STRING, allowNull: true },
+    assignee: { type: sequelize.ARRAY(sequelize.STRING), allowNull: true },
   });
   return model;
 };

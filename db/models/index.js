@@ -18,6 +18,7 @@ const db = {};
 
 const sequelize = new Sequelize('postgres://localhost:5432/okay');
 
+
 sequelize.authenticate()
   .then(() => console.log('Connected to DB'))
   .catch(() => console.log('Failed to connect to DB'));
@@ -31,14 +32,14 @@ fs
   .forEach(file => {
     const model = sequelize.import(path.join(__dirname, file));
 
-    console.log(model.name);
-
     db[model.name] = model;
 
     db[model.name].sync(
       // {force: true}
     );
   });
+
+db.user.belongsToMany(db.task, {through: 'tasksAssigned'});
 
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {

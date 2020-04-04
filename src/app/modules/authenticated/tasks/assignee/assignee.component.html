@@ -1,15 +1,21 @@
-<button type="button" class="btn btn-outline-secondary mr-2" mat-icon-button placement="bottom" [ngbPopover]="assignee">
-  <mat-icon>account_circle</mat-icon>
+<button type="button"
+class="btn btn-outline-secondary mr-2 user-button"
+mat-icon-button placement="bottom"
+[ngbPopover]="assignee"
+[autoClose]="false"
+>
+  <mat-icon *ngIf="!selectedUser">account_circle</mat-icon>
+  <div *ngIf="selectedUser" class="user-photo" [style]="userPhotoStyle"></div>
 </button>
 
 
 <ng-template #assignee>
   <mat-form-field>
-    <input matInput placeholder="Assignee" [matAutocomplete]="auto" [formControl]="stateCtrl">
+    <input matInput placeholder="Assignee" [matAutocomplete]="auto" [formControl]="filterControl">
     <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let user of users" [value]="user.id">
+      <mat-option *ngFor="let user of users" [value]="userName" (click)="onSelect(user)">
         <img [src]="user.photoUrl" height="25">
-        <span>{{user.firstName}} {{user.lastName}}</span> |
+        <span>{{user.firstName}} {{user.lastName}}</span>
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>

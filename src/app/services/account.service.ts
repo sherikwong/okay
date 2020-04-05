@@ -42,7 +42,6 @@ export class AccountService {
   }
 
   private storeInDb(user: User) {
-    console.log('Storing in DB', user);
-    this.http.post('/users', user);
+    this.http.post('/users', user).subscribe(val => console.log('Stored in DB', val));
   }
 }

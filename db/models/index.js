@@ -39,7 +39,10 @@ fs
     );
   });
 
-db.user.belongsToMany(db.task, {through: 'tasksAssigned'});
+const {task, user, assignedTask} = db;
+
+user.belongsToMany(task, {through: assignedTask});
+task.belongsToMany(user, {through: assignedTask});
 
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
@@ -48,6 +51,5 @@ Object.keys(db).forEach(modelName => {
 });
 
 db.sequelize = sequelize;
-db.Sequelize = Sequelize;
 
 module.exports = db;

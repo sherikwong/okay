@@ -58,4 +58,8 @@ export class TaskService {
       })
     ))
   }
+
+  public assign(params: {[key: string]: string}) {
+    return this.http.post('/tasks/assign', params);
+  }
 }

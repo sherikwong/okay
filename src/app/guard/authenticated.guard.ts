@@ -23,7 +23,6 @@ export class AuthenticatedGuard implements CanActivate {
     return of(null).pipe(
       delay(2000),
       map(() => {
-        console.log('User', this.accountService.user)
         if (this.accountService.user) {
           return true;
         }

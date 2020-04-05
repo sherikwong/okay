@@ -41,6 +41,6 @@ export class AccountService {
   }
 
   private storeInDb(user: User) {
-    this.http.post('/users', user).subscribe(val => console.log(user));
+    this.http.post('/users', user);
   }
 }

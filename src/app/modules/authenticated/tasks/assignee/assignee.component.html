@@ -1,6 +1,6 @@
 <!-- <ng-container *ngIf="users?.length"> -->
   <button type="button" (click)="toggle()" class="btn btn-outline-secondary mr-2 user-button" mat-icon-button placement="bottom" #popover="ngbPopover"
-    [ngbPopover]="assignee" [autoClose]="false" triggers="manual">
+    [ngbPopover]="assignee" [autoClose]="false" triggers="manual" #popover="ngbPopover">
     <mat-icon *ngIf="!selectedUser">account_circle</mat-icon>
     <div *ngIf="selectedUser" class="user-photo" [style]="userPhotoStyle"></div>
   </button>

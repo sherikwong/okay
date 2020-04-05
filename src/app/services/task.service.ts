@@ -7,6 +7,12 @@ import { Item } from "../models/item.interface";
 import { Query } from '../utils/query-string.utils';
 
 
+export interface AssignedTask {
+  userId: string;
+  taskId: string;
+  dueDate?: Date
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -59,11 +65,11 @@ export class TaskService {
     ))
   }
 
-  public assign(params: {[key: string]: string}) {
-    return this.http.post('/tasks/assign', params);
+  public assign(params: AssignedTask) {
+    return this.http.post('/assignedTasks', params);
   }
 
   public getQueue(taskId: string) {
-    return this.http.get(`/tasks/assign/task/${taskId}`);
+    return this.http.get(`/assignedTasks/${taskId}`);
   }
 }

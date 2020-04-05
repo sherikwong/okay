@@ -27,10 +27,7 @@ export class AssigneeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.accountService.getAll().subscribe(users => {
-      this.users = users as User[];
-      console.log(this.users);
-    });
+    this.accountService.login();
   }
 
   onSelect(user: User): void {
@@ -40,6 +37,13 @@ export class AssigneeComponent implements OnInit {
       taskId: this.task.id
     }).subscribe(val => {
       this.popover.close();
+    });
+  }
+
+  toggle(): void {
+    this.accountService.getAll().subscribe(users => {
+      this.users = users as User[];
+      if (this.users.length) this.popover.open();
     });
   }
 

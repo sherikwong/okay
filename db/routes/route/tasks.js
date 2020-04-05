@@ -20,11 +20,11 @@ router.get('/', function (req, res, next) {
 router.post('/', function (req, res, next) {
   const params = req.body;
   console.log('=====================================================================================', params);
-  Tasks.create(params)
-    .then(task => {
-      res.send(task)
-    })
-    .catch(error => res.status(400).send('Error inserting new task', error))
+  Tasks.create(params);
+    // .then(task => {
+      // res.send(task)
+    // })
+    // .catch(error => res.status(400).send('Error inserting new task', error))
 });
 
 router.get('/:id', function (req, res, next) {

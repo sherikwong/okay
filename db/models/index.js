@@ -16,7 +16,9 @@ const db = {};
 //   sequelize = new Sequelize(config.database, config.username, config.password, config);
 // }
 
-const sequelize = new Sequelize('postgres://localhost:5432/okay');
+const sequelize = new Sequelize('postgres://localhost:5432/okay', {
+  logging: false
+});
 
 
 sequelize.authenticate()
@@ -31,22 +33,22 @@ fs
   })
   .forEach(file => {
     const model = sequelize.import(path.join(__dirname, file));
-
+    console.log(`Dropping and recreating ---- ${model.name}`)
     db[model.name] = model;
 
     db[model.name].sync(
-      {force: true}
+      // {force: true}
     );
   });
 
-const {task, user, assignedTask} = db;
+const {Task, User, AssignedTask} = db;
 
-try {
-  user.belongsToMany(task, {through: assignedTask});
-  // task.belongsToMany(user, {through: assignedTask});
-} catch (error) {
-  console.log(error);
-}
+// try {
+  Task.belongsToMany(User, {through: 'AssignedTask', foreignKey: 'taskId'});
+  User.belongsToMany(Task, {through: 'AssignedTask', foreignKey: 'userId'});
+// } catch (error) {
+//   console.log(error);
+// }
 
 
 Object.keys(db).forEach(modelName => {

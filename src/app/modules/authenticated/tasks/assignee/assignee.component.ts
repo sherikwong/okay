@@ -1,10 +1,12 @@
 import { AccountService } from './../../../../services/account.service';
 import { FormControl } from '@angular/forms';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { User } from '../../../../interfaces/user.interface';
 import { subscribeOn } from '../../../../../../node_modules/rxjs/operators';
 import { log } from 'util';
 import { NgbPopover } from '@ng-bootstrap/ng-bootstrap/';
+import { TaskService } from '../../../../services/task.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'okay-assignee',
@@ -12,6 +14,7 @@ import { NgbPopover } from '@ng-bootstrap/ng-bootstrap/';
   styleUrls: ['./assignee.component.scss']
 })
 export class AssigneeComponent implements OnInit {
+  @Input() taskId?: string;
   filterControl = new FormControl();
   users: User[];
   selectedUser: User;
@@ -19,7 +22,8 @@ export class AssigneeComponent implements OnInit {
 
 
   constructor(
-    private accountService: AccountService
+    private accountService: AccountService,
+    private taskService: TaskService
   ) { }
 
   ngOnInit(): void {
@@ -28,9 +32,13 @@ export class AssigneeComponent implements OnInit {
     });
   }
 
-  onSelect(user: User): void {
+  async onSelect(user: User) {
     this.selectedUser = user;
-    console.log(this.popover);
+    await this.taskService.assign({
+      userId: this.accountService.user.id,
+      taskId: this.taskId
+    });
+    this.popover.close();
   }
 
   get userPhotoStyle(): {[key: string]: string} {

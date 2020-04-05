@@ -35,11 +35,12 @@ fs
     db[model.name] = model;
 
     db[model.name].sync(
-      // {force: true}
+      {force: true}
     );
   });
 
 db.user.belongsToMany(db.task, {through: 'tasksAssigned'});
+db.task.belongsToMany(db.user, {through: 'tasksAssigned'});
 
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {

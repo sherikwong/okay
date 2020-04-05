@@ -37,7 +37,7 @@ fs
     db[model.name] = model;
 
     db[model.name].sync(
-      {force: true}
+      // {force: true}
     );
   });
 

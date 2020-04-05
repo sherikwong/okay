@@ -25,7 +25,7 @@ app.set('port', port);
  async function database() {
    var server = await http.createServer(app);
    await models.sequelize.sync(
-     {force: true}
+    //  {force: true}
    );
    await server.listen(port);
    console.log('Listening on ', port);

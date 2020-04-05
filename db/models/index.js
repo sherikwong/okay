@@ -37,15 +37,16 @@ fs
     db[model.name] = model;
 
     db[model.name].sync(
-      // {force: true}
+      {force: true}
     );
   });
 
 const {Task, User, AssignedTask} = db;
 
 // try {
-  Task.belongsToMany(User, {through: 'AssignedTask', foreignKey: 'taskId'});
-  User.belongsToMany(Task, {through: 'AssignedTask', foreignKey: 'userId'});
+  Task.belongsToMany(User, {through: 'AssignedTasks'});
+  User.belongsToMany(Task, {through: 'AssignedTasks'});
+
 // } catch (error) {
 //   console.log(error);
 // }

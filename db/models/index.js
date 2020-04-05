@@ -35,14 +35,19 @@ fs
     db[model.name] = model;
 
     db[model.name].sync(
-      // {force: true}
+      {force: true}
     );
   });
 
 const {task, user, assignedTask} = db;
 
-user.belongsToMany(task, {through: assignedTask});
-task.belongsToMany(user, {through: assignedTask});
+try {
+  user.belongsToMany(task, {through: assignedTask});
+  task.belongsToMany(user, {through: assignedTask});
+} catch (error) {
+  console.log(error);
+}
+
 
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {

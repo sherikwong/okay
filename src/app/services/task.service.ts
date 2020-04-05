@@ -62,4 +62,8 @@ export class TaskService {
   public assign(params: {[key: string]: string}) {
     return this.http.post('/tasks/assign', params);
   }
+
+  public getQueue(taskId: string) {
+    return this.http.get(`/tasks/assign/task/${taskId}`);
+  }
 }

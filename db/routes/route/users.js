@@ -15,11 +15,12 @@ router.get('/', function (req, res, next) {
 
 router.post('/', function (req, res, next) {
   const { id, firstName, lastName, email, photoUrl } = req.body;
+  console.log({ id, firstName, lastName, email, photoUrl });
 
   Users.findOrCreate({ where: { id, firstName, lastName, email, photoUrl } })
     .then(found => {
       res.send(found);
-    })
+    }).catch(error => console.log(error));
 });
 
 

@@ -13,6 +13,7 @@ import { GoogleLoginProvider, AuthService } from 'angularx-social-login';
 export class TaskComponent implements OnInit {
   // id: string;
   task: ITask;
+  tabIndex: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,5 +37,10 @@ export class TaskComponent implements OnInit {
 
   public login() {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+  switchTab(index: number): void {
+     console.log(index);
+    this.tabIndex = index;
   }
 }

@@ -27,7 +27,6 @@ export class AssigneeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.accountService.login();
   }
 
   onSelect(user: User): void {

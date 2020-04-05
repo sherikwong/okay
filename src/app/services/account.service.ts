@@ -42,11 +42,11 @@ export class AccountService {
   }
 
   private storeInDb(user: User) {
-    const googleId = user.id;
+    const id = user.id;
     delete user.id;
     this.http.post('/users', {
       ...user,
-      googleId
+      id
     }).subscribe(val => console.log('Stored in DB', val));
   }
 }

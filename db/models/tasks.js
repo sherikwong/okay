@@ -1,5 +1,5 @@
 const Task = (db, sequelize) => {
-  const model = db.define('Task', {
+  const model = db.define('task', {
     // id: {type: sequelize.STRING, primaryKey: true},
     name: { type: sequelize.STRING, allowNull: false },
     // room: { type: sequelize.STRING, allowNull: true },

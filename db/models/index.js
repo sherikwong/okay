@@ -41,11 +41,11 @@ fs
     );
   });
 
-const {Task, User, AssignedTask} = db;
+const {task, user, assignedTasks} = db;
 
 // try {
-  Task.belongsToMany(User, {through: 'AssignedTasks'});
-  User.belongsToMany(Task, {through: 'AssignedTasks'});
+  task.belongsToMany(user, {through: assignedTasks});
+  user.belongsToMany(task, {through: assignedTasks});
 
 // } catch (error) {
 //   console.log(error);

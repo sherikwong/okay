@@ -1,6 +1,5 @@
 const User = (db, sequelize) => {
-  const model = db.define('User', {
-    googleId: {type: sequelize.STRING, allowNull: false},
+  const model = db.define('user', {
     firstName: { type: sequelize.STRING, allowNull: false },
     lastName: { type: sequelize.STRING, allowNull: false },
     email: { type: sequelize.STRING, allowNull: false },

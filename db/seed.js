@@ -3,7 +3,7 @@ const seed = async ({ User, Task }) => {
   try {
     const user = await User.create({
       "firstName": "Sheri",
-      "googleId": "115655759419999823636",
+      "id": "115655759419999823636",
       "email": "kwongsheri@gmail.com",
       "photoUrl": "https://lh3.googleusercontent.com/a-/AOh14GhpbgkQMwQgQXIcpV8dfmX4ylqYaNXc_ByyCLkv=s96-c",
       "lastName": "Kwong"

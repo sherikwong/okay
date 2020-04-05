@@ -6,6 +6,12 @@ import { ITask } from '../interfaces/task.interface';
 import { Item } from "../models/item.interface";
 import { Query } from '../utils/query-string.utils';
 
+export interface TaskAssignment {
+  taskId: string;
+  userId: string;
+  dueDate?: Date;
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -57,5 +63,9 @@ export class TaskService {
         return tasks;
       })
     ))
+  }
+
+  public assign(params: TaskAssignment) {
+    return this.http.post('', params).subscribe(val => console.log(val));
   }
 }

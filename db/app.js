@@ -9,6 +9,7 @@ var indexRouter = require('./routes');
 var itemsRouter = require('./routes/route/items');
 var tasksRouter = require('./routes/route/tasks');
 var usersRouter = require('./routes/route/users');
+var assignedTasksRouter = require('./routes/route/assignedTasks');
 
 var app = express();
 
@@ -33,6 +34,7 @@ app.use('/', indexRouter);
 app.use('/tasks', tasksRouter);
 app.use('/items', itemsRouter);
 app.use('/users', usersRouter);
+app.use('/assignedTasks', assignedTasksRouter);
 // okayRoutes.link(app);
 
 

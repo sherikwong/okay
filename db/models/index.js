@@ -43,7 +43,7 @@ const {task, user, assignedTask} = db;
 
 try {
   user.belongsToMany(task, {through: assignedTask});
-  task.belongsToMany(user, {through: assignedTask});
+  // task.belongsToMany(user, {through: assignedTask});
 } catch (error) {
   console.log(error);
 }

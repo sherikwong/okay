@@ -1,6 +1,6 @@
 const User = (db, sequelize) => {
   const model = db.define('user', {
-    id: {type: sequelize.STRING, primaryKey: true},
+    // id: {type: sequelize.STRING, primaryKey: true},
     firstName: { type: sequelize.STRING, allowNull: false },
     lastName: { type: sequelize.STRING, allowNull: false },
     email: { type: sequelize.STRING, allowNull: false },

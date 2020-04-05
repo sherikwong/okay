@@ -8,6 +8,7 @@ const Users = models.user;
 
 
 const assignedTasks = require('./assignedTasks');
+
 router.use('/assign', assignedTasks);
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -18,7 +19,7 @@ router.get('/', function (req, res, next) {
 
 router.post('/', function (req, res, next) {
   const params = req.body;
-  console.log(params);
+  console.log('=====================================================================================', params);
   Tasks.create(params)
     .then(task => {
       res.send(task)

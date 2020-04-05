@@ -6,13 +6,11 @@ export interface ITask {
   description?: string;
   room?: Room,
   rating?: number;
-  dueDate?: Date;
   queue?: number;
   comments?: Comment[];
   timeBegin?: Date;
   timeEnd?: Date;
   priority?: number;
-  completed?: boolean;
   repeat?: IRepeat[];
 }
 

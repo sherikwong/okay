@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../../../../services/task.service';
-import { ITask } from '../../../../interfaces/task.interface';
+import { Task } from '../../../../interfaces/task.interface';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '../../../../../../node_modules/@angular/router';
@@ -11,7 +11,7 @@ import { Router } from '../../../../../../node_modules/@angular/router';
   styleUrls: ['./list.component.scss']
 })
 export class TasksListComponent implements OnInit {
-  tasks: ITask[];
+  tasks: Task[];
 
   constructor(
     private tasksService: TaskService,
@@ -20,7 +20,9 @@ export class TasksListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.tasks = this.tasksService.getAll();
+    this.tasksService.getAll().subscribe(val => {
+      this.tasks = val;
+    });
     // const task = {
     //   id: '1',
     //   name: 'Wash the dishes',
@@ -28,7 +30,7 @@ export class TasksListComponent implements OnInit {
     // } as ITask;
   }
 
-  markAsCompleted(task: ITask, change: any) {
+  markAsCompleted(task: Task, change: any) {
     this.tasksService.update(task);
   }
 
@@ -36,7 +38,7 @@ export class TasksListComponent implements OnInit {
     // moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
   }
 
-  select(task: ITask) {
+  select(task: Task) {
     this.router.navigate(['tasks', task.id]);
   }
 }

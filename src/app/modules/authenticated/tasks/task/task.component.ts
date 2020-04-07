@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService, GoogleLoginProvider } from 'angularx-social-login';
 import { ActivatedRoute } from '../../../../../../node_modules/@angular/router';
+import { Task } from '../../../../interfaces/task.interface';
 import { TaskService } from '../../../../services/task.service';
-import { ITask } from '../../../../interfaces/task.interface';
-import { AccountService } from '../../../../services/account.service';
-import { GoogleLoginProvider, AuthService } from 'angularx-social-login';
 
 @Component({
   selector: 'okay-task',
@@ -12,7 +11,7 @@ import { GoogleLoginProvider, AuthService } from 'angularx-social-login';
 })
 export class TaskComponent implements OnInit {
   // id: string;
-  task: ITask;
+  task: Task;
   tabIndex: number;
 
   constructor(
@@ -24,7 +23,9 @@ export class TaskComponent implements OnInit {
   ngOnInit(): void {
     // this.route.params.subscribe(params => {
     // this.tasksService.getById(params.id)
-    this.task = this.tasksService.getById('1');
+    this.tasksService.getById('1').subscribe(task => {
+      this.task = task;
+    });
     // });
   }
 
@@ -35,7 +36,6 @@ export class TaskComponent implements OnInit {
   }
 
   switchTab(index: number): void {
-     console.log(index);
     this.tabIndex = index;
   }
 }

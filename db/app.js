@@ -31,10 +31,10 @@ app.use(cors());
 // })
 
 app.use('/', indexRouter);
+app.use('/assignedTasks', assignedTasksRouter);
 app.use('/tasks', tasksRouter);
 app.use('/items', itemsRouter);
 app.use('/users', usersRouter);
-app.use('/assignedTasks', assignedTasksRouter);
 // okayRoutes.link(app);
 
 

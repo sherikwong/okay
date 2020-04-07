@@ -27,7 +27,7 @@ router.post('/', function (req, res, next) {
 });
 
 router.get('/:id', function (req, res, next) {
-  console.log('Looking for tasks for', req.params.id, )
+  // console.log('Looking for tasks for', req.params.id, )
   Tasks.findByPk(req.params.id)
     .then(found => {
       res.send(found);

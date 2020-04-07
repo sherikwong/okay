@@ -1,6 +1,6 @@
 // import moment from 'moment';
 
-export interface ITask {
+export interface Task {
   id: string;
   name: string;
   description?: string;

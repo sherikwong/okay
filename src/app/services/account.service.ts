@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AuthService, GoogleLoginProvider } from 'angularx-social-login';
 import { User } from '../interfaces/user.interface';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,7 @@ export class AccountService {
     private http: HttpClient
   ) {
     this.authService.authState.subscribe(user => {
-      this.user = user;
-      console.log('User', user);
-      this.storeInDb(user);
+      this.userFromDb(user).subscribe(user => this.user = user);
     });
   }
 
@@ -29,8 +28,9 @@ export class AccountService {
     this.user_obsv.next(user);
   }
 
-  public getAll(): Observable<Object> {
-    return this.http.get('/users');
+  public getAll(): Observable<User[]> {
+    return this.http.get('/users').pipe(
+      map(users => users as User[]));
   }
 
   public get getUpdatedUser(): Observable<User> {
@@ -41,12 +41,14 @@ export class AccountService {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 
-  private storeInDb(user: User) {
+  private userFromDb(user: User): Observable<User> {
     const id = user.id;
     delete user.id;
-    this.http.post('/users', {
+    return this.http.post('/users', {
       ...user,
       id
-    }).subscribe(val => console.log('Stored in DB', val));
+    }).pipe(
+      map(user => user as User)
+    );
   }
 }

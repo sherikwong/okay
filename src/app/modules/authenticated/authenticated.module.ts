@@ -7,6 +7,7 @@ import { TaskComponent } from './tasks/task/task.component';
 import { EditTaskComponent } from './tasks/edit-task/edit-task.component';
 import { AssigneeComponent } from './tasks/assignee/assignee.component';
 import { QueueComponent } from './tasks/task/queue/queue.component';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 
 
 @NgModule({
@@ -31,6 +32,12 @@ import { QueueComponent } from './tasks/task/queue/queue.component';
     TasksListComponent,
     AssigneeComponent,
     QueueComponent
+  ],
+  providers: [
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: { displayDefaultIndicatorType: false }
+    }
   ]
 })
 export class AuthenticatedModule { }

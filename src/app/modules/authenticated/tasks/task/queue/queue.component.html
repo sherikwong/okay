@@ -1,3 +1,11 @@
 <!-- <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
   <div class="example-box" *ngFor="let movie of movies" cdkDrag>{{movie}}</div>
 </div> -->
+<mat-vertical-stepper>
+  <mat-step label="Step 1" state="phone">
+
+    <ng-template matStepperIcon="phone">
+      <mat-icon>call_end</mat-icon>
+    </ng-template>
+  </mat-step>
+</mat-vertical-stepper>

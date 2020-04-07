@@ -1,14 +1,10 @@
-import { TaskService } from './../../../../services/task.service';
-import { AccountService } from './../../../../services/account.service';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { User } from '../../../../interfaces/user.interface';
-import { subscribeOn } from '../../../../../../node_modules/rxjs/operators';
-import { log } from 'util';
 import { NgbPopover } from '@ng-bootstrap/ng-bootstrap/';
-import { TaskService } from '../../../../services/task.service';
-import { Observable } from 'rxjs';
 import { ITask } from '../../../../interfaces/task.interface';
+import { User } from '../../../../interfaces/user.interface';
+import { AccountService } from './../../../../services/account.service';
+import { TaskService } from './../../../../services/task.service';
 
 @Component({
   selector: 'okay-assignee',
@@ -20,8 +16,8 @@ export class AssigneeComponent implements OnInit {
   filterControl = new FormControl();
   users: User[];
   selectedUser: User;
-@ViewChild('popover', {static: true}) popover: NgbPopover;
-@Input() task: ITask;
+  @ViewChild('popover', { static: true }) popover: NgbPopover;
+  @Input() task: ITask;
 
 
   constructor(
@@ -30,6 +26,9 @@ export class AssigneeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.accountService.getAll().subscribe(users => {
+      this.users = users;
+    });
   }
 
   async onSelect(user: User) {
@@ -41,7 +40,7 @@ export class AssigneeComponent implements OnInit {
     this.popover.close();
   }
 
-  get userPhotoStyle(): {[key: string]: string} {
+  get userPhotoStyle(): { [key: string]: string } {
     return {
       backgroundImage: `url(${this.selectedUser.photoUrl})`
     };

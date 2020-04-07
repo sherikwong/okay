@@ -76,6 +76,6 @@ export class TaskService {
   }
 
   public getQueue(taskId: string) {
-    return this.http.get(`/assignedTasks/${taskId}`);
+    return this.http.get(`/assignedTasks/task/${taskId}`);
   }
 }

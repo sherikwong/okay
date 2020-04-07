@@ -1,4 +1,4 @@
-<mat-card class="d-flex flex-column m-4" *ngIf="task">
+<!-- <mat-card class="d-flex flex-column m-4" *ngIf="task">
   <div class="d-flex align-items-center">
     <mat-checkbox></mat-checkbox>
     <div class="okay-task-title-container">
@@ -9,7 +9,6 @@
         </mat-card-subtitle>
       </div>
       <div class="okay-task-tags">
-        <!-- <div [style]="{backgroundUrl: }"></div> -->
         <okay-assignee [taskId]="task.id"></okay-assignee>
 
         <button mat-icon-button>
@@ -39,7 +38,6 @@
         </div>
       </mat-tab>
       <mat-tab label="Queue">
-        <okay-queue *ngIf="tabIndex === 1" [taskId]="task?.id"></okay-queue>
       </mat-tab>
       <mat-tab label="Comments"> Content 2 </mat-tab>
     </mat-tab-group>
@@ -47,4 +45,10 @@
   </mat-card-content>
 </mat-card>
 
-<button (click)="login()">Login</button>
+<button (click)="login()">Login</button> -->
+
+<!-- <okay-queue *ngIf="tabIndex === 1" [taskId]="task?.id"></okay-queue> -->
+<div class="d-flex justify-content-center">
+  <okay-assignee [taskId]="task?.id"></okay-assignee>
+  <okay-queue [taskId]="task?.id"></okay-queue>
+</div>

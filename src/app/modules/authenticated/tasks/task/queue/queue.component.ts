@@ -13,7 +13,9 @@ export class QueueComponent implements OnChanges {
   ) {}
 
   ngOnChanges(): void {
-    this.taskService.getQueue(this.taskId).subscribe(val => console.log(val));
+    console.log(this.taskId);
+    if (this.taskId) {
+      this.taskService.getQueue('1').subscribe(val => console.log(val));
+    }
   }
-
 }

@@ -23,7 +23,10 @@ router.post('/', function (req, res, next) {
     .then(item => {
       res.send(item)
     })
-    .catch(error => res.status(400).send('Error inserting new item', error))
+    .catch(error => {
+      console.log(error);
+      next(error);
+    })
 });
 
 module.exports = router;

@@ -41,17 +41,6 @@ fs
     );
   });
 
-const {task, user, assignedTasks} = db;
-
-// try {
-  task.belongsToMany(user, {through: assignedTasks});
-  user.belongsToMany(task, {through: assignedTasks});
-
-// } catch (error) {
-//   console.log(error);
-// }
-
-
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
     db[modelName].associate(db);

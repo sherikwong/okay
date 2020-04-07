@@ -1,3 +1,4 @@
+import { TaskService } from './../../../../services/task.service';
 import { AccountService } from './../../../../services/account.service';
 import { FormControl } from '@angular/forms';
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
@@ -7,6 +8,7 @@ import { log } from 'util';
 import { NgbPopover } from '@ng-bootstrap/ng-bootstrap/';
 import { TaskService } from '../../../../services/task.service';
 import { Observable } from 'rxjs';
+import { ITask } from '../../../../interfaces/task.interface';
 
 @Component({
   selector: 'okay-assignee',
@@ -19,6 +21,7 @@ export class AssigneeComponent implements OnInit {
   users: User[];
   selectedUser: User;
 @ViewChild('popover', {static: true}) popover: NgbPopover;
+@Input() task: ITask;
 
 
   constructor(
@@ -27,9 +30,6 @@ export class AssigneeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.accountService.getAll().subscribe(users => {
-      this.users = users as User[];
-    });
   }
 
   async onSelect(user: User) {

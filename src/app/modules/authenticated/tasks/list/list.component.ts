@@ -29,7 +29,7 @@ export class TasksListComponent implements OnInit {
   }
 
   markAsCompleted(task: ITask, change: any) {
-    this.tasksService.update({...task, completed: change.checked});
+    this.tasksService.update(task);
   }
 
   drop(event: CdkDragDrop<string[]>) {

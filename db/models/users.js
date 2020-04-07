@@ -4,7 +4,7 @@ const User = (db, sequelize) => {
     firstName: { type: sequelize.STRING, allowNull: false },
     lastName: { type: sequelize.STRING, allowNull: false },
     email: { type: sequelize.STRING, allowNull: false },
-    photoUrl: { type: sequelize.STRING, allowNull: false },
+    photoUrl: { type: sequelize.STRING, allowNull: false }
   });
   return model;
 

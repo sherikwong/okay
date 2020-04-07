@@ -13,6 +13,12 @@ export interface TaskAssignment {
 }
 
 
+export interface AssignedTask {
+  userId: string;
+  taskId: string;
+  dueDate?: Date
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -65,7 +71,11 @@ export class TaskService {
     ))
   }
 
-  public assign(params: TaskAssignment) {
-    return this.http.post('', params).subscribe(val => console.log(val));
+  public assign(params: AssignedTask) {
+    return this.http.post('/assignedTasks', params);
+  }
+
+  public getQueue(taskId: string) {
+    return this.http.get(`/assignedTasks/${taskId}`);
   }
 }

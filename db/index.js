@@ -8,6 +8,7 @@ var app = require('./app');
 var debug = require('debug')('db:server');
 var http = require('http');
 const models = require('./models');
+const seed = require('./seed');
 
 /**
  * Get port from environment and store in Express.
@@ -39,6 +40,7 @@ app.set('port', port);
 
 /**
  * Normalize a port into a number, string, or false.
+ *
  */
 
 function normalizePort(val) {

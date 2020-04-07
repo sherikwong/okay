@@ -16,6 +16,7 @@ export class AccountService {
   ) {
     this.authService.authState.subscribe(user => {
       this.user = user;
+      console.log('User', user);
       this.storeInDb(user);
     });
   }
@@ -41,6 +42,11 @@ export class AccountService {
   }
 
   private storeInDb(user: User) {
-    this.http.post('/users', user).subscribe(val => console.log(user));
+    const id = user.id;
+    delete user.id;
+    this.http.post('/users', {
+      ...user,
+      id
+    }).subscribe(val => console.log('Stored in DB', val));
   }
 }

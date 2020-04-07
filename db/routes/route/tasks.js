@@ -3,10 +3,13 @@ const router = Router();
 const models = require('../../models');
 const Sequelize = require('sequelize')
 
-
-const Op = Sequelize.Op;
 const Tasks = models.task;
+const Users = models.user;
 
+
+const assignedTasks = require('./assignedTasks');
+
+router.use('/assign', assignedTasks);
 /* GET users listing. */
 router.get('/', function (req, res, next) {
   Tasks.findAll().then((tasks) => {
@@ -16,7 +19,6 @@ router.get('/', function (req, res, next) {
 
 router.post('/', function (req, res, next) {
   const params = req.body;
-  console.log(params);
   Tasks.create(params)
     .then(task => {
       res.send(task)
@@ -25,7 +27,7 @@ router.post('/', function (req, res, next) {
 });
 
 router.get('/:id', function (req, res, next) {
-  console.log('Looking for tasks for', req.params.id,)
+  console.log('Looking for tasks for', req.params.id, )
   Tasks.findByPk(req.params.id)
     .then(found => {
       res.send(found);
@@ -52,18 +54,4 @@ router.get('/query/:query', function (req, res, next) {
   }).then(task => res.send(task));
 });
 
-
-
 module.exports = router;
-
-
-// router.get('/', function(req, res) {
-//   models.User.findAll({
-//     include: [ models.Task ]
-//   }).then(function(users) {
-//     res.render('index', {
-//       title: 'Sequelize: Express Example',
-//       users: users
-//     });
-//   });
-// });

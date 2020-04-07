@@ -19,7 +19,7 @@
     </div>
   </div>
   <mat-card-content>
-    <mat-tab-group>
+    <mat-tab-group (selectedIndexChange)="switchTab($event)">
       <mat-tab label="Details">
         <div class="okay-tab-group">
           <div class="okay-task-items">
@@ -37,6 +37,9 @@
 
           </div>
         </div>
+      </mat-tab>
+      <mat-tab label="Queue">
+        <okay-queue *ngIf="tabIndex === 1" [taskId]="task?.id"></okay-queue>
       </mat-tab>
       <mat-tab label="Comments"> Content 2 </mat-tab>
     </mat-tab-group>

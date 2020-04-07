@@ -6,6 +6,7 @@ import { TasksListComponent } from './tasks/list/list.component';
 import { TaskComponent } from './tasks/task/task.component';
 import { EditTaskComponent } from './tasks/edit-task/edit-task.component';
 import { AssigneeComponent } from './tasks/assignee/assignee.component';
+import { QueueComponent } from './tasks/task/queue/queue.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { AssigneeComponent } from './tasks/assignee/assignee.component';
     EditTaskComponent,
     TasksListComponent,
     AssigneeComponent,
+    QueueComponent,
 
   ],
   exports: [
@@ -27,7 +29,8 @@ import { AssigneeComponent } from './tasks/assignee/assignee.component';
     TaskComponent,
     EditTaskComponent,
     TasksListComponent,
-    AssigneeComponent
+    AssigneeComponent,
+    QueueComponent
   ]
 })
 export class AuthenticatedModule { }

@@ -27,30 +27,37 @@ export class EditTaskComponent implements OnInit {
         validators: Validators.required,
         // options?: '',
       },
-      {
-        type: InputType.Dropdown,
-        name: 'Room',
-        formControlName: 'room',
-        options: Room,
-      },
-      {
-        type: InputType.Date,
-        name: 'Due date',
-        formControlName: 'dueDate',
-        // validators: Validators.required,
-        // options?: '',
-      },
-      {
-        type: InputType.Range,
-        name: 'Priority',
-        formControlName: 'priority',
-        validators: Validators.required,
-      },
-      {
-        type: InputType.Textarea,
-        name: 'Description',
-        formControlName: 'description'
-      },
+      // {
+      //   type: InputType.String,
+      //   name: 'ID',
+      //   formControlName: 'id',
+      //   validators: Validators.required,
+      //   // options?: '',
+      // },
+      // {
+      //   type: InputType.Dropdown,
+      //   name: 'Room',
+      //   formControlName: 'room',
+      //   options: Room,
+      // },
+      // {
+      //   type: InputType.Date,
+      //   name: 'Due date',
+      //   formControlName: 'dueDate',
+      //   // validators: Validators.required,
+      //   // options?: '',
+      // },
+      // {
+      //   type: InputType.Range,
+      //   name: 'Priority',
+      //   formControlName: 'priority',
+      //   validators: Validators.required,
+      // },
+      // {
+      //   type: InputType.Textarea,
+      //   name: 'Description',
+      //   formControlName: 'description'
+      // },
     ];
 
     this.fields.forEach(field => {

@@ -1,6 +1,8 @@
 const Router = require('express');
 const router = Router();
 const models = require('../../models');
+var {from} = require('rxjs');
+const {map, toPromise} = require('rxjs/operators');
 
 const AssignedTask = models.assignedTasks;
 const User = models.user;
@@ -32,25 +34,12 @@ router.get('/user/:id', async function (req, res, next) {
 
 /* GET users listing. */
 router.get('/task/:id', async function (req, res, next) {
-  console.log('Getting task');
   try {
     const {id} = req.params;
-    let tasks = await AssignedTask.findAll({
+
+    const tasks = await AssignedTask.findAll({
       where: { taskId: id }
-    })
-
-    tasks = tasks.map(async task => {
-      const user = await User.findByPk(task.userId);
-      console.log(user.firstName);
-
-      return {...task, user: {
-        firstName: user.firstName,
-        lastName: user.lastName,
-        photoUrl: user.photoUrl
-      }};
     });
-
-    console.log(tasks);
 
     res.send(tasks);
   } catch (error) {

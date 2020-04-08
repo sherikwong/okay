@@ -14,29 +14,27 @@ import { TaskService } from './../../../../services/task.service';
 export class AssigneeComponent implements OnInit {
   @Input() taskId?: string;
   filterControl = new FormControl();
-  users: User[];
+
   selectedUser: User;
   @ViewChild('popover', { static: true }) popover: NgbPopover;
   @Input() task: Task;
 
 
   constructor(
-    private accountService: AccountService,
+    public accountService: AccountService,
     private taskService: TaskService
   ) { }
 
   ngOnInit(): void {
-    this.accountService.getAll().subscribe(users => {
-      this.users = users;
-    });
   }
+
 
   async onSelect(user: User) {
     this.selectedUser = user;
     await this.taskService.assign({
       userId: this.accountService.user.id,
       taskId: this.taskId
-    }).subscribe();
+    }).subscribe(val => console.log(val));
     this.popover.close();
   }
 

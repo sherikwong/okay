@@ -10,7 +10,7 @@
     <mat-form-field>
       <input matInput placeholder="Assignee" [matAutocomplete]="auto" [formControl]="filterControl">
       <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let user of users" [value]="userName" (click)="onSelect(user)">
+        <mat-option *ngFor="let user of accountService.users" [value]="userName" (click)="onSelect(user)">
           <img [src]="user.photoUrl" height="25">
           <span>{{user.firstName}} {{user.lastName}}</span>
         </mat-option>

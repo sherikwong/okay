@@ -6,10 +6,23 @@ const models = require('../../models');
 const Users = models.user;
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
-  Users.findAll().then((users) => {
-    res.send(users);
-  });
+router.get('/:id', async function (req, res, next) {
+  try {
+    const {id} = req.params;
+    let user;
+
+    console.log('Users=========', id);
+
+    if (id) {
+      user = await Users.findByPk(id);
+    } else {
+      user = await Users.findAll();
+    }
+    res.send(user);
+  } catch (error) {
+    console.log('req.params.id', req.params.id)
+    res.status(400).send();
+  }
 });
 
 

@@ -30,6 +30,7 @@ export class AssigneeComponent implements OnInit {
 
 
   async onSelect(user: User) {
+    console.log(user.firstName + 'selected...');
     this.selectedUser = user;
     await this.taskService.assign({
       userId: this.accountService.user.id,
@@ -46,5 +47,11 @@ export class AssigneeComponent implements OnInit {
 
   get userName(): string {
     return this.selectedUser ? `${this.selectedUser.firstName} ${this.selectedUser.lastName}` : '';
+  }
+
+  get users(): any {
+    const users = [];
+    this.accountService.users.forEach(user => users.push(user));
+    return users;
   }
 }

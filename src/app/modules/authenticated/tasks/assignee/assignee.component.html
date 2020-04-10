@@ -1,20 +1,10 @@
-<!-- <ng-container *ngIf="users?.length"> -->
-  <button type="button" (click)="popover.open()" class="btn btn-outline-secondary mr-2 user-button" mat-icon-button placement="bottom" #popover="ngbPopover"
-    [ngbPopover]="assignee" [autoClose]="false" triggers="manual" #popover="ngbPopover">
-    <mat-icon *ngIf="!selectedUser">account_circle</mat-icon>
-    <div *ngIf="selectedUser" class="user-photo" [style]="userPhotoStyle"></div>
-  </button>
 
-
-  <ng-template #assignee>
-    <mat-form-field>
-      <input matInput placeholder="Assignee" [matAutocomplete]="auto" [formControl]="filterControl">
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let user of accountService.users" [value]="userName" (click)="onSelect(user)">
-          <img [src]="user.photoUrl" height="25">
-          <span>{{user.firstName}} {{user.lastName}}</span>
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-  </ng-template>
-<!-- </ng-container> -->
+  <mat-form-field>
+    <input matInput placeholder="Assignee" [matAutocomplete]="auto" [formControl]="filterControl">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let user of users" [value]="userName" (click)="onSelect(user)">
+        <img [src]="user.photoUrl" height="25">
+        <span>{{user.firstName}} {{user.lastName}}</span>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>

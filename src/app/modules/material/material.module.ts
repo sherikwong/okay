@@ -17,6 +17,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatDialogModule } from '../../../../node_modules/@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -40,6 +41,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatTabsModule,
     MatAutocompleteModule,
     MatStepperModule,
+    MatDialogModule
+
   ],
   exports: [
     MatIconModule,
@@ -59,7 +62,9 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatSnackBarModule,
     MatTabsModule,
     MatAutocompleteModule,
-    MatStepperModule
+    MatStepperModule,
+    MatDialogModule
+
   ]
 })
 export class MaterialModule { }

@@ -28,17 +28,20 @@ export class AccountService {
   public get users(): Map<string, User> {
     if (!this._users) {
       this._users = new Map();
-      console.log('User');
       this.http.get('/users').pipe(
-        tap((users: User[]) => users.forEach(user => this._users.set(user.id, user))),
+        map((users: User[]) => {
+          users.forEach(user => this._users.set(user.id, user));
+          console.log(this._users);
+          return this._users;
+        }),
       ).subscribe();
     }
     return this._users;
   }
 
-  public get getUpdatedUser(): Observable<User> {
-    return this.user_obsv.asObservable();
-  }
+  // private get getUpdatedUser(): Observable<User> {
+  //   return this.user_obsv.asObservable();
+  // }
 
   public async login(): Promise<void> {
     const currentUser = await this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
@@ -56,7 +59,7 @@ export class AccountService {
     );
   }
 
-  public get(id: string): Observable<User> {
+  private getUser(id: string): Observable<User> {
     return this.http.get(`/users/${id}`).pipe(map(user => user as User));
   }
 }

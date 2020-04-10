@@ -1,54 +1,8 @@
-  `<!-- <mat-card class="d-flex flex-column m-4" *ngIf="task">
-  <div class="d-flex align-items-center">
-    <mat-checkbox></mat-checkbox>
-    <div class="okay-task-title-container">
-      <div class="">
-        <mat-card-title>{{task.name}}</mat-card-title>
-        <mat-card-subtitle>
-          {{task.dueDate | date:'mediumDate'}}
-        </mat-card-subtitle>
-      </div>
-      <div class="okay-task-tags">
-        <okay-assignee [taskId]="task.id"></okay-assignee>
+<div class="m-3">
 
-        <button mat-icon-button>
-          <mat-icon>flag</mat-icon>
-        </button>
-      </div>
+  <mat-card class="p-0">
+    <div class="d-flex justify-content-center" *ngIf="task">
+      <okay-queue [taskId]="task?.id" class="flex-grow-2"></okay-queue>
     </div>
-  </div>
-  <mat-card-content>
-    <mat-tab-group (selectedIndexChange)="switchTab($event)">
-      <mat-tab label="Details">
-        <div class="okay-tab-group">
-          <div class="okay-task-items">
-            <div class="okay-task-item">
-              <span class="okay-task-item--label">Room</span>
-              <span class="okay-task-item--value">{{task.room}}</span>
-            </div>
-
-            <div *ngIf="task.description" class="okay-task-item">
-              <span class="okay-task-item--label">Description</span>
-              <span class="okay-task-item--value">
-                {{task.description}}
-              </span>
-            </div>
-
-          </div>
-        </div>
-      </mat-tab>
-      <mat-tab label="Queue">
-      </mat-tab>
-      <mat-tab label="Comments"> Content 2 </mat-tab>
-    </mat-tab-group>
-
-  </mat-card-content>
-</mat-card>
-
-<button (click)="login()">Login</button> -->
-
-<!-- <okay-queue *ngIf="tabIndex === 1" [taskId]="task?.id"></okay-queue> -->
-<div class="d-flex justify-content-center" *ngIf="task">
-  <okay-assignee [taskId]="task?.id"></okay-assignee>
-  <okay-queue [taskId]="task?.id"></okay-queue>
+  </mat-card>
 </div>

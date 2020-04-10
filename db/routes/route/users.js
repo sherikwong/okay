@@ -8,16 +8,15 @@ const Users = models.user;
 /* GET users listing. */
 router.get('/:id', async function (req, res, next) {
   try {
-    const {id} = req.params;
+    const { id } = req.params;
     let user;
 
     console.log('Users=========', id);
 
     if (id) {
       user = await Users.findByPk(id);
-    } else {
-      user = await Users.findAll();
     }
+
     res.send(user);
   } catch (error) {
     console.log('req.params.id', req.params.id)
@@ -25,6 +24,16 @@ router.get('/:id', async function (req, res, next) {
   }
 });
 
+router.get('/', async function (req, res, next) {
+  try {
+
+    const user = await Users.findAll();
+    res.send(user);
+
+  } catch (error) {
+    res.status(400).send();
+  }
+});
 
 router.post('/', function (req, res, next) {
   const { id, firstName, lastName, email, photoUrl } = req.body;

@@ -1,11 +1,10 @@
-<!-- <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-  <div class="example-box" *ngFor="let movie of movies" cdkDrag>{{movie}}</div>
-</div> -->
-<mat-vertical-stepper>
-  <mat-step label="Step 1" state="phone">
+<mat-action-list class="p-0" cdkDropList (cdkDropListDropped)="reorder($event)">
+  <button mat-list-item *ngFor="let task of (queue | async)l let i = index" cdkDrag class="d-flex">
+    <okay-queued class="flex-grow-2" [task]="task" [index]="i"></okay-queued>
+    <mat-divider *ngIf="i !== queue.length - 1"></mat-divider>
+  </button>
 
-    <ng-template matStepperIcon="phone">
-      <mat-icon>call_end</mat-icon>
-    </ng-template>
-  </mat-step>
-</mat-vertical-stepper>
+    <div class="okay-list-item">
+      <okay-queued class="flex-grow-2" ></okay-queued>
+    </div>
+</mat-action-list>

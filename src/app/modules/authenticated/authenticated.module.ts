@@ -8,6 +8,7 @@ import { EditTaskComponent } from './tasks/edit-task/edit-task.component';
 import { AssigneeComponent } from './tasks/assignee/assignee.component';
 import { QueueComponent } from './tasks/task/queue/queue.component';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { QueuedComponent } from './tasks/task/queue/queued/queued.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
     TasksListComponent,
     AssigneeComponent,
     QueueComponent,
+    QueuedComponent,
 
   ],
   exports: [

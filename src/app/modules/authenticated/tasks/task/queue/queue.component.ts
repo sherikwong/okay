@@ -1,42 +1,59 @@
+import { Observable } from 'rxjs';
 import { Task } from './../../../../../interfaces/task.interface';
 import { TaskService, AssignedTask } from './../../../../../services/task.service';
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ViewChild } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { User } from '../../../../../interfaces/user.interface';
-import { AccountService } from '../../../../../services/account.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AssigneeComponent } from '../../assignee/assignee.component';
 
 @Component({
   selector: 'okay-queue',
   templateUrl: './queue.component.html',
-  styleUrls: ['./queue.component.scss']
+  styleUrls: ['./queue.component.scss'],
+
 })
 export class QueueComponent implements OnChanges {
   @Input() taskId: string;
-  queue: (Partial<User> & AssignedTask)[] = [];
+  private _queue: (Partial<User> & AssignedTask)[] = [];
+  public queue: Observable<(Partial<User> & AssignedTask)[]>;
+  // @ViewChild(MatStepperIcon, {static: false}) icon: MatStepperIcon;
 
   constructor(
     private taskService: TaskService,
-    private accountService: AccountService
+    public dialog: MatDialog
   ) {}
 
   ngOnChanges(): void {
-    this.accountService.get('').subscribe(val => console.log(val));
     if (this.taskId) {
-      console.log('Quering task');
-      this.taskService.getQueue('1').pipe(
+      this.queue = this.taskService.getQueue('1').pipe(
         map((queue: AssignedTask[]) => {
           const ordered = queue.sort((a ,b) => +a.dueDate + +b.dueDate);
 
-          ordered.forEach(task => {
-            console.log(this.accountService.users);
-            this.queue.push({
-              ...this.accountService.users.get(task.userId),
-              // ...this.accountService.users.get(task.userId),
-              ...task
-            })
-          })
-        })
-      ).subscribe();
+          ordered.forEach(task => this._queue.push(task));
+          return this._queue;
+      }));
+
+      this.queue.subscribe(queue => {
+        console.log('Subscribed', queue);
+      });
     }
+  }
+
+
+
+
+  public reorder(event): void {
+
+  }
+
+
+  public add(): void {
+    this.dialog.open(AssigneeComponent, {
+      data: {
+        taskId: this.taskId
+      }
+    })
+
   }
 }

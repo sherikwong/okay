@@ -1,11 +1,5 @@
-<div class="mt-5">
-  <mat-list>
-    <div *ngFor="let route of routes; let i = index" class="okay-list-item--align-items-center">
-      <mat-list-item (click)="navigate(route.path)">
-          <mat-icon mat-list-icon>{{route.data?.icon}}</mat-icon>
-          <div mat-line>{{route.data?.title}}</div>
-      </mat-list-item>
-      <mat-divider *ngIf="i !== routes.length - 1"></mat-divider>
-    </div>
-  </mat-list>
-</div>
+<nav mat-tab-nav-bar class="mat-tab-group-inverted-header" [disablePagination]="true">
+    <a mat-tab-link *ngFor="let route of routes; let i = index" [routerLink]="link.path" #rla="routerLinkActive" routerLinkActive [active]="rla.isActive">
+        <mat-icon mat-list-icon>{{route.data?.icon}}</mat-icon>
+    </a>
+  </nav>

@@ -1,5 +1,5 @@
 <mat-action-list class="p-0" cdkDropList (cdkDropListDropped)="reorder($event)">
-  <button mat-list-item *ngFor="let task of (queue | async)l let i = index" cdkDrag class="d-flex">
+  <button mat-list-item *ngFor="let task of (queue | async); let i = index" cdkDrag class="d-flex">
     <okay-queued class="flex-grow-2" [task]="task" [index]="i"></okay-queued>
     <mat-divider *ngIf="i !== queue.length - 1"></mat-divider>
   </button>

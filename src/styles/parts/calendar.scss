@@ -1,0 +1,9 @@
+@mixin okay-calendar($theme) {
+  .okay-calendar {
+    .fc-view-container,
+    .fc-view, .fc-view table,
+    .fc-widget-content {
+     height: 100%;
+    }
+  }
+}

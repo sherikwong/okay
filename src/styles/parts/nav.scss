@@ -1,0 +1,20 @@
+@import './buttons';
+
+@mixin okay-nav($theme) {
+  // .okay-nav {
+  //   display: flex;
+  //   justify-content: space-between;
+  //   padding: 1rem;
+  //   border-top: 1px solid x-map-get($theme, 'foreground', 'dividers');
+  // }
+
+  @include okay-button($theme);
+
+
+  .mat-tab-label-container,
+  .mat-tab-list,
+  .mat-tab-labels,
+  .mat-tab-label {
+    height: 40px;
+  }
+}

@@ -1,6 +1,10 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { OverlayService } from './services/overlay.service';
 import { AccountService } from './services/account.service';
+import { AuthenticatedRoutes } from './enums/routes.enum';
+import { authenticatedRoutes } from './modules/authenticated/authenticated.routes';
+
 
 @Component({
   selector: 'okay-root',
@@ -9,9 +13,21 @@ import { AccountService } from './services/account.service';
 })
 export class AppComponent {
 
+  public routes = authenticatedRoutes;
+
+
   constructor(
-    public overlayService: OverlayService,
+    private router: Router,
+    private overlayService: OverlayService,
     public accountService: AccountService
-  ){
+  ) {
+  }
+
+  ngOnInit(): void {
+  }
+
+  public navigate(route: AuthenticatedRoutes) {
+    this.router.navigateByUrl(route);
+    this.overlayService.close();
   }
 }

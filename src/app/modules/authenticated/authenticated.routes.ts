@@ -46,7 +46,23 @@ export const authenticatedRoutes: Routes = [
     component: InventoryComponent,
     data: {
       title: 'Inventory',
+      icon: 'add'
+    }
+  },
+  {
+    path: AuthenticatedRoutes.Inventory,
+    component: InventoryComponent,
+    data: {
+      title: 'Inventory',
       icon: 'fastfood'
+    }
+  },
+  {
+    path: AuthenticatedRoutes.Account,
+    component: InventoryComponent,
+    data: {
+      title: 'Account',
+      icon: 'person'
     }
   },
   {

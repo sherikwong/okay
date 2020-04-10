@@ -3,8 +3,9 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-// font-family: 'Sacramento', cursive;
-// font-family: 'Quicksand', sans-serif;
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+@import '~@fullcalendar/bootstrap/main.css';
 @import './parts/parts';
 @import './common/common';
 @import './theming/theming';

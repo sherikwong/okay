@@ -1,6 +1,6 @@
+import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { GenericModule } from '../generic/generic.module';
-import { HomeComponent } from './dashboard/home.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { TasksListComponent } from './tasks/list/list.component';
 import { TaskComponent } from './tasks/task/task.component';

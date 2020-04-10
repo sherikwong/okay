@@ -1,7 +1,7 @@
-<mat-form-field>
-  <mat-label>{{label}}</mat-label>
+<mat-form-field *ngIf="details">
+  <mat-label>{{details?.name}}</mat-label>
 
-  <input *ngIf="details?.type === inputTypes.String" matInput [ngClass]="isRequiredClass" [(ngModel)]="value" class="w-100">
+  <input *ngIf="details?.type === inputTypes.String" matInput [ngClass]="isRequiredClass + ' ' +  additionalClasses" [(ngModel)]="value" class="w-100">
 
   <mat-select [(ngModel)]="value" class="w-100" *ngIf="details?.type === inputTypes.Dropdown">
     <mat-option *ngFor="let option of details?.options | keyvalue" [value]="option.value">

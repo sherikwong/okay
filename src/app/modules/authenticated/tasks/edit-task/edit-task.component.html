@@ -1,6 +1,8 @@
 <div [formGroup]="form" *ngIf="fields" class="okay-container">
-    <ng-container *ngFor="let field of fields">
-      <okay-input [for]="field" [formControlName]="field.formControlName" [label]=""></okay-input>
-    </ng-container>
-    <!-- <button mat-raised-button color="primary" (click)="add()">Add</button> -->
+    <okay-input [for]="fields.name" class="okay-input--fill" formControlName="name" additionalClasses="gso-input--large"></okay-input>
+
+    <div class="d-flex">
+        <!-- <okay-input [for]="fields.priority" class="okay-input--fill" formControlName="priority"></okay-input> -->
+        <!-- <okay-input [for]="fields.dueDate" class="okay-input--fill" formControlName="dueDate"></okay-input> -->
+    </div>
 </div>

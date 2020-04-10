@@ -22,7 +22,7 @@ export interface IInput {
 @Component({
   selector: 'okay-input',
   templateUrl: './input.component.html',
-  styleUrls: ['./input.component.css'],
+  styleUrls: ['./input.component.scss'],
   providers: [
 
   ]
@@ -30,7 +30,7 @@ export interface IInput {
 export class InputComponent implements OnChanges, ControlValueAccessor {
   public inputTypes = InputType;
   @Input('for') details: IInput;
-  @Input('label') label: string;
+  @Input() additionalClasses: string;
   public isRequiredClass: string;
   private _value: any;
 
@@ -41,6 +41,7 @@ export class InputComponent implements OnChanges, ControlValueAccessor {
   }
 
   ngOnChanges(): void {
+    console.log(this.details);
     if (this.ngControl.control) {
       this.isRequiredClass = FormUtil.isRequired(this.ngControl.control) ? 'okay-input--required' : '';
       this._value = this.ngControl.control.value;

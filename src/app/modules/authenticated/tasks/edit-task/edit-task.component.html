@@ -1,9 +1,6 @@
 <div [formGroup]="form" *ngIf="fields" class="okay-container">
-  <mat-card class="d-flex flex-column m-4">
     <ng-container *ngFor="let field of fields">
-      <okay-input [for]="field" [formControlName]="field.formControlName"></okay-input>
+      <okay-input [for]="field" [formControlName]="field.formControlName" [label]=""></okay-input>
     </ng-container>
-
-    <button mat-raised-button color="primary" (click)="add()">Add</button>
-  </mat-card>
+    <!-- <button mat-raised-button color="primary" (click)="add()">Add</button> -->
 </div>

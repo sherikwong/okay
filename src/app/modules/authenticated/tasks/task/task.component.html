@@ -1,8 +1,9 @@
 <div class="m-3">
-
   <mat-card class="p-0">
-    <div class="d-flex justify-content-center" *ngIf="task">
-      <okay-queue [taskId]="task?.id" class="flex-grow-2"></okay-queue>
+  <okay-edit-task [task]="task | async"></okay-edit-task>
+
+    <div class="d-flex justify-content-center" *ngIf="task | async">
+      <okay-queue [taskId]="(task | async).id" class="flex-grow-2"></okay-queue>
     </div>
   </mat-card>
 </div>

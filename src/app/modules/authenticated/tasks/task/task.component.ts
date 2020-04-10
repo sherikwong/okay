@@ -3,6 +3,7 @@ import { AuthService, GoogleLoginProvider } from 'angularx-social-login';
 import { ActivatedRoute } from '../../../../../../node_modules/@angular/router';
 import { Task } from '../../../../interfaces/task.interface';
 import { TaskService } from '../../../../services/task.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'okay-task',
@@ -10,8 +11,7 @@ import { TaskService } from '../../../../services/task.service';
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent implements OnInit {
-  // id: string;
-  task: Task;
+  task: Observable<Task>;
   tabIndex: number;
 
   constructor(
@@ -21,12 +21,8 @@ export class TaskComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.route.params.subscribe(params => {
-    // this.tasksService.getById(params.id)
-    this.tasksService.getById('1').subscribe(task => {
-      this.task = task;
-    });
-    // });
+    this.task = this.tasksService.getById('1');
+    this.task.subscribe();
   }
 
   // (change)="markAsCompleted(task, $event)"

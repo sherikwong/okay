@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Optional, Self } from '@angular/core';
+import { Component, Input, OnChanges, Optional, Self } from '@angular/core';
 import { ControlValueAccessor, NgControl, ValidatorFn } from '@angular/forms';
 import { FormUtil } from '../../../utils/form.util';
 
@@ -27,11 +27,12 @@ export interface IInput {
 
   ]
 })
-export class InputComponent implements OnInit, ControlValueAccessor {
+export class InputComponent implements OnChanges, ControlValueAccessor {
   public inputTypes = InputType;
   @Input('for') details: IInput;
+  @Input('label') label: string;
   public isRequiredClass: string;
-  public _value: any;
+  private _value: any;
 
   constructor(
     @Optional() @Self() private ngControl: NgControl
@@ -39,8 +40,11 @@ export class InputComponent implements OnInit, ControlValueAccessor {
     this.ngControl.valueAccessor = this;
   }
 
-  ngOnInit(): void {
-    if (this.ngControl.control) {this.isRequiredClass = FormUtil.isRequired(this.ngControl.control) ? 'okay-input--required' : '';}
+  ngOnChanges(): void {
+    if (this.ngControl.control) {
+      this.isRequiredClass = FormUtil.isRequired(this.ngControl.control) ? 'okay-input--required' : '';
+      this._value = this.ngControl.control.value;
+    }
   }
 
   public get value(): any {

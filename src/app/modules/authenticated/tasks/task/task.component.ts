@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AuthService, GoogleLoginProvider } from 'angularx-social-login';
 import { ActivatedRoute } from '../../../../../../node_modules/@angular/router';
 import { Task } from '../../../../interfaces/task.interface';
 import { TaskService } from '../../../../services/task.service';
 import { IInput, InputType } from '../../../generic/input/input.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'okay-task',
@@ -14,7 +15,7 @@ import { IInput, InputType } from '../../../generic/input/input.component';
 export class TaskComponent implements OnInit {
   task: Partial<Task> = {id: '1'};
   tabIndex: number;
-  form: FormGroup = new FormGroup({});
+  form: FormGroup;
   nameField: IInput = {
     type: InputType.String,
     name: '',
@@ -25,14 +26,22 @@ export class TaskComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private tasksService: TaskService,
-    private authService: AuthService
+    private authService: AuthService,
+    private _snackBar: MatSnackBar,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
     console.log(this.task);
     this.tasksService.getById('1').subscribe(task => this.task = task);
 
-    this.form.addControl('name', new FormControl(this.nameField.formControlName, this.nameField.validators));
+    this.form = this.fb.group({name: this.fb.control(this.nameField.formControlName, {
+      validators: this.nameField.validators
+    })}, {
+      updateOn: 'blur'
+    });
+
+    this.form.valueChanges.subscribe(name => this.updateName(name));
   }
 
   // (change)="markAsCompleted(task, $event)"
@@ -43,5 +52,14 @@ export class TaskComponent implements OnInit {
 
   switchTab(index: number): void {
     this.tabIndex = index;
+  }
+
+  private updateName(name: Partial<Task>): void {
+    console.log('Updating');
+    const task = {...this.task, ...name} as Task;
+
+    this.tasksService.update(task).toPromise().then(task => {
+      console.log(task);
+    });
   }
 }

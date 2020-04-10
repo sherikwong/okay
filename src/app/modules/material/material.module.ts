@@ -41,7 +41,8 @@ import { MatDialogModule } from '../../../../node_modules/@angular/material/dial
     MatTabsModule,
     MatAutocompleteModule,
     MatStepperModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule
 
   ],
   exports: [
@@ -63,7 +64,8 @@ import { MatDialogModule } from '../../../../node_modules/@angular/material/dial
     MatTabsModule,
     MatAutocompleteModule,
     MatStepperModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule
 
   ]
 })

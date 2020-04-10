@@ -28,25 +28,25 @@ export class EditTaskComponent implements OnChanges {
         validators: Validators.required
         // options?: '',
       },
-      // room: {
-      //   type: InputType.Dropdown,
-      //   name: 'Room',
-      //   formControlName: 'room',
-      //   options: Room,
-      // },
-      // dueDate: {
-      //   type: InputType.Date,
-      //   name: 'Due date',
-      //   formControlName: 'dueDate',
-      //   // validators: Validators.required,
-      //   // options?: '',
-      // },
-      // priority: {
-      //   type: InputType.Range,
-      //   name: 'Priority',
-      //   formControlName: 'priority',
-      //   validators: Validators.required,
-      // },
+      room: {
+        type: InputType.Dropdown,
+        name: 'Room',
+        formControlName: 'room',
+        options: Room,
+      },
+      dueDate: {
+        type: InputType.Date,
+        name: 'Due date',
+        formControlName: 'dueDate',
+        // validators: Validators.required,
+        // options?: '',
+      },
+      priority: {
+        type: InputType.Range,
+        name: 'Priority',
+        formControlName: 'priority',
+        validators: Validators.required,
+      },
       // {
       //   type: InputType.Textarea,
       //   name: 'Description',

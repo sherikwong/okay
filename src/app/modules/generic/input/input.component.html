@@ -1,7 +1,8 @@
-<mat-form-field *ngIf="details">
+<mat-form-field *ngIf="details && details?.type !== inputTypes.Range">
   <mat-label>{{details?.name}}</mat-label>
 
-  <input *ngIf="details?.type === inputTypes.String" matInput [ngClass]="isRequiredClass + ' ' +  additionalClasses" [(ngModel)]="value" class="w-100">
+  <input *ngIf="details?.type === inputTypes.String" matInput [ngClass]="isRequiredClass + ' ' +  additionalClasses" [(ngModel)]="value"
+    class="w-100">
 
   <mat-select [(ngModel)]="value" class="w-100" *ngIf="details?.type === inputTypes.Dropdown">
     <mat-option *ngFor="let option of details?.options | keyvalue" [value]="option.value">
@@ -15,7 +16,10 @@
     <mat-datepicker #picker></mat-datepicker>
   </ng-container>
 
-
-  <mat-slider *ngIf="details?.type === inputTypes.Range" [(ngModel)]="value"></mat-slider>
-
 </mat-form-field>
+
+<div *ngIf="details && details?.type === inputTypes.Range" class="d-flex align-items-center justify-content-center flex-grow-2">
+
+  <span class="okay-text--foreground mr-2">{{details?.name}}</span>
+  <mat-slider class="okay-slider" [(ngModel)]="value"></mat-slider>
+</div>

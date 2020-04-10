@@ -1,11 +1,28 @@
-<div class="m-3">
-  <mat-card class="p-0">
-    <div class="p-3">
-      <okay-edit-task [task]="task | async"></okay-edit-task>
+<div class="m-3" *ngIf="form">
+  <mat-card class="p-0 okay-card">
+    <div class="p-3" [formGroup]="form">
+        <okay-input [for]="nameField" class="okay-input--fill okay-input--no-underline okay-input--large" formControlName="name"></okay-input>
     </div>
 
-    <div class="d-flex justify-content-center" *ngIf="task | async">
-      <okay-queue [taskId]="(task | async)?.id" class="flex-grow-2"></okay-queue>
-    </div>
+    <mat-tab-group class="okay-tab-group">
+      <mat-tab label="Details">
+        <div class="p-3">
+          <okay-edit-task [task]="task"></okay-edit-task>
+        </div>
+
+        </mat-tab>
+        <mat-tab label="Assigned">
+            <div class="d-flex justify-content-center" *ngIf="task">
+                <okay-queue [taskId]="task?.id" class="flex-grow-2"></okay-queue>
+              </div>
+        </mat-tab>
+        <mat-tab label="Comments">
+
+
+        </mat-tab>
+      </mat-tab-group>
+
+
+
   </mat-card>
 </div>

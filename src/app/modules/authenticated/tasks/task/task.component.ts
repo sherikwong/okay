@@ -1,9 +1,11 @@
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { AuthService, GoogleLoginProvider } from 'angularx-social-login';
 import { ActivatedRoute } from '../../../../../../node_modules/@angular/router';
 import { Task } from '../../../../interfaces/task.interface';
 import { TaskService } from '../../../../services/task.service';
 import { Observable } from 'rxjs';
+import { IInput, InputType } from '../../../generic/input/input.component';
 
 @Component({
   selector: 'okay-task',
@@ -11,8 +13,15 @@ import { Observable } from 'rxjs';
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent implements OnInit {
-  task: Observable<Task>;
+  task: Task;
   tabIndex: number;
+  form: FormGroup = new FormGroup({});
+  nameField: IInput = {
+    type: InputType.String,
+    name: '',
+    formControlName: 'name',
+    validators: Validators.required
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -21,8 +30,9 @@ export class TaskComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.task = this.tasksService.getById('1');
-    this.task.subscribe();
+    this.tasksService.getById('1').subscribe(task => this.task = task);
+
+    this.form.addControl('name', new FormControl(this.nameField.formControlName, this.nameField.validators));
   }
 
   // (change)="markAsCompleted(task, $event)"

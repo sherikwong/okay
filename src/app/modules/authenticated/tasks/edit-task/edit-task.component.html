@@ -1,8 +1,8 @@
 <div [formGroup]="form" *ngIf="fields" class="okay-container">
-    <okay-input [for]="fields.name" class="okay-input--fill" formControlName="name" additionalClasses="gso-input--large"></okay-input>
+    <okay-input [for]="fields.room" class="okay-input--fill" formControlName="room"></okay-input>
+    <okay-input [for]="fields.dueDate" class="okay-input--fill" formControlName="dueDate"></okay-input>
 
-    <div class="d-flex">
-        <!-- <okay-input [for]="fields.priority" class="okay-input--fill" formControlName="priority"></okay-input> -->
-        <!-- <okay-input [for]="fields.dueDate" class="okay-input--fill" formControlName="dueDate"></okay-input> -->
-    </div>
+
+        <okay-input [for]="fields.priority" class="okay-input--fill" formControlName="priority"></okay-input>
+
 </div>

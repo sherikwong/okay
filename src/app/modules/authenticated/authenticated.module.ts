@@ -13,7 +13,7 @@ import { QueuedComponent } from './tasks/task/queue/queued/queued.component';
 
 @NgModule({
   imports: [
-    GenericModule,
+    GenericModule
   ],
   declarations: [
     HomeComponent,

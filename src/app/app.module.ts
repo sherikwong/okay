@@ -14,10 +14,11 @@ import { HttpInterceptorService } from './services/http-interceptor.service';
 import { ItemService } from './services/item.service';
 import { NamePipe } from './pipes/name.pipe';
 
+
 export const OverlayToken = new InjectionToken('overlayService');
 
 const ThirdPartyModules = [
-  SocialLoginModule,
+  SocialLoginModule
 ];
 
 const OkayModules = [

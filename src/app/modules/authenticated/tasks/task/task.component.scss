@@ -30,3 +30,19 @@
   display: flex;
   justify-content: space-between;
 }
+
+.okay-task--qr {
+  position: absolute;
+  right: 0;
+}
+
+::ng-deep {
+  .okay-input--suffix-1 {
+    .mat-input-element {
+      padding-right: 50px !important;
+    }
+  }
+}
+.okay-input-container {
+  align-items: flex-end;
+}

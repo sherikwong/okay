@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QuillModule } from 'ngx-quill'
 import {NgbPopoverModule} from '@ng-bootstrap/ng-bootstrap';
+import { QRCodeModule } from 'angularx-qrcode';
 
 export class MyHammerConfig extends HammerGestureConfig  {
   overrides = <any>{
@@ -28,7 +29,8 @@ export class MyHammerConfig extends HammerGestureConfig  {
     CommonModule,
     RouterModule,
     QuillModule.forRoot(),
-    NgbPopoverModule
+    NgbPopoverModule,
+    QRCodeModule
   ],
   declarations: [
     ContainerComponent,
@@ -46,7 +48,8 @@ export class MyHammerConfig extends HammerGestureConfig  {
     RouterModule,
     InputComponent,
     QuillModule,
-    NgbPopoverModule
+    NgbPopoverModule,
+    QRCodeModule
   ],
   providers: [
 

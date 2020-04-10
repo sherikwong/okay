@@ -7,7 +7,15 @@
   width: 100%;
 }
 
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
 .flex-grow-2 {
+  flex-grow: 2;
+}
+
+.flex-grow-4 {
   flex-grow: 2;
 }
 
@@ -63,4 +71,9 @@
     display: flex !important;
     flex-grow: 2;
   }
+}
+
+.okay-input-container {
+  display: flex;
+  position: relative;
 }

@@ -10,7 +10,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'okay-task',
   templateUrl: './task.component.html',
-  styleUrls: ['./task.component.scss']
+  styleUrls: ['./task.component.scss'],
+  host: { 'class': 'okay-container--fill flex-column' }
 })
 export class TaskComponent implements OnInit {
   task: Partial<Task> = {id: '1'};

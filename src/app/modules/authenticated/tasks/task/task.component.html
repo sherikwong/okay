@@ -1,28 +1,24 @@
-<div class="okay-container--fill flex-column" *ngIf="form">
+<mat-card class="okay-container--fill flex-column m-3 p-0" *ngIf="form">
+  <div class="okay-input-container m-3" [formGroup]="form">
+    <okay-input [for]="nameField" class="okay-input--suffix-1 okay-input--fill okay-input--no-underline okay-input--large" formControlName="name"></okay-input>
+    <qrcode *ngIf="task" [qrdata]="task.id" [width]="40" errorCorrectionLevel="'M'" class="okay-task--qr"></qrcode>
+  </div>
 
-  <!-- <mat-card class="p-0 okay-card d-flex flex-column justify-content-center"> -->
-    <div class="okay-input-container m-3" [formGroup]="form">
-      <okay-input [for]="nameField" class="okay-input--suffix-1 okay-input--fill okay-input--no-underline okay-input--large" formControlName="name"></okay-input>
-      <qrcode *ngIf="task" [qrdata]="task.id" [width]="40" errorCorrectionLevel="'M'" class="okay-task--qr"></qrcode>
-    </div>
+  <mat-tab-group class="okay-tab-group" mat-align-tabs="center">
+    <mat-tab label="Details">
+      <div class="p-3">
+        <okay-edit-task [task]="task"></okay-edit-task>
+      </div>
 
-    <mat-tab-group class="okay-tab-group" mat-align-tabs="center">
-      <mat-tab label="Details">
-        <div class="p-3">
-          <okay-edit-task [task]="task"></okay-edit-task>
-        </div>
-
-      </mat-tab>
-      <mat-tab label="Assigned">
-        <div class="d-flex justify-content-center" *ngIf="task">
-          <okay-queue [taskId]="task?.id" class="flex-grow-2"></okay-queue>
-        </div>
-      </mat-tab>
-      <mat-tab label="Comments">
+    </mat-tab>
+    <mat-tab label="Assigned">
+      <div class="d-flex justify-content-center" *ngIf="task">
+        <okay-queue [taskId]="task?.id" class="flex-grow-2"></okay-queue>
+      </div>
+    </mat-tab>
+    <mat-tab label="Comments">
 
 
-      </mat-tab>
-    </mat-tab-group>
-
-  <!-- </mat-card> -->
-</div>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>

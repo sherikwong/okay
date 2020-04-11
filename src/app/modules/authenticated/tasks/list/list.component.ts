@@ -73,11 +73,11 @@ export class TasksListComponent implements OnInit {
     // moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
   }
 
-  select(task: Task) {
-    this.router.navigate(['tasks', task.id]);
-  }
-
   masterToggle() {
 
+  }
+
+  goToTask(task: TaskService) {
+    this.router.navigate(['tasks', task.id]);
   }
 }

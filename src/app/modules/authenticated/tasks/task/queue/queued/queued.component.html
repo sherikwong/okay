@@ -1,9 +1,9 @@
 <div class="d-flex align-items-center justify-content-between flex-grow-2">
   <div class="d-flex align-items-center flex-grow-2">
-    <div class="okay-user-photo" [ngStyle]="userImage">
+    <div class="okay-user-photo" [ngStyle]="user.profileImage">
       <mat-icon *ngIf="isNewEntry" class="m-0">account_circle</mat-icon>
     </div>
-    <span *ngIf="!isNewEntry" class="okay-user-name ml-2">{{userService | userName}}</span>
+    <span *ngIf="!isNewEntry" class="okay-user-name ml-2">{{user.name}}</span>
 
 
     <mat-form-field *ngIf="isNewEntry" class="ml-2 flex-grow-2">

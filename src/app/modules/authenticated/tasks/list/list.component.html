@@ -1,24 +1,25 @@
-<div cdkDropList class="okay-list m-3" (cdkDropListDropped)="drop($event)">
+<div cdkDropList class="okay-list okay-container--fill m-3" (cdkDropListDropped)="drop($event)">
   <div class="p-3" [formGroup]="form">
     <okay-input [for]="inputParams" class="okay-input--suffix-1 okay-input--fill okay-input--large" formControlName="filter"></okay-input>
     <mat-form-field class="example-full-width">
-        <mat-label>Favorite food</mat-label>
-        <input matInput placeholder="Ex. Pizza" value="Sushi">
-      </mat-form-field>
+      <mat-label>Favorite food</mat-label>
+      <input matInput placeholder="Ex. Pizza" value="Sushi">
+    </mat-form-field>
   </div>
 
 
+  <ng-container *ngFor="let task of tasks">
+    <div class="okay-box" cdkDrag cdkDragLockAxis="y" (click)="goToTask(task)">
+      <div class="okay-custom-placeholder" *cdkDragPlaceholder></div>
+      <div class="d-flex">
 
-  <div class="okay-box" *ngFor="let task of tasks" cdkDrag cdkDragLockAxis="y">
-    <div class="okay-custom-placeholder" *cdkDragPlaceholder></div>
-    <div class="d-flex">
+        <mat-checkbox class="okay-checkbox"></mat-checkbox>
+        <div class="d-flex flex-column">
+          <span>{{task?.name}}</span>
+          <small>{{task?.dueDate | date:'shortDate'}}</small>
 
-      <mat-checkbox class="okay-checkbox"></mat-checkbox>
-      <div class="d-flex flex-column">
-        <span>{{task?.name}}</span>
-        <small>{{task?.dueDate | date:'shortDate'}}</small>
-
+        </div>
       </div>
     </div>
-  </div>
+  </ng-container>
 </div>

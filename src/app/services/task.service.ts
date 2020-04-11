@@ -33,4 +33,8 @@ export class TaskService {
     : new Date();
   }
 
+  public get id(): string {
+    return this._assignedTask.taskId;
+  }
+
 }

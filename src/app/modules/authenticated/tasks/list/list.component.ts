@@ -1,3 +1,4 @@
+import { ListModalComponent } from './../../../generic/list-modal/list-modal.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from '../../../../services/user.service';
 import { AssignedTask } from '../../../../services/tasks.service';
@@ -5,13 +6,12 @@ import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, OnInit, Injector } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { Task } from '../../../../interfaces/task.interface';
 import { TasksService } from '../../../../services/tasks.service';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { User } from '../../../../interfaces/user.interface';
 import { TaskService } from '../../../../services/task.service';
 import { InputType, IInput } from '../../../generic/input/input.component';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 
 interface Services {
   user: UserService;
@@ -45,6 +45,7 @@ export class TasksListComponent implements OnInit {
     private router: Router,
     private injector: Injector,
     private fb: FormBuilder,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -57,7 +58,7 @@ export class TasksListComponent implements OnInit {
         this.tasks = tasks.map(assignedTask => {
           const taskService = this.injector.get<TaskService>(TaskService);
           taskService.get(assignedTask);
-          console.log(assignedTask);
+          console.log(taskService);
           return taskService;
         })
       }));
@@ -73,8 +74,8 @@ export class TasksListComponent implements OnInit {
     // moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
   }
 
-  masterToggle() {
-
+  openSortModal() {
+    // this.dialog.open(ListModalComponent, { data: [] });
   }
 
   goToTask(task: TaskService) {

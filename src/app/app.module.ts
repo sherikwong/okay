@@ -13,6 +13,7 @@ import { OverlayModule } from './modules/overlay/overlay.module';
 import { HttpInterceptorService } from './services/http-interceptor.service';
 import { ItemService } from './services/item.service';
 import { NamePipe } from './pipes/name.pipe';
+// import { ListModalComponent } from './components/list-modal/list-modal.component';
 
 
 export const OverlayToken = new InjectionToken('overlayService');
@@ -40,7 +41,7 @@ const OkayModules = [
     AppComponent,
     HeaderComponent,
     HamburgerComponent,
-    NamePipe,
+    NamePipe
   ],
   providers: [
     ItemService,

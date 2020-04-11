@@ -1,29 +1,24 @@
-<mat-card class="okay-container--fill m-3 p-0" *ngIf="services">
-  <mat-table [dataSource]="services" matSort>
-    <ng-container matColumnDef="name" mat-sort-header>
-      <mat-header-cell *matHeaderCellDef>What?</mat-header-cell>
-      <mat-cell *matCellDef="let services; let i = index;">
-        {{services?.task?.name}}
-      </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="dueDate" mat-sort-header>
-      <mat-header-cell *matHeaderCellDef>When?</mat-header-cell>
-      <mat-cell *matCellDef="let services; let i = index;">
-        {{services?.task?.dueDate | date:'shortDate'}}
-      </mat-cell>
-    </ng-container>
+<div cdkDropList class="okay-list m-3" (cdkDropListDropped)="drop($event)">
+  <div class="p-3" [formGroup]="form">
+    <okay-input [for]="inputParams" class="okay-input--suffix-1 okay-input--fill okay-input--large" formControlName="filter"></okay-input>
+    <mat-form-field class="example-full-width">
+        <mat-label>Favorite food</mat-label>
+        <input matInput placeholder="Ex. Pizza" value="Sushi">
+      </mat-form-field>
+  </div>
 
 
-    <ng-container matColumnDef="assigned" mat-sort-header>
-      <mat-header-cell *matHeaderCellDef>Who?</mat-header-cell>
-      <mat-cell *matCellDef="let services; let i = index;">
-        <div [ngStyle]="services?.user?.profileImage">&nbsp;</div>
-        <span>{{services?.user?.name}}</span>
-      </mat-cell>
-    </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
-</mat-card>
+  <div class="okay-box" *ngFor="let task of tasks" cdkDrag cdkDragLockAxis="y">
+    <div class="okay-custom-placeholder" *cdkDragPlaceholder></div>
+    <div class="d-flex">
+
+      <mat-checkbox class="okay-checkbox"></mat-checkbox>
+      <div class="d-flex flex-column">
+        <span>{{task?.name}}</span>
+        <small>{{task?.dueDate | date:'shortDate'}}</small>
+
+      </div>
+    </div>
+  </div>
+</div>

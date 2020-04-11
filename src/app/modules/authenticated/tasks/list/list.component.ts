@@ -1,3 +1,4 @@
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from '../../../../services/user.service';
 import { AssignedTask } from '../../../../services/tasks.service';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
@@ -10,6 +11,7 @@ import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { User } from '../../../../interfaces/user.interface';
 import { TaskService } from '../../../../services/task.service';
+import { InputType, IInput } from '../../../generic/input/input.component';
 
 interface Services {
   user: UserService;
@@ -20,43 +22,47 @@ interface Services {
   selector: 'okay-tasks-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
-  host: { 'class': 'okay-container--fill' }
+  host: { 'class': 'okay-container--fill flex-column' }
 })
 export class TasksListComponent implements OnInit {
-  tasks: Observable<AssignedTask[]>;
-  services?: Services[];
+  public assignedTask: Observable<AssignedTask[]>;
+  tasks?: TaskService[];
+  form: FormGroup;
+  inputParams: IInput = {
+    type: InputType.String,
+    name: 'Filter',
+    formControlName: 'filter'
+  };
 
   displayedColumns: string[] = [
     'name',
-    'dueDate',
-    'assigned'
+    'dueDate'
   ];
 
   constructor(
     private tasksService: TasksService,
     private snackBar: MatSnackBar,
     private router: Router,
-    private injector: Injector
+    private injector: Injector,
+    private fb: FormBuilder,
   ) { }
 
   ngOnInit() {
+    this.form = this.fb.group({
+      'filter': this.fb.control('')
+    });
 
-    this.tasks = this.tasksService.getAllQueued()
-    .pipe(tap(tasks => {
-      this.services = tasks.map(assignedTask => {
-        const userService = this.injector.get<UserService>(UserService);
-        userService.getFromTask(assignedTask);
+    this.assignedTask = this.tasksService.getAllQueued()
+      .pipe(tap(tasks => {
+        this.tasks = tasks.map(assignedTask => {
+          const taskService = this.injector.get<TaskService>(TaskService);
+          taskService.get(assignedTask);
+          console.log(assignedTask);
+          return taskService;
+        })
+      }));
 
-        const taskService = this.injector.get<TaskService>(TaskService);
-        taskService.get(assignedTask);
-
-        return {
-          user: userService,
-          task: taskService
-        };
-      })
-    }));
-    this.tasks.subscribe(val => console.log(this.services));
+    this.assignedTask.subscribe();
   }
 
   // markAsCompleted(task: Task, change: any) {
@@ -69,5 +75,9 @@ export class TasksListComponent implements OnInit {
 
   select(task: Task) {
     this.router.navigate(['tasks', task.id]);
+  }
+
+  masterToggle() {
+
   }
 }

@@ -1,8 +1,8 @@
 <div class="okay-theme okay-theme--sofa okay-container">
   <okay-overlay *ngIf="overlayService.opened"></okay-overlay>
-  <!-- <okay-hamburger></okay-hamburger> -->
-  <!-- <div class="mt-4" *ngIf="!overlayService.opened"> -->
+
   <router-outlet></router-outlet>
+
   <nav mat-tab-nav-bar class="mat-tab-group-inverted-header" [disablePagination]="true">
     <a mat-tab-link *ngFor="let route of routes; let i = index" [routerLink]="route.path" #rla="routerLinkActive" routerLinkActive
       [active]="rla.isActive">

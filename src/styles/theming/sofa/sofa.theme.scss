@@ -30,9 +30,9 @@ $sofa-theme: x-map-merge(
   // background-color: $background-color;
 
   @include angular-material-theme($sofa-theme);
-  @include okay-menu($sofa-theme);
+  // @include okay-menu($sofa-theme);
   @include okay-nav($sofa-theme);
-  @include okay-calendar($sofa-theme);
+  // @include okay-calendar($sofa-theme);
   @include okay-list($sofa-theme);
 }
 

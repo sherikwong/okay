@@ -12,7 +12,8 @@ import { QuillModule } from 'ngx-quill'
 import {NgbPopoverModule} from '@ng-bootstrap/ng-bootstrap';
 import { QRCodeModule } from 'angularx-qrcode';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { MbscModule } from '../../../lib/mobiscroll/js/mobiscroll.angular.min';
+
+
 
 export class MyHammerConfig extends HammerGestureConfig  {
   overrides = <any>{
@@ -33,7 +34,7 @@ export class MyHammerConfig extends HammerGestureConfig  {
     QuillModule.forRoot(),
     NgbPopoverModule,
     QRCodeModule,
-    MbscModule,
+    FullCalendarModule,
   ],
   declarations: [
     ContainerComponent,
@@ -53,7 +54,7 @@ export class MyHammerConfig extends HammerGestureConfig  {
     QuillModule,
     NgbPopoverModule,
     QRCodeModule,
-    MbscModule,
+    FullCalendarModule,
   ],
   providers: [
 

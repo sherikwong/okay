@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, OnInit } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
-import { map } from "rxjs/operators";
-import { IItem, Item } from "../models/item.interface";
+import { Injectable, OnInit } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { IItem, Item } from '../models/item.interface';
 import { QueryStringUtils, Query } from '../utils/query-string.utils';
 import crypto from 'crypto-js';
 
@@ -54,12 +54,12 @@ export class ItemService {
   public subscribe(): Observable<Item[]> {
     return this._itemsSubject.asObservable().pipe((
       map((items: IItem[]) => {
-        const parsedItems = items.map((itemDetails: IItem) => new Item(itemDetails))
+        const parsedItems = items.map((itemDetails: IItem) => new Item(itemDetails));
         // const parsedItems = items.map((itemDetails: IItem) => new Item(itemDetails))
         this._items = parsedItems;
         return parsedItems;
       })
-    ))
+    ));
   }
 
   // TODO: Filter by DB or by front-end?

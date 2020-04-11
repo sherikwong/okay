@@ -26,7 +26,7 @@ export class OverlayComponent implements OnInit {
         this.expandBackground = this.overlayService.opened
         ? 'okay-overlay__background--open'
         : '';
-      }).bind(this), 2000)
+      }).bind(this), 2000);
 
       return this.overlayService.opened
       ? `okay-overlay__background--${this.overlayService.opened}`

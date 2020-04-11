@@ -1,7 +1,7 @@
 import crypto from 'crypto-js';
 
 export interface Query {
-  [key: string]: string | number
+  [key: string]: string | number;
 }
 
 export class QueryStringUtils {

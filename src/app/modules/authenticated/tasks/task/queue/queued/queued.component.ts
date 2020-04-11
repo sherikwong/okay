@@ -3,11 +3,13 @@ import { User } from '../../../../../../interfaces/user.interface';
 import { AccountService } from '../../../../../../services/account.service';
 import { AssignedTask, TaskService } from './../../../../../../services/task.service';
 import { FormControl } from '@angular/forms';
+import { UserService } from '../../../../../../services/user.service';
 
 @Component({
   selector: 'okay-queued',
   templateUrl: './queued.component.html',
-  styleUrls: ['./queued.component.scss']
+  styleUrls: ['./queued.component.scss'],
+  providers: [UserService]
 })
 export class QueuedComponent implements OnInit {
   @Input() task: AssignedTask = {} as AssignedTask;
@@ -17,27 +19,14 @@ export class QueuedComponent implements OnInit {
 
   constructor(
     private accountService: AccountService,
-    private taskService: TaskService
+    private taskService: TaskService,
+    public user: UserService
   ) { }
 
   ngOnInit(): void {
+    this.user.getFromTask(this.task);
 
   }
-
-  public get userImage(): {[key: string]: string} {
-    const user =  this.accountService.users.get(this.task.userId);
-    return user
-    ? {'background-image': `url(${user.photoUrl})`}
-    : {};
-  }
-
-  public get userName(): string {
-    const user =  this.accountService.users.get(this.task.userId);
-    return user
-    ? `${user.firstName} ${user.lastName}`
-    : '';
-  }
-
 
   async onSelect(user: User) {
     console.log(user.firstName + 'selected...');
@@ -48,11 +37,7 @@ export class QueuedComponent implements OnInit {
     }).subscribe(val => console.log(val));
   }
 
-  get userPhotoStyle(): { [key: string]: string } {
-    return {
-      backgroundImage: `url(${this.selectedUser.photoUrl})`
-    };
-  }
+
 
   get users(): any {
     const users = [];

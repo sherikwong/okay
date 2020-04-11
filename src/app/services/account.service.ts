@@ -31,7 +31,6 @@ export class AccountService {
       this.http.get('/users').pipe(
         map((users: User[]) => {
           users.forEach(user => this._users.set(user.id, user));
-          console.log(this._users);
           return this._users;
         }),
       ).subscribe();

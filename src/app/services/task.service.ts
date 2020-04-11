@@ -3,7 +3,6 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { Task } from '../interfaces/task.interface';
-import { Item } from "../models/item.interface";
 import { Query } from '../utils/query-string.utils';
 
 export interface TaskAssignment {
@@ -16,7 +15,7 @@ export interface TaskAssignment {
 export interface AssignedTask {
   userId: string;
   taskId: string;
-  dueDate?: Date
+  dueDate?: Date;
 }
 
 @Injectable({
@@ -61,7 +60,7 @@ export class TaskService {
   public getAll(): Observable<Task[]> {
     return this.http.get('/tasks').pipe(map(
       tasks => tasks as Task[]
-    ));;
+    ));
   }
 
   public update<T>(updated: Task): Observable<Object> {
@@ -69,7 +68,7 @@ export class TaskService {
       const url = updated.id ? `/${updated.id}` : '';
       return this.http.post(`/tasks` + url, updated).pipe(map(
         Task => Task as Task
-      ));;
+      ));
     }
   }
 
@@ -79,7 +78,7 @@ export class TaskService {
       map((tasks: Task[]) => {
         return tasks;
       })
-    ))
+    ));
   }
 
   public assign(params: AssignedTask): Observable<AssignedTask> {
@@ -94,7 +93,13 @@ export class TaskService {
     if (taskId) {
       return this.http.get(`/assignedTasks/task/${taskId}`).pipe(map(
         tasks => tasks as AssignedTask[]
-      ));;
+      ));
     }
+  }
+
+  public getAllQueued(): Observable<AssignedTask[]> {
+    return this.http.get('/assignedTasks').pipe(map(
+      tasks => tasks as AssignedTask[]
+    ));
   }
 }

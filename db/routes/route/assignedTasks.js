@@ -7,6 +7,16 @@ const {map, toPromise} = require('rxjs/operators');
 const AssignedTask = models.assignedTasks;
 const User = models.user;
 
+router.get('/', async function (req, res, next) {
+  try {
+    const tasks = await AssignedTask.findAll();
+    res.send(tasks);
+  } catch(error) {
+    console.error(error);
+    next(error);
+  }
+});
+
 router.post('/', async function (req, res, next) {
   try {
     const { taskId, userId, dueDate } = req.body;

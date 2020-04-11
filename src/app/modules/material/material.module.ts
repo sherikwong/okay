@@ -17,7 +17,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatDialogModule } from '../../../../node_modules/@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -42,7 +42,7 @@ import { MatDialogModule } from '../../../../node_modules/@angular/material/dial
     MatAutocompleteModule,
     MatStepperModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
 
   ],
   exports: [
@@ -53,7 +53,6 @@ import { MatDialogModule } from '../../../../node_modules/@angular/material/dial
     MatCardModule,
     MatListModule,
     DragDropModule,
-    MatTableModule,
     MatInputModule,
     MatSelectModule,
     MatSliderModule,
@@ -61,6 +60,7 @@ import { MatDialogModule } from '../../../../node_modules/@angular/material/dial
     MatCheckboxModule,
     MatExpansionModule,
     MatSnackBarModule,
+    MatTableModule,
     MatTabsModule,
     MatAutocompleteModule,
     MatStepperModule,

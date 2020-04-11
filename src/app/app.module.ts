@@ -34,6 +34,7 @@ const OkayModules = [
     ...ThirdPartyModules,
     MaterialModule,
     ...OkayModules,
+
   ],
   declarations: [
     AppComponent,

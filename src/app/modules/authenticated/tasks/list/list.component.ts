@@ -1,12 +1,13 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { TaskService } from '../../../../services/task.service';
-import { Task } from '../../../../interfaces/task.interface';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { UserService } from './../../../../services/user.service';
+import { AssignedTask } from './../../../../services/task.service';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { Component, OnInit, Injector } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import { MbscEventcalendarOptions } from '../../../../../lib/mobiscroll/js/mobiscroll.angular.min';
+import { Task } from '../../../../interfaces/task.interface';
+import { TaskService } from '../../../../services/task.service';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'okay-tasks-list',
@@ -15,44 +16,39 @@ import { MbscEventcalendarOptions } from '../../../../../lib/mobiscroll/js/mobis
   host: { 'class': 'okay-container--fill' }
 })
 export class TasksListComponent implements OnInit {
-  events: any;
+  tasks: Observable<AssignedTask[]>;
+  userInfo?: UserService[];
 
-    eventSettings: MbscEventcalendarOptions = {
-        theme: 'ios',
-        themeVariant: 'light',
-        display: 'inline',
-        view: {
-            calendar: { type: 'month' },
-            eventList: { type: 'month', scrollable: true }
-        }
-    };
-  tasks: Task[];
+  displayedColumns: string[] = [
+    'name',
+    'dueDate',
+    'assigned'
+  ];
+
 
   constructor(
     private tasksService: TaskService,
     private snackBar: MatSnackBar,
     private router: Router,
-    private http: HttpClient
+    private injector: Injector
   ) { }
 
   ngOnInit() {
-    this.http.jsonp('https://trial.mobiscroll.com/events/', 'callback').subscribe((resp: any) => {
-      this.events = resp;
-  });
 
-    this.tasksService.getAll().subscribe(val => {
-      this.tasks = val;
-    });
-    // const task = {
-    //   id: '1',
-    //   name: 'Wash the dishes',
-    //   dueDate: new Date(2011, 2, 3)
-    // } as ITask;
+    this.tasks = this.tasksService.getAllQueued()
+    .pipe(tap(tasks => {
+      this.userInfo = tasks.map(task => {
+        const service = this.injector.get<UserService>(UserService);
+        service.getFromTask(task);
+        return service;
+      })
+    }));
+    this.tasks.subscribe(val => console.log(val));
   }
 
-  markAsCompleted(task: Task, change: any) {
-    this.tasksService.update(task);
-  }
+  // markAsCompleted(task: Task, change: any) {
+  //   this.tasksService.update(task);
+  // }
 
   drop(event: CdkDragDrop<string[]>) {
     // moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);

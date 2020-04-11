@@ -3,14 +3,14 @@
     <div class="okay-user-photo" [ngStyle]="userImage">
       <mat-icon *ngIf="isNewEntry" class="m-0">account_circle</mat-icon>
     </div>
-    <span *ngIf="!isNewEntry" class="okay-user-name ml-2">{{userName}}</span>
+    <span *ngIf="!isNewEntry" class="okay-user-name ml-2">{{userService | userName}}</span>
 
 
     <mat-form-field *ngIf="isNewEntry" class="ml-2 flex-grow-2">
       <input matInput placeholder="Assignee" [matAutocomplete]="auto" [formControl]="filterControl">
       <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let user of users" [value]="userName" (click)="onSelect(user)">
-          <img [src]="user.photoUrl" height="25">
+        <mat-option *ngFor="let user of users" [value]="user.name" (click)="onSelect(user)">
+          <img [src]="user.profileImage" height="25">
           <span>{{user.firstName}} {{user.lastName}}</span>
         </mat-option>
       </mat-autocomplete>

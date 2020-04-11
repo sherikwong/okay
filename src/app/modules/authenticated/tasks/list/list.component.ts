@@ -1,13 +1,20 @@
-import { UserService } from './../../../../services/user.service';
-import { AssignedTask } from './../../../../services/task.service';
+import { UserService } from '../../../../services/user.service';
+import { AssignedTask } from '../../../../services/tasks.service';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, OnInit, Injector } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Task } from '../../../../interfaces/task.interface';
-import { TaskService } from '../../../../services/task.service';
+import { TasksService } from '../../../../services/tasks.service';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { User } from '../../../../interfaces/user.interface';
+import { TaskService } from '../../../../services/task.service';
+
+interface Services {
+  user: UserService;
+  task: TaskService;
+}
 
 @Component({
   selector: 'okay-tasks-list',
@@ -17,7 +24,7 @@ import { map, tap } from 'rxjs/operators';
 })
 export class TasksListComponent implements OnInit {
   tasks: Observable<AssignedTask[]>;
-  userInfo?: UserService[];
+  services?: Services[];
 
   displayedColumns: string[] = [
     'name',
@@ -25,9 +32,8 @@ export class TasksListComponent implements OnInit {
     'assigned'
   ];
 
-
   constructor(
-    private tasksService: TaskService,
+    private tasksService: TasksService,
     private snackBar: MatSnackBar,
     private router: Router,
     private injector: Injector
@@ -37,13 +43,20 @@ export class TasksListComponent implements OnInit {
 
     this.tasks = this.tasksService.getAllQueued()
     .pipe(tap(tasks => {
-      this.userInfo = tasks.map(task => {
-        const service = this.injector.get<UserService>(UserService);
-        service.getFromTask(task);
-        return service;
+      this.services = tasks.map(assignedTask => {
+        const userService = this.injector.get<UserService>(UserService);
+        userService.getFromTask(assignedTask);
+
+        const taskService = this.injector.get<TaskService>(TaskService);
+        taskService.get(assignedTask);
+
+        return {
+          user: userService,
+          task: taskService
+        };
       })
     }));
-    this.tasks.subscribe(val => console.log(val));
+    this.tasks.subscribe(val => console.log(this.services));
   }
 
   // markAsCompleted(task: Task, change: any) {

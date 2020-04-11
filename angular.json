@@ -45,8 +45,6 @@
               "src/assets/"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
-              "src/lib/mobiscroll/css/mobiscroll.angular.min.css",
               "src/styles/app.scss"
             ],
             "scripts": []

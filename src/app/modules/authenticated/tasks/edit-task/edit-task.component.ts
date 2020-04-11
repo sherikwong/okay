@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Task, Room } from '../../../../interfaces/task.interface';
-import { TaskService } from '../../../../services/task.service';
+import { TasksService } from '../../../../services/tasks.service';
 import { IInput, InputType } from '../../../generic/input/input.component';
 
 @Component({
@@ -16,7 +16,7 @@ export class EditTaskComponent implements OnChanges {
 
   constructor(
     private fb: FormBuilder,
-    private tasksService: TaskService
+    private tasksService: TasksService
   ) { }
 
   ngOnChanges(): void {

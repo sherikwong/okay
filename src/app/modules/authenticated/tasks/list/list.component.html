@@ -1,21 +1,25 @@
-<mat-card class="okay-container--fill m-3 p-0">
-  <mat-table [dataSource]="tasks | async" matSort>
+<mat-card class="okay-container--fill m-3 p-0" *ngIf="services">
+  <mat-table [dataSource]="services" matSort>
     <ng-container matColumnDef="name" mat-sort-header>
       <mat-header-cell *matHeaderCellDef>What?</mat-header-cell>
-      <mat-cell *matCellDef="let task"> {{task.name}} </mat-cell>
+      <mat-cell *matCellDef="let services; let i = index;">
+        {{services?.task?.name}}
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="dueDate" mat-sort-header>
       <mat-header-cell *matHeaderCellDef>When?</mat-header-cell>
-      <mat-cell *matCellDef="let task"> {{task.dueDate | date:'shortDate'}} </mat-cell>
+      <mat-cell *matCellDef="let services; let i = index;">
+        {{services?.task?.dueDate | date:'shortDate'}}
+      </mat-cell>
     </ng-container>
 
 
     <ng-container matColumnDef="assigned" mat-sort-header>
       <mat-header-cell *matHeaderCellDef>Who?</mat-header-cell>
-      <mat-cell *matCellDef="let task; let i = index;">
-        <img [src]="userInfo[i].profileImage" height="25">
-        <span>{{userInfo[i].name}}</span>
+      <mat-cell *matCellDef="let services; let i = index;">
+        <div [ngStyle]="services?.user?.profileImage">&nbsp;</div>
+        <span>{{services?.user?.name}}</span>
       </mat-cell>
     </ng-container>
 

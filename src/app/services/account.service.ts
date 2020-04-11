@@ -26,16 +26,18 @@ export class AccountService {
   }
 
   public get users(): Map<string, User> {
-    if (!this._users) {
-      this._users = new Map();
-      this.http.get('/users').pipe(
-        map((users: User[]) => {
-          users.forEach(user => this._users.set(user.id, user));
-          return this._users;
-        }),
-      ).subscribe();
-    }
     return this._users;
+  }
+
+  public loadUsers(): void {
+    this._users = new Map();
+
+    this.http.get('/users').pipe(
+      map((users: User[]) => {
+        users.forEach(user => this._users.set(user.id, user));
+        return this._users;
+      }),
+    ).subscribe();
   }
 
   // private get getUpdatedUser(): Observable<User> {

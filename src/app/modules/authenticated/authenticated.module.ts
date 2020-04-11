@@ -10,6 +10,7 @@ import { QueueComponent } from './tasks/task/queue/queue.component';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { QueuedComponent } from './tasks/task/queue/queued/queued.component';
 import { UserService } from '../../services/user.service';
+import { TaskService } from '../../services/task.service';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { UserService } from '../../services/user.service';
       provide: STEPPER_GLOBAL_OPTIONS,
       useValue: { displayDefaultIndicatorType: false }
     },
-    UserService
+    UserService,
+    TaskService
   ]
 })
 export class AuthenticatedModule { }

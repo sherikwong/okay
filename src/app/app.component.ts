@@ -24,6 +24,7 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
+    this.accountService.loadUsers();
   }
 
   public navigate(route: AuthenticatedRoutes) {

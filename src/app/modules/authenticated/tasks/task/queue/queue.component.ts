@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
-import { Task } from './../../../../../interfaces/task.interface';
-import { TaskService, AssignedTask } from './../../../../../services/task.service';
+import { Task } from '../../../../../interfaces/task.interface';
+import { TasksService, AssignedTask } from '../../../../../services/tasks.service';
 import { Component, OnInit, Input, OnChanges, ViewChild } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { User } from '../../../../../interfaces/user.interface';
@@ -20,7 +20,7 @@ export class QueueComponent implements OnChanges {
   // @ViewChild(MatStepperIcon, {static: false}) icon: MatStepperIcon;
 
   constructor(
-    private taskService: TaskService,
+    private taskService: TasksService,
     public dialog: MatDialog
   ) {}
 

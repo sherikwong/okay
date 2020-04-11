@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from '../../../../../../interfaces/user.interface';
 import { AccountService } from '../../../../../../services/account.service';
-import { AssignedTask, TaskService } from './../../../../../../services/task.service';
+import { AssignedTask, TasksService } from '../../../../../../services/tasks.service';
 import { FormControl } from '@angular/forms';
 import { UserService } from '../../../../../../services/user.service';
 
@@ -19,7 +19,7 @@ export class QueuedComponent implements OnInit {
 
   constructor(
     private accountService: AccountService,
-    private taskService: TaskService,
+    private taskService: TasksService,
     public user: UserService
   ) { }
 

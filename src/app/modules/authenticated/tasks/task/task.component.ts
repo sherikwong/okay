@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AuthService, GoogleLoginProvider } from 'angularx-social-login';
-import { ActivatedRoute } from '../../../../../../node_modules/@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Task } from '../../../../interfaces/task.interface';
-import { TaskService } from '../../../../services/task.service';
+import { TasksService } from '../../../../services/tasks.service';
 import { IInput, InputType } from '../../../generic/input/input.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -25,7 +25,7 @@ export class TaskComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private tasksService: TaskService,
+    private tasksService: TasksService,
     private authService: AuthService,
     private _snackBar: MatSnackBar,
     private fb: FormBuilder

@@ -1,8 +1,9 @@
-import { AccountService } from './account.service';
 import { Injectable } from '@angular/core';
-import { AssignedTask } from './task.service';
-import { Task } from '../interfaces/task.interface';
+import { of } from 'rxjs';
+import { delay, tap } from 'rxjs/operators';
 import { User } from '../interfaces/user.interface';
+import { AccountService } from './account.service';
+import { AssignedTask } from './tasks.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,10 @@ export class UserService {
 
   public getFromTask(task: AssignedTask) {
     this._task = task;
-    this._user = this.accountService.users.get(task.userId);
+
+        this._user = this.accountService.users.get(task.userId);
+
+        console.log(this.accountService.users);
   }
 
   public get profileImage(): { [key: string]: string } {

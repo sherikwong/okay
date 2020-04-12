@@ -6,6 +6,7 @@ import { TasksListComponent } from './tasks/list/list.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { TaskComponent } from './tasks/task/task.component';
 import { EditItemComponent } from './inventory/item/edit-item/edit-item.component';
+import { QueueComponent } from './tasks/task/queue/queue.component';
 
 export const authenticatedRoutes: Routes = [
   {
@@ -33,9 +34,21 @@ export const authenticatedRoutes: Routes = [
         component: TaskComponent,
         children: [
           {
-            path: 'edit',
-            component: EditItemComponent
-          }
+            path: 'details',
+            component: EditItemComponent,
+            outlet: 'task'
+          },
+          {
+            path: 'assigned',
+            component: QueueComponent,
+            outlet: 'task'
+          },
+          {
+            path: 'comments',
+            component: EditItemComponent,
+            outlet: 'task'
+          },
+          { path: '**', redirectTo: 'details' }
         ]
       },
       { path: '**', redirectTo: '' }

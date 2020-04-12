@@ -4,21 +4,12 @@
     <qrcode *ngIf="task" [qrdata]="task.id" [width]="40" errorCorrectionLevel="'M'" class="okay-task--qr"></qrcode>
   </div>
 
-  <mat-tab-group class="okay-tab-group" mat-align-tabs="center">
-    <mat-tab label="Details">
-      <div class="p-3">
-        <okay-edit-task [task]="task"></okay-edit-task>
-      </div>
 
-    </mat-tab>
-    <mat-tab label="Assigned">
-      <div class="d-flex justify-content-center" *ngIf="task">
-        <okay-queue [taskId]="task?.id" class="flex-grow-2"></okay-queue>
-      </div>
-    </mat-tab>
-    <mat-tab label="Comments">
-
-
-    </mat-tab>
-  </mat-tab-group>
+  <nav mat-tab-nav-bar class="mat-tab-group-inverted-header" [disablePagination]="true">
+    <a mat-tab-link *ngFor="let tab of (tabs | keyvalue)" #rla="routerLinkActive" (click)="onSelectTab(tab.key)" routerLinkActive
+      [active]="rla.isActive">
+      <mat-icon mat-list-icon>{{tab.value.icon}}</mat-icon>
+    </a>
+  </nav>
+  <router-outlet name="task"></router-outlet>
 </mat-card>

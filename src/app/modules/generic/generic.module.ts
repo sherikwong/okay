@@ -1,3 +1,4 @@
+import { ListModalComponent } from './list-modal/list-modal.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -38,7 +39,8 @@ export class MyHammerConfig extends HammerGestureConfig  {
   ],
   declarations: [
     ContainerComponent,
-    InputComponent
+    InputComponent,
+    ListModalComponent
   ],
   exports: [
     ContainerComponent,
@@ -55,6 +57,7 @@ export class MyHammerConfig extends HammerGestureConfig  {
     NgbPopoverModule,
     QRCodeModule,
     FullCalendarModule,
+    ListModalComponent
   ],
   providers: [
 

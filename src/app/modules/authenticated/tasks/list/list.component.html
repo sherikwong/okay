@@ -1,10 +1,11 @@
 <div cdkDropList class="okay-list okay-container--fill m-3" (cdkDropListDropped)="drop($event)">
-  <div class="p-3" [formGroup]="form">
-    <okay-input [for]="inputParams" class="okay-input--suffix-1 okay-input--fill okay-input--large" formControlName="filter"></okay-input>
-    <mat-form-field class="example-full-width">
-      <mat-label>Favorite food</mat-label>
-      <input matInput placeholder="Ex. Pizza" value="Sushi">
-    </mat-form-field>
+  <div class="p-3 d-flex align-items-center" [formGroup]="form">
+    <okay-input [for]="inputParams" class="okay-input--suffix-1 okay-input--fill okay-input--large mr-3" formControlName="filter"></okay-input>
+    <!-- <button mat-icon-button (click)="openSortModal()">
+      <mat-icon>
+        swap_vert
+      </mat-icon>
+    </button> -->
   </div>
 
 

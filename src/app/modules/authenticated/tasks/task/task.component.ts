@@ -7,11 +7,13 @@ import { TasksService } from '../../../../services/tasks.service';
 import { IInput, InputType } from '../../../generic/input/input.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { tap } from 'rxjs/operators';
+import { KeyValue } from '@angular/common';
 
 interface TabRouting {
   path: string;
   name: string;
   icon: string;
+  order: number;
 }
 
 @Component({
@@ -51,17 +53,20 @@ export class TaskComponent implements OnInit {
       details: {
         path: 'details',
         name: 'Details',
-        icon: 'info'
+        icon: 'info',
+        order: 1
       },
       assigned: {
         path: 'assigned',
         name: 'Assigned',
-        icon: 'person_add'
+        icon: 'person_add',
+        order: 2
       },
       comments: {
         path: 'comments',
         name: 'Comments',
-        icon: 'comment'
+        icon: 'comment',
+        order: 3
       },
     };
 
@@ -111,5 +116,9 @@ export class TaskComponent implements OnInit {
     this.router.navigateByUrl(`tasks/${this.task.id}/${this.tabs[tabName].path}`, {
       state: this.task
     });
+  }
+
+  public keyValuePipeCompare = (a: TabRouting, b: TabRouting): number => {
+    return a.order > b.order ? -1 : (b.order > a.order ? 1 : 0);
   }
 }

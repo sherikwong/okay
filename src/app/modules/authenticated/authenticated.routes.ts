@@ -36,17 +36,17 @@ export const authenticatedRoutes: Routes = [
           {
             path: 'details',
             component: EditItemComponent,
-            outlet: 'task'
+            // outlet: 'task',
           },
           {
             path: 'assigned',
             component: QueueComponent,
-            outlet: 'task'
+            // outlet: 'task'
           },
           {
             path: 'comments',
             component: EditItemComponent,
-            outlet: 'task'
+            // outlet: 'task'
           },
           { path: '**', redirectTo: 'details' }
         ]

@@ -6,10 +6,10 @@
 
 
   <nav mat-tab-nav-bar class="mat-tab-group-inverted-header" [disablePagination]="true">
-    <a mat-tab-link *ngFor="let tab of (tabs | keyvalue)" #rla="routerLinkActive" (click)="onSelectTab(tab.key)" routerLinkActive
+    <a mat-tab-link *ngFor="let tab of (tabs | keyvalue: keyValuePipeCompare)" #rla="routerLinkActive" (click)="onSelectTab(tab.key)" routerLinkActive
       [active]="rla.isActive">
       <mat-icon mat-list-icon>{{tab.value.icon}}</mat-icon>
     </a>
   </nav>
-  <router-outlet name="task"></router-outlet>
+  <router-outlet></router-outlet>
 </mat-card>

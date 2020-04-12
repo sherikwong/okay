@@ -1,14 +1,11 @@
+import { KeyValue } from '@angular/common';
 import { Component, Input, OnChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Task, Room } from '../../../../interfaces/task.interface';
 import { TasksService } from '../../../../services/tasks.service';
 import { IInput, InputType } from '../../../generic/input/input.component';
-<<<<<<< Updated upstream
-=======
 import { TaskService } from '../../../../services/task.service';
-import { KeyValue } from '@angular/common';
 import { Router } from '../../../../../../node_modules/@angular/router';
->>>>>>> Stashed changes
 
 @Component({
   selector: 'okay-edit-task',
@@ -17,30 +14,12 @@ import { Router } from '../../../../../../node_modules/@angular/router';
 })
 export class EditTaskComponent implements OnChanges {
   @Input() task: Task;
-  fields: {[key: string]: IInput};
+  fields: { [key: string]: IInput };
   form: FormGroup = new FormGroup({});
+  details: { [key: string]: KeyValue<string, any> };
 
   constructor(
     private fb: FormBuilder,
-<<<<<<< Updated upstream
-    private tasksService: TasksService
-  ) { }
-
-  ngOnChanges(): void {
-    this.fields = {
-      name: {
-        type: InputType.String,
-        name: '',
-        formControlName: 'name',
-        validators: Validators.required
-        // options?: '',
-      },
-      room: {
-        type: InputType.Dropdown,
-        name: 'Room',
-        formControlName: 'room',
-        options: Room,
-=======
     private tasksService: TasksService,
     private taskService: TaskService,
     private router: Router
@@ -51,34 +30,16 @@ export class EditTaskComponent implements OnChanges {
     console.log(this.task);
 
 
-    this.details = [
-      // {
-      //   key: 'Due',
-      //   value: this.task.room
-      // },
-      {
-        key: 'Priority',
-        value: this.task.priority
->>>>>>> Stashed changes
-      },
+    this.details = {
       dueDate: {
-        type: InputType.Date,
-        name: 'Due date',
-        formControlName: 'dueDate',
-        // validators: Validators.required,
-        // options?: '',
+        key: 'Due',
+        value: this.task.room
       },
       priority: {
-        type: InputType.Range,
-        name: 'Priority',
-        formControlName: 'priority',
-        validators: Validators.required,
+        key: 'Priority',
+        value: this.task.priority
       },
-      // {
-      //   type: InputType.Textarea,
-      //   name: 'Description',
-      //   formControlName: 'description'
-      // },
+
     };
 
     Object.values(this.fields).forEach(field => {
@@ -97,7 +58,7 @@ export class EditTaskComponent implements OnChanges {
 
   public additionalInputClass(field: IInput): string {
     return field.formControlName === 'name'
-    ? 'okay-input--large'
-    : '';
+      ? 'okay-input--large'
+      : '';
   }
 }

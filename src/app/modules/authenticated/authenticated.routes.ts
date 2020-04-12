@@ -34,18 +34,13 @@ export const authenticatedRoutes: Routes = [
         outlet: 'task',
         children: [
           {
-<<<<<<< Updated upstream
-            path: 'edit',
-            component: EditItemComponent
-          }
-=======
             path: 'details',
             component: EditItemComponent,
             outlet: 'task'
           },
           {
             path: 'assigned',
-            component: QueueComponent,
+            // component: QueueComponent,
             outlet: 'task'
           },
           {
@@ -54,7 +49,6 @@ export const authenticatedRoutes: Routes = [
             outlet: 'task'
           },
           { path: '**', redirectTo: 'details' }
->>>>>>> Stashed changes
         ]
       },
       { path: '**', redirectTo: '' }

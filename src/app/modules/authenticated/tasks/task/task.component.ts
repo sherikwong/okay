@@ -23,6 +23,12 @@ export class TaskComponent implements OnInit {
     formControlName: 'name',
     validators: Validators.required
   }
+<<<<<<< Updated upstream
+=======
+  tabs: { [key: string]: TabRouting };
+  private currentTab: string;
+
+>>>>>>> Stashed changes
 
   constructor(
     private route: ActivatedRoute,
@@ -33,8 +39,39 @@ export class TaskComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+<<<<<<< Updated upstream
     console.log(this.task);
     this.tasksService.getById('1').subscribe(task => this.task = task);
+=======
+    this.tabs = {
+      details: {
+        path: 'details',
+        name: 'Details',
+        icon: 'info'
+      },
+      assigned: {
+        path: 'assigned',
+        name: 'Assigned',
+        icon: 'person_add'
+      },
+      comments: {
+        path: 'comments',
+        name: 'Comments',
+        icon: 'comment'
+      },
+    };
+
+    // this.currentTab = this.route.children[0].routeConfig.path;
+    // this.onSelectTab(this.currentTab);
+
+    this.route.paramMap.pipe(tap((paramsMap: ParamMap) => {
+      this.tasksService.getById(paramsMap.get('id'))
+        .subscribe(task => {
+          this.task = task;
+        });
+    })).subscribe();
+
+>>>>>>> Stashed changes
 
     this.form = this.fb.group({name: this.fb.control(this.nameField.formControlName, {
       validators: this.nameField.validators
@@ -63,4 +100,14 @@ export class TaskComponent implements OnInit {
       console.log(task);
     });
   }
+<<<<<<< Updated upstream
+=======
+
+  public onSelectTab(tabName: string): void {
+    console.log(`task/${this.task.id}/${this.tabs[tabName].path}`);
+    this.router.navigateByUrl(`tasks/${this.task.id}/${this.tabs[tabName].path}`, {
+      state: this.task
+    });
+  }
+>>>>>>> Stashed changes
 }

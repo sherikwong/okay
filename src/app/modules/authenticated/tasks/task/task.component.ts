@@ -73,12 +73,14 @@ export class TaskComponent implements OnInit {
     // this.currentTab = this.route.children[0].routeConfig.path;
     // this.onSelectTab(this.currentTab);
 
-    this.route.paramMap.pipe(tap((paramsMap: ParamMap) => {
-      this.tasksService.getById(paramsMap.get('id'))
+    // this.route.paramMap.pipe(tap((paramsMap: ParamMap) => {
+      // const id = paramsMap.get('id');
+      const id = '1';
+      this.tasksService.getById(id)
         .subscribe(task => {
           this.task = task;
         });
-    })).subscribe();
+    // })).subscribe();
 
 
     this.form = this.fb.group({
@@ -90,12 +92,6 @@ export class TaskComponent implements OnInit {
       });
 
     this.form.valueChanges.subscribe(name => this.updateName(name));
-  }
-
-  // (change)="markAsCompleted(task, $event)"
-
-  public login() {
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 
   switchTab(index: number): void {

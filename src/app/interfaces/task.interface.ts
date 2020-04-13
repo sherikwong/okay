@@ -4,7 +4,7 @@ export interface Task {
   id: string;
   name: string;
   description?: string;
-  room?: Room,
+  location?: Location,
   rating?: number;
   queue?: number;
   comments?: Comment[];
@@ -14,7 +14,7 @@ export interface Task {
   repeat?: IRepeat[];
 }
 
-export enum Room {
+export enum Location {
   LivingRoom = 'Living Room',
   DiningRoom = 'Dining Room',
   Kitchen = 'Kitchen',

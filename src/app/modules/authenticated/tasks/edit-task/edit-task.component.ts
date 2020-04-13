@@ -25,19 +25,25 @@ export class EditTaskComponent implements OnChanges {
   ) { }
 
   ngOnChanges(): void {
-    this.task = this.router.getCurrentNavigation().extras.state as Task;
-
+    // this.task = this.router.getCurrentNavigation().extras.state as Task;
+    console.log(this.task);
+    if (!this.task) {
+      console.error('Task does not exist in edit-task component.');
+    }
 
     this.details = {
-      dueDate: {
-        key: 'Due',
-        value: this.task.room
-      },
       priority: {
         key: 'Priority',
         value: this.task.priority
       },
-
+      location: {
+        key: 'Location',
+        value: this.task.location
+      },
+      description: {
+        key: 'Description',
+        value: this.task.description,
+      }
     };
   }
 

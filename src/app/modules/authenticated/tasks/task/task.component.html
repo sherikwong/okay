@@ -11,5 +11,6 @@
       <mat-icon mat-list-icon>{{tab.value.icon}}</mat-icon>
     </a>
   </nav>
-  <router-outlet></router-outlet>
+  <!-- <router-outlet outlet="task"></router-outlet> -->
+  <okay-edit-task [task]="task"></okay-edit-task>
 </mat-card>

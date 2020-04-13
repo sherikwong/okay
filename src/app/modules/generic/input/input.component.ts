@@ -41,7 +41,6 @@ export class InputComponent implements OnChanges, ControlValueAccessor {
   }
 
   ngOnChanges(): void {
-    console.log(this.details);
     if (this.ngControl.control) {
       this.isRequiredClass = FormUtil.isRequired(this.ngControl.control) ? 'okay-input--required' : '';
       this._value = this.ngControl.control.value;

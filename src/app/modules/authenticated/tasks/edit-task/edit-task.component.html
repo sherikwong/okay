@@ -3,12 +3,12 @@
         <div class="flex-grow-2 d-flex justify-content-between align-items-center">
             <span>
                 <b>
-                    {{detail.value.name}}
+                    {{detail.value.name | titlecase}}
                 </b>
             </span>
 
             <span>
-                {{detail.value.value}}
+                {{detail.value.value | titlecase}}
             </span>
 
             <button mat-icon-button>

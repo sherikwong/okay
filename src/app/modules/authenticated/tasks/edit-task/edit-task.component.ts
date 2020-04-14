@@ -9,7 +9,7 @@ import { TaskService } from '../../../../services/task.service';
 import { TasksService } from '../../../../services/tasks.service';
 import { IInput } from '../../../generic/input/input.component';
 import { InputType } from './../../../generic/input/input.component';
-
+import {Location} from '../../../../enums/location.enum';
 
 
 @Component({

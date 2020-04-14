@@ -24,7 +24,9 @@ export class ListModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.mapValues();
+    console.log(this.data.options);
+    // this.mapValues();
+    this.options = this.data.options;
     this.dataService.succeeds.subscribe(succeeds => {
       this.succeeds = succeeds;
 
@@ -40,11 +42,11 @@ export class ListModalComponent implements OnInit {
     this.dataService.emit(response);
   }
 
-  private mapValues(): void {
-    const rawOptions = Object.values(this.data.options);
-    const names = rawOptions.slice(0, rawOptions.length / 2);
+  // private mapValues(): void {
+  //   const rawOptions = Object.values(this.data.options);
+  //   const names = rawOptions.slice(0, rawOptions.length / 2);
 
-    names.forEach((name: string, i) => this.options[i] = name);
-  }
+  //   names.forEach((name: string, i) => this.options[i] = name);
+  // }
 }
 

@@ -1,0 +1,133 @@
+@function quoted($str) {
+  @return '\"' + $str + '\"';
+}
+
+@function asset($type, $file) {
+  @return url("~okay/sass/" + $type + "/" + $file);
+}
+
+@function image($file) {
+  @return asset('images', $file);
+}
+
+@function font($file) {
+  @return asset('fonts', $file);
+}
+
+/// Helper function to print into console
+/// @group native
+/// @access public
+/// @param {list} $lines - Lines separated by commas
+/// @example add-console-paragraph("My", "Printed", "", "Log")
+@function add-console-paragraph($lines...) {
+  $new-line: "\00000a";
+  $return-string: "";
+  $divider: "";
+
+  @for $i from 1 through 4 {
+      $divider: $divider + $new-line;
+  }
+
+  @for $i from 1 through length($lines) {
+      $line: nth($lines, $i);
+      $return-string: str-insert($return-string, $line + $new-line, -1);
+  }
+
+  @return $divider + $return-string + $divider;
+}
+
+/// Recursively merges nested maps nondestructively.
+/// If the deepest keys, whose value is not a map, collides, the following map's value prevails.
+/// Any colliding keys more shallow than the deepest level will be merged together.
+/// *Reasoning*: SCSS's native map-merge overwrites any values pass 1 level deep.
+/// @group native
+/// @access public
+/// @param {map} $parent-map
+/// @param {map} $child-map - Only one adjoining source child map
+/// @link https://medium.com/@pentzzsolt/a-non-destructive-map-merge-function-for-sass-f91637f87b2e
+@function map-merge-deep($parent-map, $child-map) {
+  $result: $parent-map;
+@each $key, $value in $child-map {
+  @if (not map-has-key($result, $key)) or (type-of(map-get($result, $key)) != type-of($value)) or (not (type-of(map-get($result, $key)) == map and type-of($value) == map)) {
+    $result: map-merge($result, ($key: $value));
+  }
+  @else {
+    $result: map-merge($result, ($key: map-merge-deep(map-get($result, $key), $value)));
+  }
+  }
+
+@return $result;
+}
+
+/// Recursively merges more than 2 nested maps nondestructively.
+/// If the deepest keys, whose value is not a map, collides, the following map's value prevails.
+/// Any colliding keys more shallow than the deepest level will be merged together.
+/// *Reasoning*: SCSS's native map-merge overwrites any values pass 1 level deep.
+/// @group native
+/// @access public
+/// @param {map} $parent-map
+/// @param {map} $child-map - One or more source child maps
+/// @todo Error log
+/// ```sass
+/// $map-a: (
+/// 	key1: "value1",
+/// 	key2: (
+/// 		key2a: "value2"
+/// 	),
+/// 	key3: "value4"
+/// );
+///
+/// $map-b: (
+/// 	key1: "value1-replaced",
+/// 	key2: (
+/// 		key2a: "value2-replaced",
+/// 		key2b: "value3"
+/// 	),
+/// );
+///
+/// $map-a-b: (
+/// 	key1: "value1-replaced",
+/// 	key2: (
+/// 		key2a: "value2-replaced",
+/// 		key2b: "value3"
+/// 	),
+/// 	key3: "value4"
+/// );
+/// ```
+@function x-map-merge($parent-map, $child-maps...) {
+  $current-child-map: nth($child-maps, 1);
+  $result: map-merge-deep($parent-map, $current-child-map);
+
+  @if (length($child-maps) > 1) {
+      @each $child-value in $child-maps {
+          $next-child-map: nth($child-maps, 2);
+          $result: x-map-merge($result, $next-child-map);
+      }
+  }
+
+  @return $result;
+}
+
+/// Recursively gets deeply nested maps
+/// *Reasoning*: SCSS's native map-get only handles 2 levels nested
+/// @group native
+/// @access public
+/// @param {map} $map
+/// @param {list} $keys... - List of keys separated by commas
+/// @example x-map-get($map, "key1", "key2", "key3");
+@function x-map-get($map, $keys...) {
+  $current-key: nth($keys, 1);
+  $result: map-get($map, $current-key);
+
+  @if length($keys) > 1 and type-of($result) == "map" {
+      $next-key: nth($keys, 2);
+      $result: x-map-get($result, $next-key);
+  }
+
+  @if($result == null) {
+      $_new-line: "\00000a";
+      @error 'Recursive Getter: Unable to get value for key: #{$current-key} in class #{&}';
+  }
+
+  @return $result;
+}

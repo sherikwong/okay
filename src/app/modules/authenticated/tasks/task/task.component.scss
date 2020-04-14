@@ -1,0 +1,48 @@
+.okay-task-items {
+  display: flex;
+  flex-direction: column;
+
+  .okay-task-item {
+    display: flex;
+    padding: 6px 0 6px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+    &--label {
+      flex: 1 0 auto;
+      font-weight: bold;
+    }
+
+    &--value {
+      flex: 4 0 auto;
+    }
+  }
+}
+
+
+.okay-task-title-container {
+ display: flex;
+  margin-left: 12px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.okay-task-tags {
+  display: flex;
+  justify-content: space-between;
+}
+
+.okay-task--qr {
+  position: absolute;
+  right: 0;
+}
+
+::ng-deep {
+  .okay-input--suffix-1 {
+    .mat-input-element {
+      padding-right: 50px !important;
+    }
+  }
+}
+.okay-input-container {
+  align-items: flex-end;
+}

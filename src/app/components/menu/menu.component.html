@@ -1,0 +1,5 @@
+<nav mat-tab-nav-bar class="mat-tab-group-inverted-header" [disablePagination]="true">
+    <a mat-tab-link *ngFor="let route of routes; let i = index" [routerLink]="link.path" #rla="routerLinkActive" routerLinkActive [active]="rla.isActive">
+        <mat-icon mat-list-icon>{{route.data?.icon}}</mat-icon>
+    </a>
+  </nav>

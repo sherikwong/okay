@@ -1,0 +1,25 @@
+
+::ng-deep {
+  .popover {
+    z-index: 1000;
+  }
+  .user-button {
+    .mat-button-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+.user-photo {
+  height: 24px;
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-position: center center;
+  background-size: contain;
+}
+

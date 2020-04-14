@@ -1,0 +1,20 @@
+<mat-action-list role="list" class="p-0">
+    <mat-list-item role="listitem" *ngFor="let detail of details | keyvalue" (click)="openEditModal(detail.key)">
+        <div class="flex-grow-2 d-flex justify-content-between align-items-center">
+            <span>
+                <b>
+                    {{detail.value.name}}
+                </b>
+            </span>
+
+            <span>
+                {{detail.value.value}}
+            </span>
+
+            <button mat-icon-button>
+                <mat-icon>chevron_right</mat-icon>
+            </button>
+        </div>
+        <mat-divider></mat-divider>
+    </mat-list-item>
+</mat-action-list>

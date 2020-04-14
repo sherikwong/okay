@@ -1,8 +1,0 @@
-@mixin hello() {
-  background-color: red;
-}
-
-body {
-  @include hello();
-  background-color: green;
-}

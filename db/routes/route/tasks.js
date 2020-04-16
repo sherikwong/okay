@@ -34,12 +34,18 @@ router.get('/:id', function (req, res, next) {
     })
 });
 
-router.post('/:id', function (req, res, next) {
-  Tasks.update(req.body, {
-    where: {
-      id: req.params.id
-    }
-  })
+router.post('/:id', async function (req, res, next) {
+  try {
+    await Tasks.update(req.body, {
+      where: {
+        id: req.params.id
+      }
+    });
+
+    res.sendStatus(200);
+  } catch (error) {
+    res.sendStatus(400);
+  }
 })
 
 router.get('/query/:query', function (req, res, next) {

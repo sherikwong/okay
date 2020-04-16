@@ -1,11 +1,12 @@
-import { Component, OnInit, Inject, Output } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Component, OnInit, Inject, Output, OnDestroy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { DataService } from '../../../services/data.service';
 import { IInput } from '../input/input.component';
 import { KeyValue } from '@angular/common';
 
-interface ModalResponse {
-
+export interface ModalData {
+  [key: string]: IInput;
 }
 
 @Component({
@@ -13,9 +14,9 @@ interface ModalResponse {
   templateUrl: './list-modal.component.html',
   styleUrls: ['./list-modal.component.scss']
 })
-export class ListModalComponent implements OnInit {
-  options: {[key: string]: string} = {};
+export class ListModalComponent implements OnInit, OnDestroy {
   succeeds: boolean;
+  successSubscription: Subscription;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: IInput,
@@ -24,10 +25,7 @@ export class ListModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.data.options);
-    // this.mapValues();
-    this.options = this.data.options;
-    this.dataService.succeeds.subscribe(succeeds => {
+    this.successSubscription = this.dataService.succeeds.subscribe(succeeds => {
       this.succeeds = succeeds;
 
       if (succeeds) {
@@ -36,17 +34,28 @@ export class ListModalComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.successSubscription.unsubscribe();
+  }
+
+  get fieldName(): string {
+    return Object.keys(this.data)[0];
+  }
+
+  get options() {
+    return this.data.options;
+  }
+
   emit(option: string): void {
-    const response = {...this.data, value: option};
-    console.log('Response inside modal', response);
+    const response = {
+        ...this.data[this.fieldName],
+        value: option
+    };
     this.dataService.emit(response);
   }
 
-  // private mapValues(): void {
-  //   const rawOptions = Object.values(this.data.options);
-  //   const names = rawOptions.slice(0, rawOptions.length / 2);
-
-  //   names.forEach((name: string, i) => this.options[i] = name);
-  // }
+  isNotNumber(option: any): boolean {
+    return isNaN(option);
+  }
 }
 

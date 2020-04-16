@@ -1,15 +1,19 @@
-import { DataService } from './../../../../services/data.service';
-import { ListModalComponent } from './../../../generic/list-modal/list-modal.component';
-import { Component, Input, OnChanges } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog
+ } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { debounceTime, takeLast, map, take } from 'node_modules/rxjs/operators';
+import { Location } from '../../../../enums/location.enum';
 import { Priority, Task } from '../../../../interfaces/task.interface';
 import { TaskService } from '../../../../services/task.service';
 import { TasksService } from '../../../../services/tasks.service';
 import { IInput } from '../../../generic/input/input.component';
+import { DataService } from './../../../../services/data.service';
 import { InputType } from './../../../generic/input/input.component';
-import {Location} from '../../../../enums/location.enum';
+import { ListModalComponent, ModalData } from './../../../generic/list-modal/list-modal.component';
+import { tap } from 'rxjs/operators';
 
 
 @Component({
@@ -17,10 +21,11 @@ import {Location} from '../../../../enums/location.enum';
   templateUrl: './edit-task.component.html',
   styleUrls: ['./edit-task.component.scss']
 })
-export class EditTaskComponent implements OnChanges {
+export class EditTaskComponent implements OnChanges, OnInit {
+
   @Input() task: Task;
   form: FormGroup = new FormGroup({});
-  details: { [key: string]: IInput };
+  details: ModalData;
 
   constructor(
     private fb: FormBuilder,
@@ -32,7 +37,6 @@ export class EditTaskComponent implements OnChanges {
   ) { }
 
   ngOnChanges(): void {
-    // this.task = this.router.getCurrentNavigation().extras.state as Task;
     if (!this.task) {
       console.error('Task does not exist in edit-task component.');
     }
@@ -42,32 +46,32 @@ export class EditTaskComponent implements OnChanges {
         name: 'Priority',
         value: this.task.priority,
         type: InputType.Dropdown,
-        options: Priority
+        options: Priority,
+        formControlName: 'priority'
       },
       location: {
         name: 'Location',
         value: this.task.location,
         options: Location,
-        type: InputType.Dropdown
+        type: InputType.Dropdown,
+        formControlName: 'location'
       },
       description: {
         name: 'Description',
         value: this.task.description,
-        type: InputType.Textarea
+        type: InputType.Textarea,
+        formControlName: 'description'
       }
     };
-
-    this.dataService.output.subscribe(updatedInput => {
-      if (updatedInput) {
-        this.updateValue(updatedInput);
-      }
-    });
   }
 
+  ngOnInit(): void {
+    this.sendUpdatesToDB().subscribe();
+  }
 
   public add(): void {
     this.tasksService.update(this.form.value)
-      .subscribe(res => console.log(res));
+      .subscribe();
   }
 
   public additionalInputClass(field: IInput): string {
@@ -76,16 +80,29 @@ export class EditTaskComponent implements OnChanges {
       : '';
   }
 
-  public openEditModal(detail: string): void {
+  public openEditModal(detailName: string): void {
     this.matDialog.open(ListModalComponent, {
-      data: this.details[detail],
+      data: { [detailName]: this.details[detailName] },
       width: '100%'
     });
   }
 
-  private updateValue(input: IInput): void {
-    this.task[input.formControlName] = input.value;
-    console.log(this.task);
-    // this.tasksService.update()
+  private sendUpdatesToDB(): Observable<IInput> {
+    return this.dataService.output.pipe(
+      take(1),
+      tap(value => {
+        if (value) {
+          const updatedVal = { ...this.task, [name]: value.formControlName };
+          this.tasksService.update(updatedVal).toPromise()
+            .then(val => console.log(val))
+            .catch(error => console.error(error));
+        }
+      })
+    );
+  }
+
+  public getValue(detail: IInput): string {
+    const retrieved = this.details[detail.formControlName];
+    return retrieved &&  retrieved.value;
   }
 }

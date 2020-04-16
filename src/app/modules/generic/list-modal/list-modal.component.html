@@ -1,8 +1,12 @@
 <mat-action-list role="list">
-    <mat-list-item role="listitem" (click)="emit(option.key)" *ngFor="let option of (options | keyvalue); let i = index;">
+  <ng-container *ngFor="let option of (options | keyvalue); let i = index;">
+
+    <mat-list-item role="listitem" (click)="emit(i)" *ngIf="isNotNumber(option.value)">
       <span>
         {{option.value | titlecase}}
       </span>
       <mat-divider *ngIf="i !== option.length - 1"></mat-divider>
     </mat-list-item>
+  </ng-container>
 </mat-action-list>
+

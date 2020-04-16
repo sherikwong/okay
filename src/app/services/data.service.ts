@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
-import { of, Observable, Subscription, BehaviorSubject } from 'rxjs';
+import {  Subject } from 'rxjs';
+import { ModalData } from './../modules/generic/list-modal/list-modal.component';
 import { IInput } from '../modules/generic/input/input.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  output: BehaviorSubject<IInput> = new BehaviorSubject(null);
-  succeeds: BehaviorSubject<boolean> = new BehaviorSubject(null);
+  output: Subject<IInput> = new Subject();
+  succeeds: Subject<boolean> = new Subject();
 
   constructor() { }
 
   emit<T>(response: IInput): void {
-    this.output.next(response);
+    if (response) {
+      this.output.next(response);
+    }
   }
 }

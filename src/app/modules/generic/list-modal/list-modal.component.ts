@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { Component, OnInit, Inject, Output, OnDestroy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
@@ -21,15 +22,17 @@ export class ListModalComponent implements OnInit, OnDestroy {
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: IInput,
     public dataService: DataService,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private snackbar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
     this.successSubscription = this.dataService.succeeds.subscribe(succeeds => {
-      this.succeeds = succeeds;
 
       if (succeeds) {
         this.matDialog.closeAll();
+      } else {
+        this.snackbar.open('God fucking damn it. Tell Sheri there\'s a problem saving');
       }
     });
   }
@@ -38,17 +41,13 @@ export class ListModalComponent implements OnInit, OnDestroy {
     this.successSubscription.unsubscribe();
   }
 
-  get fieldName(): string {
-    return Object.keys(this.data)[0];
-  }
-
   get options() {
     return this.data.options;
   }
 
   emit(option: string): void {
     const response = {
-        ...this.data[this.fieldName],
+        ...this.data,
         value: option
     };
     this.dataService.emit(response);

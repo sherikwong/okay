@@ -82,23 +82,24 @@ export class EditTaskComponent implements OnChanges, OnInit {
 
   public openEditModal(detailName: string): void {
     this.matDialog.open(ListModalComponent, {
-      data: { [detailName]: this.details[detailName] },
+      data: this.details[detailName],
       width: '100%'
     });
   }
 
   private sendUpdatesToDB(): Observable<IInput> {
     return this.dataService.output.pipe(
-      take(1),
-      tap(value => {
+      tap(async value => {
         if (value) {
           const updatedVal = { ...this.task, [name]: value.formControlName };
-          this.tasksService.update(updatedVal).toPromise()
-            .then(val => console.log(val))
-            .catch(error => console.error(error));
-        }
-      })
-    );
+          try {
+            await this.tasksService.update(updatedVal).toPromise();
+            this.dataService.succeeds.next(true);
+          } catch (error) {
+            this.dataService.succeeds.next(false);
+          }
+        }})
+      );
   }
 
   public getValue(detail: IInput): string {

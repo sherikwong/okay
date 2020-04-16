@@ -42,9 +42,9 @@ router.post('/:id', async function (req, res, next) {
       }
     });
 
-    res.sendStatus(200);
+    res.end();
   } catch (error) {
-    res.sendStatus(400);
+    res.end();
   }
 })
 

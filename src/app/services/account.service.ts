@@ -46,7 +46,7 @@ export class AccountService {
 
   public async login(): Promise<void> {
     const currentUser = await this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
-    this.storeInDb(currentUser);
+    this.storeInDb(currentUser).subscribe();
   }
 
   private storeInDb(user: SocialUser): Observable<User> {

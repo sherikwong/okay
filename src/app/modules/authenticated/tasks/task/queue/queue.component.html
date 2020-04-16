@@ -4,7 +4,9 @@
     <mat-divider *ngIf="i !== queue.length - 1"></mat-divider>
   </button>
 
-    <div class="okay-list-item">
-      <okay-queued class="flex-grow-2" ></okay-queued>
+    <div class="okay-list-item d-flex justify-content-center">
+      <button mat-icon-button color="primary" (click)="add()">
+        <mat-icon>add</mat-icon>
+      </button>
     </div>
 </mat-action-list>

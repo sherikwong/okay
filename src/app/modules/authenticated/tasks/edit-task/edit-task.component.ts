@@ -1,20 +1,15 @@
-import { Observable } from 'rxjs';
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import {
-  MatDialog
-} from '@angular/material/dialog';
-import { Router } from '@angular/router';
-
-import { Location } from '../../../../enums/location.enum';
-import { Priority, Task } from '../../../../interfaces/task.interface';
-import { TaskService } from '../../../../services/task.service';
+import { MatDialog } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
+import { filter, tap } from 'rxjs/operators';
+import { Priority, Task, Location } from '../../../../interfaces/task.interface';
 import { TasksService } from '../../../../services/tasks.service';
 import { IInput } from '../../../generic/input/input.component';
 import { DataService } from './../../../../services/data.service';
 import { InputType } from './../../../generic/input/input.component';
 import { ListModalComponent, ModalData } from './../../../generic/list-modal/list-modal.component';
-import { tap, filter } from 'rxjs/operators';
+
 
 
 @Component({
@@ -31,8 +26,6 @@ export class EditTaskComponent implements OnChanges, OnInit {
   constructor(
     private fb: FormBuilder,
     private tasksService: TasksService,
-    private taskService: TaskService,
-    private router: Router,
     private matDialog: MatDialog,
     private dataService: DataService
   ) { }
@@ -92,16 +85,17 @@ export class EditTaskComponent implements OnChanges, OnInit {
     return this.dataService.output.pipe(
       filter(value => !!value),
       tap(async ({formControlName, value}) => {
-        if (value) {
           const updatedVal = { ...this.task, [formControlName]: value };
+          console.log('Sending to DB', updatedVal);
           try {
             await this.tasksService.update(updatedVal).toPromise();
             this.dataService.succeeds.next(true);
-            this.details[formControlName] = value;
+            this.details[formControlName].value = value;
+            this.matDialog.closeAll();
           } catch (error) {
             this.dataService.succeeds.next(false);
+            console.error('Failed');
           }
-        }
       })
     );
   }
@@ -118,7 +112,6 @@ export class EditTaskComponent implements OnChanges, OnInit {
         value = retrieved && retrieved.value;
       }
     }
-
     return value;
   }
 }

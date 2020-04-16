@@ -2,7 +2,9 @@
   <okay-overlay *ngIf="overlayService.opened"></okay-overlay>
 
   <!-- <router-outlet></router-outlet> -->
-  <okay-task ></okay-task>
+  <okay-task [task]="{id: 1}">
+  <okay-queue [task]="{id: 1}"></okay-queue>
+</okay-task>
 
   <nav mat-tab-nav-bar class="mat-tab-group-inverted-header" [disablePagination]="true">
     <a mat-tab-link *ngFor="let route of routes; let i = index" [routerLink]="route.path" #rla="routerLinkActive" routerLinkActive

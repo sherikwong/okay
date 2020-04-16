@@ -12,6 +12,7 @@ export interface Task {
   timeEnd?: Date;
   priority?: Priority;
   repeat?: IRepeat[];
+  due: Date;
 }
 
 export enum Location {

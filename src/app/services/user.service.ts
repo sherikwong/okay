@@ -20,8 +20,6 @@ export class UserService {
     this._task = task;
 
         this._user = this.accountService.users.get(task.userId);
-
-        console.log(this.accountService.users);
   }
 
   public get profileImage(): { [key: string]: string } {

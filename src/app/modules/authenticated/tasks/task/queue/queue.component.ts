@@ -1,11 +1,15 @@
+import { DataService } from './../../../../../services/data.service';
 import { Observable } from 'rxjs';
 import { Task } from '../../../../../interfaces/task.interface';
 import { TasksService, AssignedTask } from '../../../../../services/tasks.service';
-import { Component, OnInit, Input, OnChanges, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ViewChild, Injector } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { User } from '../../../../../interfaces/user.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { AssigneeComponent } from '../../assignee/assignee.component';
+import { ListModalComponent } from '../../../../generic/list-modal/list-modal.component';
+import { AccountService } from '../../../../../services/account.service';
+import { UserService } from '../../../../../services/user.service';
 
 @Component({
   selector: 'okay-queue',
@@ -14,18 +18,21 @@ import { AssigneeComponent } from '../../assignee/assignee.component';
 
 })
 export class QueueComponent implements OnChanges {
-  @Input() taskId: string;
+  @Input() task: Task;
   private _queue: (Partial<User> & AssignedTask)[] = [];
   public queue: Observable<(Partial<User> & AssignedTask)[]>;
-  // @ViewChild(MatStepperIcon, {static: false}) icon: MatStepperIcon;
+
 
   constructor(
     private taskService: TasksService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private dataService: DataService,
+    private accountService: AccountService,
+    private injector: Injector
   ) {}
 
   ngOnChanges(): void {
-    if (this.taskId) {
+    if (this.task.id) {
       this.queue = this.taskService.getQueue('1').pipe(
         map((queue: AssignedTask[]) => {
           const ordered = queue.sort((a ,b) => +a.dueDate + +b.dueDate);
@@ -41,19 +48,22 @@ export class QueueComponent implements OnChanges {
   }
 
 
-
-
   public reorder(event): void {
 
   }
 
-
   public add(): void {
-    this.dialog.open(AssigneeComponent, {
+    this.dialog.open(ListModalComponent, {
       data: {
-        taskId: this.taskId
+        options: this.users
       }
     })
+  }
 
+
+  get users(): {[id: string]: string} {
+    const users = {};
+    this.accountService.users.forEach(user => users[user.id] = `${user.firstName} ${user.lastName}`);
+    return users;
   }
 }

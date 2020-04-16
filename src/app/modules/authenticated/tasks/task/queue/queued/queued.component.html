@@ -4,17 +4,6 @@
       <mat-icon *ngIf="isNewEntry" class="m-0">account_circle</mat-icon>
     </div>
     <span *ngIf="!isNewEntry" class="okay-user-name ml-2">{{user.name}}</span>
-
-
-    <mat-form-field *ngIf="isNewEntry" class="ml-2 flex-grow-2">
-      <input matInput placeholder="Assignee" [matAutocomplete]="auto" [formControl]="filterControl">
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let user of users" [value]="user.name" (click)="onSelect(user)">
-          <img [src]="user.profileImage" height="25">
-          <span>{{user.firstName}} {{user.lastName}}</span>
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
   </div>
 
   <button mat-icon-button *ngIf="!isNewEntry">

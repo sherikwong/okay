@@ -3,7 +3,6 @@ import { Unit } from "../enums/unit.enum";
 import { Inject, Injectable } from "@angular/core";
 // import { ItemService, ItemsServiceToken } from "../services/item.service";
 import { Type } from "../enums/type.enum";
-import { Location } from '../enums/location.enum';
 
 export type IItem = ICompositeItem | IBaseItem;
 

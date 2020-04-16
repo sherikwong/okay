@@ -1,10 +1,9 @@
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
-import { Component, OnInit, Inject, Output, OnDestroy } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { DataService } from '../../../services/data.service';
 import { IInput } from '../input/input.component';
-import { KeyValue } from '@angular/common';
 
 export interface ModalData {
   [key: string]: IInput;
@@ -22,16 +21,13 @@ export class ListModalComponent implements OnInit, OnDestroy {
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: IInput,
     public dataService: DataService,
-    private matDialog: MatDialog,
     private snackbar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
+    console.log(this.options);
     this.successSubscription = this.dataService.succeeds.subscribe(succeeds => {
-
-      if (succeeds) {
-        this.matDialog.closeAll();
-      } else {
+      if (!succeeds) {
         this.snackbar.open('God fucking damn it. Tell Sheri there\'s a problem saving');
       }
     });
@@ -47,8 +43,8 @@ export class ListModalComponent implements OnInit, OnDestroy {
 
   emit(option: string): void {
     const response = {
-        ...this.data,
-        value: option
+      ...this.data,
+      value: option
     };
     this.dataService.emit(response);
   }

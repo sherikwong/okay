@@ -11,6 +11,7 @@ import { AssigneeComponent } from '../../assignee/assignee.component';
 import { ListModalComponent } from '../../../../generic/list-modal/list-modal.component';
 import { AccountService } from '../../../../../services/account.service';
 import { UserService } from '../../../../../services/user.service';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'okay-queue',
@@ -19,7 +20,7 @@ import { UserService } from '../../../../../services/user.service';
 
 })
 export class QueueComponent implements OnChanges, OnInit {
-  @Input() task: Task = {id: '1', name: 'Blah'} as Task;
+  @Input() task: Task = { id: '1', name: 'Blah' } as Task;
   private _queue: (Partial<User> & AssignedTask)[] = [];
   public queue: (Partial<User> & AssignedTask)[];
 
@@ -43,8 +44,8 @@ export class QueueComponent implements OnChanges, OnInit {
     this.addToDb().subscribe();
   }
 
-  public reorder(event): void {
-
+  public reorder(event: CdkDragDrop<any, any>): void {
+    console.log(event);
   }
 
   public openAddModal(): void {
@@ -67,7 +68,6 @@ export class QueueComponent implements OnChanges, OnInit {
       tap((queue: AssignedTask[]) => {
         const ordered = queue.sort((a, b) => +a.dueDate + +b.dueDate);
         this.queue = ordered;
-        console.log(ordered);
       }));
   }
 

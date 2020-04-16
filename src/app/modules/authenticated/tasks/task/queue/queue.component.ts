@@ -19,9 +19,9 @@ import { UserService } from '../../../../../services/user.service';
 
 })
 export class QueueComponent implements OnChanges, OnInit {
-  @Input() task: Task;
+  @Input() task: Task = {id: '1', name: 'Blah'} as Task;
   private _queue: (Partial<User> & AssignedTask)[] = [];
-  public queue: Observable<(Partial<User> & AssignedTask)[]>;
+  public queue: (Partial<User> & AssignedTask)[];
 
 
   constructor(
@@ -34,21 +34,12 @@ export class QueueComponent implements OnChanges, OnInit {
 
   ngOnChanges(): void {
     if (this.task.id) {
-      this.queue = this.taskService.getQueue('1').pipe(
-        map((queue: AssignedTask[]) => {
-          const ordered = queue.sort((a, b) => +a.dueDate + +b.dueDate);
 
-          ordered.forEach(task => this._queue.push(task));
-          return this._queue;
-        }));
-
-      // this.queue.subscribe(queue => {
-      //   console.log('Subscribed', queue);
-      // });
     }
   }
 
   ngOnInit(): void {
+    this.getQueue().subscribe();
     this.addToDb().subscribe();
   }
 
@@ -71,6 +62,15 @@ export class QueueComponent implements OnChanges, OnInit {
     return users;
   }
 
+  private getQueue(): Observable<any> {
+    return this.taskService.getQueue(this.task.id).pipe(
+      tap((queue: AssignedTask[]) => {
+        const ordered = queue.sort((a, b) => +a.dueDate + +b.dueDate);
+        this.queue = ordered;
+        console.log(ordered);
+      }));
+  }
+
   private addToDb(): Observable<any> {
     return this.dataService.output.pipe(tap(async (selected) => {
       const assignment = {
@@ -78,13 +78,11 @@ export class QueueComponent implements OnChanges, OnInit {
         taskId: this.task.id
       };
 
-      console.log(assignment);
-
       try {
         await this.taskService.assign(assignment).toPromise();
-
+        this.queue.push(assignment);
         this.dialog.closeAll();
-      } catch(error) {
+      } catch (error) {
         console.error('Couldn\'t save');
       }
     }));

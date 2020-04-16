@@ -1,10 +1,11 @@
 import { Observable } from 'rxjs';
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog
- } from '@angular/material/dialog';
+import {
+  MatDialog
+} from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { debounceTime, takeLast, map, take } from 'node_modules/rxjs/operators';
+
 import { Location } from '../../../../enums/location.enum';
 import { Priority, Task } from '../../../../interfaces/task.interface';
 import { TaskService } from '../../../../services/task.service';
@@ -13,7 +14,7 @@ import { IInput } from '../../../generic/input/input.component';
 import { DataService } from './../../../../services/data.service';
 import { InputType } from './../../../generic/input/input.component';
 import { ListModalComponent, ModalData } from './../../../generic/list-modal/list-modal.component';
-import { tap } from 'rxjs/operators';
+import { tap, filter } from 'rxjs/operators';
 
 
 @Component({
@@ -89,21 +90,35 @@ export class EditTaskComponent implements OnChanges, OnInit {
 
   private sendUpdatesToDB(): Observable<IInput> {
     return this.dataService.output.pipe(
-      tap(async value => {
+      filter(value => !!value),
+      tap(async ({formControlName, value}) => {
         if (value) {
-          const updatedVal = { ...this.task, [name]: value.formControlName };
+          const updatedVal = { ...this.task, [formControlName]: value };
           try {
             await this.tasksService.update(updatedVal).toPromise();
             this.dataService.succeeds.next(true);
+            this.details[formControlName] = value;
           } catch (error) {
             this.dataService.succeeds.next(false);
           }
-        }})
-      );
+        }
+      })
+    );
   }
 
   public getValue(detail: IInput): string {
     const retrieved = this.details[detail.formControlName];
-    return retrieved &&  retrieved.value;
+
+    let value;
+
+    if (retrieved) {
+      if (retrieved.options) {
+        value = retrieved.options[retrieved.value];
+      } else {
+        value = retrieved && retrieved.value;
+      }
+    }
+
+    return value;
   }
 }

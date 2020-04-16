@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
-import { delay, tap } from 'rxjs/operators';
+import { AssignedTask } from '../interfaces/task.interface';
 import { User } from '../interfaces/user.interface';
 import { AccountService } from './account.service';
-import { AssignedTask } from './tasks.service';
 
 @Injectable({
   providedIn: 'root'

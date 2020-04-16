@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {  Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { ModalData } from './../modules/generic/list-modal/list-modal.component';
 import { IInput } from '../modules/generic/input/input.component';
 
@@ -13,8 +13,6 @@ export class DataService {
   constructor() { }
 
   emit<T>(response: IInput): void {
-    if (response) {
-      this.output.next(response);
-    }
+    this.output.next(response);
   }
 }

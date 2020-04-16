@@ -1,9 +1,10 @@
+import { IInput } from './../../../../generic/input/input.component';
 import { DataService } from './../../../../../services/data.service';
 import { Observable } from 'rxjs';
-import { Task } from '../../../../../interfaces/task.interface';
-import { TasksService, AssignedTask } from '../../../../../services/tasks.service';
+import { Task, AssignedTask } from '../../../../../interfaces/task.interface';
+import { TasksService } from '../../../../../services/tasks.service';
 import { Component, OnInit, Input, OnChanges, ViewChild, Injector } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { User } from '../../../../../interfaces/user.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { AssigneeComponent } from '../../assignee/assignee.component';
@@ -17,7 +18,7 @@ import { UserService } from '../../../../../services/user.service';
   styleUrls: ['./queue.component.scss'],
 
 })
-export class QueueComponent implements OnChanges {
+export class QueueComponent implements OnChanges, OnInit {
   @Input() task: Task;
   private _queue: (Partial<User> & AssignedTask)[] = [];
   public queue: Observable<(Partial<User> & AssignedTask)[]>;
@@ -29,30 +30,33 @@ export class QueueComponent implements OnChanges {
     private dataService: DataService,
     private accountService: AccountService,
     private injector: Injector
-  ) {}
+  ) { }
 
   ngOnChanges(): void {
     if (this.task.id) {
       this.queue = this.taskService.getQueue('1').pipe(
         map((queue: AssignedTask[]) => {
-          const ordered = queue.sort((a ,b) => +a.dueDate + +b.dueDate);
+          const ordered = queue.sort((a, b) => +a.dueDate + +b.dueDate);
 
           ordered.forEach(task => this._queue.push(task));
           return this._queue;
-      }));
+        }));
 
-      this.queue.subscribe(queue => {
-        console.log('Subscribed', queue);
-      });
+      // this.queue.subscribe(queue => {
+      //   console.log('Subscribed', queue);
+      // });
     }
   }
 
+  ngOnInit(): void {
+    this.addToDb().subscribe();
+  }
 
   public reorder(event): void {
 
   }
 
-  public add(): void {
+  public openAddModal(): void {
     this.dialog.open(ListModalComponent, {
       data: {
         options: this.users
@@ -61,9 +65,28 @@ export class QueueComponent implements OnChanges {
   }
 
 
-  get users(): {[id: string]: string} {
+  get users(): { [id: string]: string } {
     const users = {};
     this.accountService.users.forEach(user => users[user.id] = `${user.firstName} ${user.lastName}`);
     return users;
+  }
+
+  private addToDb(): Observable<any> {
+    return this.dataService.output.pipe(tap(async (selected) => {
+      const assignment = {
+        userId: selected.value,
+        taskId: this.task.id
+      };
+
+      console.log(assignment);
+
+      try {
+        await this.taskService.assign(assignment).toPromise();
+
+        this.dialog.closeAll();
+      } catch(error) {
+        console.error('Couldn\'t save');
+      }
+    }));
   }
 }

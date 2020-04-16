@@ -27,6 +27,19 @@ export enum Location {
   Backyard = 'Backyard'
 }
 
+export interface TaskAssignment {
+  taskId: string;
+  userId: string;
+  dueDate?: Date;
+}
+
+
+export interface AssignedTask {
+  userId: string;
+  taskId: string;
+  dueDate?: Date;
+}
+
 export interface IRepeat {
   duration: number;
   frequency: string;

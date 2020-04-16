@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { AssignedTask } from '../../../../../../interfaces/task.interface';
 import { User } from '../../../../../../interfaces/user.interface';
 import { AccountService } from '../../../../../../services/account.service';
-import { AssignedTask, TasksService } from '../../../../../../services/tasks.service';
-import { FormControl } from '@angular/forms';
+import { TasksService } from '../../../../../../services/tasks.service';
 import { UserService } from '../../../../../../services/user.service';
 
 @Component({

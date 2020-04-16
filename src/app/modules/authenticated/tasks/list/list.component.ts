@@ -1,17 +1,16 @@
-import { ListModalComponent } from './../../../generic/list-modal/list-modal.component';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { UserService } from '../../../../services/user.service';
-import { AssignedTask } from '../../../../services/tasks.service';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { TasksService } from '../../../../services/tasks.service';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
+import { AssignedTask } from '../../../../interfaces/task.interface';
 import { TaskService } from '../../../../services/task.service';
-import { InputType, IInput } from '../../../generic/input/input.component';
-import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { TasksService } from '../../../../services/tasks.service';
+import { UserService } from '../../../../services/user.service';
+import { IInput, InputType } from '../../../generic/input/input.component';
 
 interface Services {
   user: UserService;

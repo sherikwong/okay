@@ -2,21 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { Task } from '../interfaces/task.interface';
+import { AssignedTask, Task } from '../interfaces/task.interface';
 import { Query } from '../utils/query-string.utils';
-
-export interface TaskAssignment {
-  taskId: string;
-  userId: string;
-  dueDate?: Date;
-}
-
-
-export interface AssignedTask {
-  userId: string;
-  taskId: string;
-  dueDate?: Date;
-}
 
 @Injectable({
   providedIn: 'root'

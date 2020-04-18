@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 import { ModalData } from './../modules/generic/list-modal/list-modal.component';
 import { IInput } from '../modules/generic/input/input.component';
 
@@ -8,7 +8,7 @@ import { IInput } from '../modules/generic/input/input.component';
 })
 export class DataService {
   output: Subject<IInput> = new Subject();
-  succeeds: Subject<boolean> = new Subject();
+  succeeds: Subject<boolean> = new BehaviorSubject(null);
 
   constructor() { }
 

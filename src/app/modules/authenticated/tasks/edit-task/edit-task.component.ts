@@ -1,8 +1,8 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
-import { filter, tap } from 'rxjs/operators';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Observable, Subscription } from 'rxjs';
+import { filter, tap, map, takeWhile } from 'rxjs/operators';
 import { Priority, Task, Location } from '../../../../interfaces/task.interface';
 import { TasksService } from '../../../../services/tasks.service';
 import { IInput } from '../../../generic/input/input.component';
@@ -19,11 +19,11 @@ import { KeyValue } from '@angular/common';
   styleUrls: ['./edit-task.component.scss']
 })
 export class EditTaskComponent implements OnChanges, OnInit {
-
   @Input() task: Task;
   form: FormGroup = new FormGroup({});
   details: ModalData;
   value: any;
+  private subscriptions: Subscription[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -33,13 +33,11 @@ export class EditTaskComponent implements OnChanges, OnInit {
   ) { }
 
   ngOnChanges(): void {
-    // this.tasksService.update({
-    // name: 'aosifjaoifjaiof'
-    // }).subscribe();
-
     if (!this.task) {
       console.error('Task does not exist in edit-task component.');
     }
+
+    console.log(this.task);
 
     this.details = {
       priority: {
@@ -72,7 +70,12 @@ export class EditTaskComponent implements OnChanges, OnInit {
   }
 
   ngOnInit(): void {
-    this.sendUpdatesToDB().subscribe();
+    const dbUpdates = this.sendUpdatesToDB().subscribe();
+    this.subscriptions.push(dbUpdates);
+
+    if (!this.task) {
+      this.openModalForNewTask();
+    }
   }
 
   public add(): void {
@@ -86,8 +89,8 @@ export class EditTaskComponent implements OnChanges, OnInit {
       : '';
   }
 
-  public openEditModal(detailName: string): void {
-    this.matDialog.open(ListModalComponent, {
+  public openEditModal(detailName: string): MatDialogRef<ListModalComponent, any> {
+    return this.matDialog.open(ListModalComponent, {
       data: this.details[detailName],
       width: '100%'
     });
@@ -118,12 +121,19 @@ export class EditTaskComponent implements OnChanges, OnInit {
 
   public hasDate(keyVal: KeyValue<string, IInput>): boolean {
     const value = (keyVal.value.value as Date);
-      return !!(value && value.getDate);
+    return !!(value && value.getDate);
   }
 
   public isLessThanAWeekAway(keyVal: KeyValue<string, IInput>): boolean {
     const value = (keyVal.value.value as Date);
 
     return +value - +new Date() <= 604800000;
+  }
+
+  private openModalForNewTask(): void {
+    this.matDialog.open(ListModalComponent, {
+      data: Object.values(this.details),
+      width: '100%'
+    });
   }
 }

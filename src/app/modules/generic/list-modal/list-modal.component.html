@@ -1,5 +1,5 @@
-<mat-action-list role="list" *ngIf="isDropdown">
-  <ng-container *ngFor="let option of (options | keyvalue); let i = index;">
+<mat-action-list role="list" *ngIf="is[inputTypes.Dropdown]">
+  <ng-container *ngFor="let option of (currentField.options | keyvalue); let i = index;">
 
     <mat-list-item role="listitem" (click)="emit(option.key)" *ngIf="isNotNumber(option.value)">
       <span>
@@ -10,4 +10,19 @@
   </ng-container>
 </mat-action-list>
 
-<mat-calendar #calendar *ngIf="isDatepicker"></mat-calendar>
+<mat-calendar #calendar *ngIf="is[inputTypes.Date]"></mat-calendar>
+
+<div class="d-flex align-items-center justify-content-center">
+
+  <mat-form-field appearance="fill" *ngIf="is[inputTypes.Textarea]">
+    <mat-label>Description</mat-label>
+    <textarea [(ngModel)]="data.value" [ngModelOptions]="{
+      updateOn: 'blur'
+    }" matInput></textarea>
+  </mat-form-field>
+
+  <button mat-icon-button (click)="emit(data.value)">
+    <mat-icon>chevron_right</mat-icon>
+  </button>
+
+</div>

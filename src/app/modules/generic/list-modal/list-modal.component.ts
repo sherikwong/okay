@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, ViewChild, AfterViewInit, TemplateRef, Input, DoCheck } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
@@ -6,6 +6,10 @@ import { DataService } from '../../../services/data.service';
 import { IInput, InputType } from '../input/input.component';
 import { FormControl } from '@angular/forms';
 import { MatCalendar } from '@angular/material/datepicker';
+import { MatStepper } from '../../../../../node_modules/@angular/material/stepper';
+
+const SUCCESS_SUBSCRIPTION = 'succes';
+const CALENDAR_SUBSCRIPTION = 'calendar';
 
 export interface ModalData {
   [key: string]: IInput;
@@ -17,12 +21,24 @@ export interface ModalData {
   styleUrls: ['./list-modal.component.scss']
 })
 export class ListModalComponent implements OnInit, OnDestroy, AfterViewInit {
-  succeeds: boolean;
   @ViewChild('calendar', { static: false }) public calendar: MatCalendar<Date>;
-  private subscriptions: Subscription[] = [];
+  @ViewChild('stepper', { static: false }) stepper: MatStepper;
+
+  @ViewChild('dropdown', { static: false }) dropdown: TemplateRef<any>;
+  @ViewChild('datepicker', { static: false }) datepicker: TemplateRef<any>;
+  @ViewChild('textarea', { static: false }) textarea: TemplateRef<any>;
+
+  private templateEquiv = new Map([
+    [InputType.Dropdown, 'dropdown'],
+    [InputType.Textarea, 'textarea'],
+    [InputType.Date, 'datepicker'],
+  ]);
+
+  private succeeds: boolean;
+  private subscriptions: Map<string, Subscription> = new Map();
   public inputTypes = InputType;
-  private currentFieldIndex: number = 0;
-  private _fields;
+  public fields: IInput[];
+  private currentIndex = 0;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: IInput | IInput[],
@@ -32,75 +48,59 @@ export class ListModalComponent implements OnInit, OnDestroy, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
-    this._fields = Array.isArray(this.data)
+
+
+    this.fields = Array.isArray(this.data)
       ? this.data
       : [this.data];
 
     const successSubscription = this.dataService.succeeds.subscribe(succeeds => {
       if (succeeds) {
-        if (this.currentFieldIndex >= this._fields.length) {
+        if (this.currentIndex >= this.fields.length) {
           this.matDialog.closeAll();
         } else {
-          this.currentFieldIndex++;
+          this.currentIndex++;
+          this.stepper.next();
         }
       } else {
         this.snackbar.open('God fucking damn it. Tell Sheri there\'s a problem saving');
       }
     });
 
-    this.subscriptions.push(successSubscription);
+    this.subscriptions.set(SUCCESS_SUBSCRIPTION, successSubscription);
   }
 
-  ngAfterViewInit(): void {
-    if (this.calendar && this.is[InputType.Date]) {
-      const calendarSubsription = this.calendar.selectedChange
-        .subscribe(val => this.emit(val));
+  public ngAfterViewInit(): void {
+    const calendarSubscription = this.calendar.selectedChange
+      .subscribe(val => this.emit(val));
 
-      this.subscriptions.push(calendarSubsription);
-    }
+    this.subscriptions.set(CALENDAR_SUBSCRIPTION, calendarSubscription);
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
-  get currentField(): IInput {
-    return this._fields[this.currentFieldIndex];
-  }
-
-  emit(newValue: any): void {
+  public emit(newValue: any): void {
     const response = {
-      ...this.currentField,
+      ...this.fields[this.currentIndex],
       value: newValue
     };
     this.dataService.emit(response);
   }
 
-  isNotNumber(option: any): boolean {
+  public isNotNumber(option: any): boolean {
     return isNaN(option);
   }
 
-  get isDropdown(): boolean {
-    return this.currentField.type === InputType.Dropdown;
+  public get hasMultipleFields(): boolean {
+    return this.fields.length > 1;
   }
 
-  get isDatepicker(): boolean {
-    return this.currentField.type === InputType.Date;
-  }
+  public getTemplate(field: IInput): TemplateRef<any> {
+    const templateName = this.templateEquiv.get(field.type);
 
-  datePicked(event): void {
-    console.log(event);
-  }
-
-  get is(): { [key: string]: boolean } {
-    return {
-      [String(InputType.Date)]: this.currentField.type === InputType.Date,
-      [String(InputType.Dropdown)]: this.currentField.type === InputType.Dropdown,
-      [String(InputType.Number)]: this.currentField.type === InputType.Number,
-      [String(InputType.Range)]: this.currentField.type === InputType.Range,
-      [String(InputType.String)]: this.currentField.type === InputType.String,
-      [String(InputType.Textarea)]: this.currentField.type === InputType.Textarea,
-    };
+    return this[templateName] && this[templateName];
   }
 }
 

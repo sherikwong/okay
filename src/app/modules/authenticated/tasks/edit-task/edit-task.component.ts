@@ -37,8 +37,6 @@ export class EditTaskComponent implements OnChanges, OnInit {
       console.error('Task does not exist in edit-task component.');
     }
 
-    console.log(this.task);
-
     this.details = {
       priority: {
         name: 'Priority',
@@ -70,6 +68,8 @@ export class EditTaskComponent implements OnChanges, OnInit {
   }
 
   ngOnInit(): void {
+    this.task = null;
+
     const dbUpdates = this.sendUpdatesToDB().subscribe();
     this.subscriptions.push(dbUpdates);
 
@@ -106,7 +106,6 @@ export class EditTaskComponent implements OnChanges, OnInit {
           await this.tasksService.update(updatedVal).toPromise();
           this.dataService.succeeds.next(true);
           this.details[formControlName].value = value;
-          this.matDialog.closeAll();
         } catch (error) {
           this.dataService.succeeds.next(false);
           console.error('Failed');

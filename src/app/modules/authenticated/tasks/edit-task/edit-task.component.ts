@@ -9,6 +9,7 @@ import { IInput } from '../../../generic/input/input.component';
 import { DataService } from './../../../../services/data.service';
 import { InputType } from './../../../generic/input/input.component';
 import { ListModalComponent, ModalData } from './../../../generic/list-modal/list-modal.component';
+import { KeyValue } from '@angular/common';
 
 
 
@@ -22,6 +23,7 @@ export class EditTaskComponent implements OnChanges, OnInit {
   @Input() task: Task;
   form: FormGroup = new FormGroup({});
   details: ModalData;
+  value: any;
 
   constructor(
     private fb: FormBuilder,
@@ -31,6 +33,10 @@ export class EditTaskComponent implements OnChanges, OnInit {
   ) { }
 
   ngOnChanges(): void {
+    // this.tasksService.update({
+    // name: 'aosifjaoifjaiof'
+    // }).subscribe();
+
     if (!this.task) {
       console.error('Task does not exist in edit-task component.');
     }
@@ -55,6 +61,12 @@ export class EditTaskComponent implements OnChanges, OnInit {
         value: this.task.description,
         type: InputType.Textarea,
         formControlName: 'description'
+      },
+      due: {
+        name: 'Due',
+        value: this.task.due,
+        type: InputType.Date,
+        formControlName: 'due'
       }
     };
   }
@@ -84,34 +96,34 @@ export class EditTaskComponent implements OnChanges, OnInit {
   private sendUpdatesToDB(): Observable<IInput> {
     return this.dataService.output.pipe(
       filter(value => !!value),
-      tap(async ({formControlName, value}) => {
-          const updatedVal = { ...this.task, [formControlName]: value };
-          console.log('Sending to DB', updatedVal);
-          try {
-            await this.tasksService.update(updatedVal).toPromise();
-            this.dataService.succeeds.next(true);
-            this.details[formControlName].value = value;
-            this.matDialog.closeAll();
-          } catch (error) {
-            this.dataService.succeeds.next(false);
-            console.error('Failed');
-          }
+      tap(async ({ formControlName, value }) => {
+        const updatedVal = { ...this.task, [formControlName]: value };
+        console.log('Sending to DB', updatedVal);
+        try {
+          await this.tasksService.update(updatedVal).toPromise();
+          this.dataService.succeeds.next(true);
+          this.details[formControlName].value = value;
+          this.matDialog.closeAll();
+        } catch (error) {
+          this.dataService.succeeds.next(false);
+          console.error('Failed');
+        }
       })
     );
   }
 
-  public getValue(detail: IInput): string {
-    const retrieved = this.details[detail.formControlName];
+  public getValue(keyVal: KeyValue<string, IInput>): string {
+    return keyVal.value && keyVal.value.value;
+  }
 
-    let value;
+  public hasDate(keyVal: KeyValue<string, IInput>): boolean {
+    const value = (keyVal.value.value as Date);
+      return !!(value && value.getDate);
+  }
 
-    if (retrieved) {
-      if (retrieved.options) {
-        value = retrieved.options[retrieved.value];
-      } else {
-        value = retrieved && retrieved.value;
-      }
-    }
-    return value;
+  public isLessThanAWeekAway(keyVal: KeyValue<string, IInput>): boolean {
+    const value = (keyVal.value.value as Date);
+
+    return +value - +new Date() <= 604800000;
   }
 }

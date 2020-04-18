@@ -50,7 +50,7 @@ export class TasksService {
     ));
   }
 
-  public update<T>(updated: Task): Observable<Object> {
+  public update<T>(updated: Partial<Task>): Observable<Object> {
     if (updated) {
       const url = updated.id ? `/${updated.id}` : '';
       return this.http.post(`/tasks` + url, updated).pipe(map(

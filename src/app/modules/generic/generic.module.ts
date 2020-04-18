@@ -10,7 +10,7 @@ import { BrowserModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angu
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QuillModule } from 'ngx-quill'
-import {NgbPopoverModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbPopoverModule, NgbDatepickerModule} from '@ng-bootstrap/ng-bootstrap';
 import { QRCodeModule } from 'angularx-qrcode';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
@@ -36,6 +36,7 @@ export class MyHammerConfig extends HammerGestureConfig  {
     NgbPopoverModule,
     QRCodeModule,
     FullCalendarModule,
+    NgbDatepickerModule
   ],
   declarations: [
     ContainerComponent,
@@ -57,7 +58,8 @@ export class MyHammerConfig extends HammerGestureConfig  {
     NgbPopoverModule,
     QRCodeModule,
     FullCalendarModule,
-    ListModalComponent
+    ListModalComponent,
+    NgbDatepickerModule
   ],
   providers: [
 

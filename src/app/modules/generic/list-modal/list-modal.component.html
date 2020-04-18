@@ -1,4 +1,4 @@
-<mat-action-list role="list">
+<mat-action-list role="list" *ngIf="isDropdown">
   <ng-container *ngFor="let option of (options | keyvalue); let i = index;">
 
     <mat-list-item role="listitem" (click)="emit(option.key)" *ngIf="isNotNumber(option.value)">
@@ -10,3 +10,4 @@
   </ng-container>
 </mat-action-list>
 
+<mat-calendar #calendar *ngIf="isDatepicker"></mat-calendar>

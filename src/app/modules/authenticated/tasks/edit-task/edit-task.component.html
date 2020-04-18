@@ -1,16 +1,18 @@
 <mat-action-list role="list" class="p-0">
     <mat-list-item role="listitem" *ngFor="let detail of details | keyvalue" (click)="openEditModal(detail.key)">
-        <div class="flex-grow-2 d-flex justify-content-between align-items-center">
+        <div class="flex-grow-2 d-flex justify-content-between align-items-center" *ngIf="detail">
             <span>
                 <b>
                     {{detail.value.name | titlecase}}
                 </b>
             </span>
-
             <span>
-                {{getValue(detail.value) | titlecase}}
-            </span>
 
+                <ng-container
+                *ngTemplateOutlet="hasDate(detail) ? date : string; context: {$implicit: detail}">
+                </ng-container>
+
+            </span>
             <button mat-icon-button>
                 <mat-icon>chevron_right</mat-icon>
             </button>
@@ -18,3 +20,14 @@
         <mat-divider></mat-divider>
     </mat-list-item>
 </mat-action-list>
+
+
+<ng-template #string let-detail>
+    {{getValue(detail) | titlecase}}
+</ng-template>
+
+<ng-template #date let-detail>
+    {{getValue(detail) | date: isLessThanAWeekAway(detail)
+        ? 'EEEE'
+        : 'shortDate'}}
+</ng-template>

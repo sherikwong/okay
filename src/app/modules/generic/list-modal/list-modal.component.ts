@@ -1,9 +1,11 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { DataService } from '../../../services/data.service';
-import { IInput } from '../input/input.component';
+import { IInput, InputType } from '../input/input.component';
+import { FormControl } from '@angular/forms';
+import { MatCalendar } from '@angular/material/datepicker';
 
 export interface ModalData {
   [key: string]: IInput;
@@ -14,9 +16,10 @@ export interface ModalData {
   templateUrl: './list-modal.component.html',
   styleUrls: ['./list-modal.component.scss']
 })
-export class ListModalComponent implements OnInit, OnDestroy {
+export class ListModalComponent implements OnInit, OnDestroy, AfterViewInit {
   succeeds: boolean;
-  successSubscription: Subscription;
+  @ViewChild('calendar', { static: false }) public calendar: MatCalendar<Date>;
+  private subscriptions: Subscription[] = [];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: IInput,
@@ -25,32 +28,52 @@ export class ListModalComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.options);
-    this.successSubscription = this.dataService.succeeds.subscribe(succeeds => {
+    const successSubscription = this.dataService.succeeds.subscribe(succeeds => {
       if (!succeeds) {
         this.snackbar.open('God fucking damn it. Tell Sheri there\'s a problem saving');
       }
     });
+
+    this.subscriptions.push(successSubscription);
+  }
+
+  ngAfterViewInit(): void {
+    const calendarSubsription = this.calendar.selectedChange
+      .subscribe(val => this.emit(val));
+
+    this.subscriptions.push(calendarSubsription);
   }
 
   ngOnDestroy(): void {
-    this.successSubscription.unsubscribe();
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   get options() {
     return this.data.options;
   }
 
-  emit(option: string): void {
+  emit(newValue: any): void {
     const response = {
       ...this.data,
-      value: option
+      value: newValue
     };
     this.dataService.emit(response);
   }
 
   isNotNumber(option: any): boolean {
     return isNaN(option);
+  }
+
+  get isDropdown(): boolean {
+    return this.data.type === InputType.Dropdown;
+  }
+
+  get isDatepicker(): boolean {
+    return this.data.type === InputType.Date;
+  }
+
+  datePicked(event): void {
+    console.log(event);
   }
 }
 
